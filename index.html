@@ -384,43 +384,68 @@
     }
 
     .journey {
+      background: var(--deep-purple);
       color: white;
-      background:
-        linear-gradient(
-          rgba(55, 46, 69, 0.90),
-          rgba(55, 46, 69, 0.90)
-        ),
-        url("535771147_10230812688281697_5872507385772841575_n.jpg");
-      background-size: cover;
-      background-position: center;
-      text-align: center;
     }
 
-    .journey-intro {
-      max-width: 700px;
-      margin: 0 auto;
+    .journey-feature {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 38px;
+      align-items: stretch;
+    }
+
+    .journey-photo {
+      min-height: 620px;
+      border-radius: 28px;
+      overflow: hidden;
+      box-shadow: 0 22px 60px rgba(20, 15, 28, 0.28);
+    }
+
+    .journey-photo img {
+      width: 100%;
+      height: 100%;
+      min-height: 620px;
+      object-fit: cover;
+      object-position: center 36%;
+    }
+
+    .journey-copy {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 30px 0;
+    }
+
+    .journey-copy .section-title {
+      margin-bottom: 18px;
+    }
+
+    .journey-copy > p {
+      font-size: 1.08rem;
+      color: rgba(255,255,255,0.88);
+      max-width: 560px;
     }
 
     .journey-steps {
-      margin-top: 45px;
+      margin-top: 34px;
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 18px;
+      grid-template-columns: 1fr;
+      gap: 14px;
     }
 
     .journey-step {
-      padding: 32px 24px;
-      border: 1px solid rgba(255,255,255,0.25);
-      background: rgba(255,255,255,0.08);
-      border-radius: 18px;
-      backdrop-filter: blur(5px);
+      padding: 23px 22px;
+      border: 1px solid rgba(255,255,255,0.18);
+      background: rgba(255,255,255,0.07);
+      border-radius: 17px;
     }
 
     .journey-step strong {
       display: block;
       font-family: Georgia, serif;
-      font-size: 1.7rem;
-      margin-bottom: 9px;
+      font-size: 1.5rem;
+      margin-bottom: 6px;
     }
 
     .help-section {
@@ -575,9 +600,17 @@
         margin: auto;
       }
 
-      .cards,
-      .journey-steps {
+      .cards {
         grid-template-columns: 1fr;
+      }
+
+      .journey-feature {
+        grid-template-columns: 1fr;
+      }
+
+      .journey-photo,
+      .journey-photo img {
+        min-height: 520px;
       }
 
       .photo-story {
@@ -611,6 +644,11 @@
 
       .photo-story .wide {
         grid-column: span 2;
+      }
+
+      .journey-photo,
+      .journey-photo img {
+        min-height: 430px;
       }
 
       .quick-exit {
@@ -931,41 +969,53 @@
     <section class="section journey" id="program">
       <div class="container">
 
-        <div class="journey-intro">
+        <div class="journey-feature">
 
-          <div class="eyebrow">
-            The Smilee Kylee Program
+          <div class="journey-photo">
+            <img
+              src="535771147_10230812688281697_5872507385772841575_n.jpg"
+              alt="Kylee sitting peacefully by the water"
+              loading="lazy"
+            >
           </div>
 
-          <h2 class="section-title">
-            From Surviving to Living
-          </h2>
+          <div class="journey-copy">
 
-          <p>
-            A shelter can provide a bed.
-            Smilee Kylee will work toward providing a path forward.
-          </p>
+            <div class="eyebrow">
+              The Smilee Kylee Program
+            </div>
 
-        </div>
+            <h2 class="section-title">
+              From Surviving to Living
+            </h2>
 
-        <div class="journey-steps">
+            <p>
+              A shelter can provide a bed.
+              Smilee Kylee will work toward providing a path forward.
+            </p>
 
-          <div class="journey-step">
-            <strong>Safe Tonight</strong>
-            Shelter, stability, dignity, and somewhere
-            to finally feel secure.
-          </div>
+            <div class="journey-steps">
 
-          <div class="journey-step">
-            <strong>Supported Tomorrow</strong>
-            Counseling, financial education, employment
-            assistance, life skills, and guidance.
-          </div>
+              <div class="journey-step">
+                <strong>Safe Tonight</strong>
+                Shelter, stability, dignity, and somewhere
+                to finally feel secure.
+              </div>
 
-          <div class="journey-step">
-            <strong>Independent Future</strong>
-            Income, permanent housing, confidence,
-            stability, and a life of her own.
+              <div class="journey-step">
+                <strong>Supported Tomorrow</strong>
+                Counseling, financial education, employment
+                assistance, life skills, and guidance.
+              </div>
+
+              <div class="journey-step">
+                <strong>Independent Future</strong>
+                Income, permanent housing, confidence,
+                stability, and a life of her own.
+              </div>
+
+            </div>
+
           </div>
 
         </div>
@@ -1114,14 +1164,12 @@
 
 
   <script>
-
     document.getElementById("year").textContent =
       new Date().getFullYear();
 
     function quickExit() {
       window.location.replace("https://www.google.com");
     }
-
   </script>
 
 </body>
