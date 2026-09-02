@@ -4,32 +4,35 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>Smilee Kylee | In Memory of Kylee Monteiro</title>
+  <title>Smilee Kylee | In Loving Memory of Kylee Monteiro</title>
 
   <meta
     name="description"
-    content="Smilee Kylee is being created in memory of Kylee Monteiro to provide safety, support, and hope for women rebuilding their lives."
+    content="Smilee Kylee honors the life of Kylee Monteiro by building a future of safety, support, healing and independence for women in need."
   >
 
   <style>
     :root {
-      --cream: #fbf8f3;
-      --soft-cream: #f4eee6;
+      --purple: #76639a;
+      --deep-purple: #4d3d68;
+      --lavender: #d9cdec;
+      --light-lavender: #f4eff9;
+      --pink: #d6a6b8;
+      --soft-pink: #f7e9ee;
+      --blue: #536aa6;
+      --cream: #fcfaf7;
       --white: #ffffff;
-      --charcoal: #292929;
-      --muted: #68645f;
-      --sage: #7c9182;
-      --sage-dark: #53675a;
-      --rose: #b98c8e;
-      --rose-light: #ead7d5;
-      --gold: #b69a6a;
-      --shadow: 0 12px 35px rgba(41, 41, 41, 0.08);
+      --charcoal: #29262d;
+      --muted: #69636d;
+      --green: #71806b;
+      --gold: #c6a978;
+      --shadow: 0 18px 50px rgba(47, 38, 57, 0.10);
     }
 
     * {
-      box-sizing: border-box;
       margin: 0;
       padding: 0;
+      box-sizing: border-box;
     }
 
     html {
@@ -43,170 +46,163 @@
       line-height: 1.7;
     }
 
+    img {
+      display: block;
+      width: 100%;
+    }
+
     h1,
     h2,
     h3 {
       font-family: Georgia, "Times New Roman", serif;
       font-weight: 400;
-      line-height: 1.15;
+      line-height: 1.1;
     }
 
     a {
       color: inherit;
     }
 
+    .emergency-bar {
+      background: var(--deep-purple);
+      color: white;
+      text-align: center;
+      padding: 9px 60px 9px 20px;
+      font-size: 0.87rem;
+    }
+
     .quick-exit {
       position: fixed;
-      right: 18px;
-      bottom: 18px;
+      right: 16px;
+      bottom: 16px;
       z-index: 1000;
-      border: none;
+      border: 0;
       border-radius: 999px;
-      background: #222;
+      padding: 13px 19px;
+      background: #242126;
       color: white;
-      padding: 13px 20px;
-      font-size: 0.9rem;
       font-weight: 700;
       cursor: pointer;
       box-shadow: var(--shadow);
     }
 
-    .quick-exit:hover {
-      background: #000;
-    }
-
-    .top-message {
-      background: var(--sage-dark);
-      color: white;
-      text-align: center;
-      padding: 10px 20px;
-      font-size: 0.9rem;
-    }
-
     nav {
-      background: rgba(251, 248, 243, 0.96);
-      border-bottom: 1px solid rgba(41, 41, 41, 0.08);
       position: sticky;
       top: 0;
       z-index: 100;
+      background: rgba(252, 250, 247, 0.96);
+      border-bottom: 1px solid rgba(77, 61, 104, 0.10);
     }
 
     .nav-inner {
-      max-width: 1150px;
+      max-width: 1180px;
       margin: auto;
-      padding: 15px 24px;
+      padding: 15px 22px;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 20px;
+      gap: 25px;
     }
 
     .logo {
-      text-decoration: none;
       font-family: Georgia, "Times New Roman", serif;
-      font-size: 1.55rem;
-      letter-spacing: 0.04em;
+      font-size: 1.7rem;
+      text-decoration: none;
+      color: var(--deep-purple);
     }
 
     .nav-links {
       display: flex;
       flex-wrap: wrap;
-      gap: 18px;
+      gap: 17px;
       align-items: center;
     }
 
     .nav-links a {
       text-decoration: none;
-      font-size: 0.92rem;
+      font-size: 0.9rem;
     }
 
     .nav-links a:hover {
       text-decoration: underline;
     }
 
-    .nav-help {
-      background: var(--sage-dark);
+    .help-link {
+      background: var(--deep-purple);
       color: white;
-      padding: 9px 14px;
+      padding: 9px 15px;
       border-radius: 999px;
     }
 
     .hero {
-      min-height: 82vh;
+      min-height: 88vh;
+      position: relative;
       display: flex;
       align-items: center;
-      background:
+      background-image:
         linear-gradient(
-          120deg,
-          rgba(41, 41, 41, 0.70),
-          rgba(83, 103, 90, 0.38)
+          90deg,
+          rgba(31, 26, 38, 0.86) 0%,
+          rgba(49, 39, 62, 0.70) 40%,
+          rgba(49, 39, 62, 0.20) 72%,
+          rgba(49, 39, 62, 0.06) 100%
         ),
-        linear-gradient(135deg, #8c817b, #b9aaa0);
+        url("656153597_26193231943666922_5799060983736162287_n.jpg");
+      background-size: cover;
+      background-position: center 30%;
       color: white;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .hero::after {
-      content: "";
-      position: absolute;
-      width: 420px;
-      height: 420px;
-      border-radius: 50%;
-      background: rgba(255, 255, 255, 0.08);
-      right: -100px;
-      top: -80px;
     }
 
     .hero-content {
+      max-width: 1180px;
       width: 100%;
-      max-width: 1150px;
       margin: auto;
-      padding: 90px 24px;
-      position: relative;
-      z-index: 2;
+      padding: 100px 24px;
+    }
+
+    .hero-copy {
+      max-width: 680px;
     }
 
     .eyebrow {
-      text-transform: uppercase;
-      letter-spacing: 0.18em;
       font-size: 0.76rem;
-      margin-bottom: 18px;
+      text-transform: uppercase;
+      letter-spacing: 0.20em;
       font-weight: 700;
+      margin-bottom: 17px;
     }
 
     .hero h1 {
-      font-size: clamp(3rem, 8vw, 6.5rem);
-      max-width: 850px;
-      margin-bottom: 18px;
+      font-size: clamp(4rem, 10vw, 7.5rem);
+      margin-bottom: 15px;
     }
 
-    .hero .subtitle {
+    .hero-subtitle {
       font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(1.4rem, 3vw, 2.2rem);
       font-style: italic;
-      font-size: clamp(1.25rem, 3vw, 2rem);
       margin-bottom: 25px;
     }
 
     .hero p {
-      max-width: 700px;
+      max-width: 610px;
       font-size: 1.08rem;
     }
 
     .buttons {
+      margin-top: 30px;
       display: flex;
-      flex-wrap: wrap;
       gap: 12px;
-      margin-top: 32px;
+      flex-wrap: wrap;
     }
 
     .button {
       display: inline-block;
-      text-decoration: none;
       padding: 13px 21px;
       border-radius: 999px;
+      text-decoration: none;
       font-weight: 700;
-      transition: transform 0.2s ease;
+      transition: 0.2s;
     }
 
     .button:hover {
@@ -215,223 +211,368 @@
 
     .button-light {
       background: white;
-      color: var(--charcoal);
+      color: var(--deep-purple);
     }
 
     .button-outline {
+      border: 1px solid rgba(255, 255, 255, 0.8);
       color: white;
-      border: 1px solid rgba(255, 255, 255, 0.75);
     }
 
-    .button-dark {
-      background: var(--sage-dark);
+    .button-purple {
+      background: var(--deep-purple);
       color: white;
     }
 
     .section {
-      padding: 90px 24px;
+      padding: 95px 24px;
     }
 
     .container {
-      max-width: 1050px;
+      max-width: 1100px;
       margin: auto;
     }
 
     .narrow {
-      max-width: 760px;
+      max-width: 780px;
       margin: auto;
     }
 
     .section-title {
-      font-size: clamp(2.2rem, 5vw, 3.8rem);
+      font-size: clamp(2.5rem, 6vw, 4.3rem);
       margin-bottom: 24px;
     }
 
     .lead {
-      font-size: 1.16rem;
       color: var(--muted);
+      font-size: 1.12rem;
     }
 
-    .memorial {
+    .intro {
       text-align: center;
-    }
-
-    .memorial-placeholder {
-      width: 210px;
-      height: 210px;
-      border-radius: 50%;
-      margin: 0 auto 35px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
-      padding: 30px;
       background:
-        linear-gradient(
-          135deg,
-          var(--rose-light),
-          var(--soft-cream)
-        );
-      border: 6px solid white;
+        radial-gradient(circle at top right, #f2e6f4, transparent 35%),
+        var(--cream);
+    }
+
+    .memorial-grid {
+      display: grid;
+      grid-template-columns: 0.85fr 1.15fr;
+      gap: 60px;
+      align-items: center;
+    }
+
+    .portrait-frame {
+      position: relative;
+    }
+
+    .portrait-frame::before {
+      content: "";
+      position: absolute;
+      width: 85%;
+      height: 92%;
+      left: -20px;
+      bottom: -20px;
+      border-radius: 180px 180px 30px 30px;
+      background: var(--lavender);
+      z-index: 0;
+    }
+
+    .portrait-frame img {
+      position: relative;
+      z-index: 1;
+      border-radius: 180px 180px 30px 30px;
+      max-height: 650px;
+      object-fit: cover;
+      object-position: center;
       box-shadow: var(--shadow);
-      font-family: Georgia, "Times New Roman", serif;
-      color: #745e60;
+    }
+
+    .memorial-text p + p {
+      margin-top: 18px;
     }
 
     .quote {
-      margin: 35px auto 0;
-      max-width: 760px;
+      margin-top: 32px;
+      padding-left: 22px;
+      border-left: 3px solid var(--pink);
       font-family: Georgia, "Times New Roman", serif;
-      font-size: clamp(1.5rem, 3vw, 2.2rem);
+      font-size: 1.7rem;
       font-style: italic;
-      color: var(--sage-dark);
+      color: var(--deep-purple);
     }
 
-    .soft-section {
-      background: var(--soft-cream);
+    .dates {
+      margin-top: 18px;
+      color: var(--muted);
+      font-size: 0.9rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .life-section {
+      background: var(--light-lavender);
+    }
+
+    .center {
+      text-align: center;
+    }
+
+    .photo-story {
+      margin-top: 45px;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      grid-auto-rows: 245px;
+      gap: 13px;
+    }
+
+    .photo-story img {
+      height: 100%;
+      object-fit: cover;
+      border-radius: 18px;
+      box-shadow: var(--shadow);
+    }
+
+    .photo-story .tall {
+      grid-row: span 2;
+    }
+
+    .photo-story .wide {
+      grid-column: span 2;
+    }
+
+    .mission {
+      background: white;
+    }
+
+    .mission-header {
+      max-width: 800px;
+      margin-bottom: 48px;
     }
 
     .cards {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 20px;
-      margin-top: 45px;
+      gap: 18px;
     }
 
     .card {
-      background: white;
+      background: var(--cream);
+      border: 1px solid rgba(77, 61, 104, 0.08);
+      border-radius: 20px;
       padding: 30px;
-      border-radius: 18px;
-      box-shadow: var(--shadow);
     }
 
-    .card-number {
-      font-family: Georgia, "Times New Roman", serif;
-      color: var(--rose);
-      font-size: 2rem;
-      margin-bottom: 10px;
+    .card-icon {
+      width: 43px;
+      height: 43px;
+      border-radius: 50%;
+      background: var(--lavender);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 19px;
+      color: var(--deep-purple);
+      font-family: Georgia, serif;
+      font-size: 1.1rem;
     }
 
     .card h3 {
-      font-size: 1.45rem;
+      font-size: 1.5rem;
+      color: var(--deep-purple);
       margin-bottom: 12px;
     }
 
     .journey {
-      background: var(--sage-dark);
       color: white;
+      background:
+        linear-gradient(
+          rgba(55, 46, 69, 0.90),
+          rgba(55, 46, 69, 0.90)
+        ),
+        url("535771147_10230812688281697_5872507385772841575_n.jpg");
+      background-size: cover;
+      background-position: center;
       text-align: center;
+    }
+
+    .journey-intro {
+      max-width: 700px;
+      margin: 0 auto;
     }
 
     .journey-steps {
       margin-top: 45px;
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 25px;
+      gap: 18px;
     }
 
     .journey-step {
-      padding: 30px 20px;
-      border: 1px solid rgba(255, 255, 255, 0.25);
+      padding: 32px 24px;
+      border: 1px solid rgba(255,255,255,0.25);
+      background: rgba(255,255,255,0.08);
       border-radius: 18px;
+      backdrop-filter: blur(5px);
     }
 
     .journey-step strong {
       display: block;
-      font-family: Georgia, "Times New Roman", serif;
+      font-family: Georgia, serif;
       font-size: 1.7rem;
-      margin-bottom: 8px;
+      margin-bottom: 9px;
+    }
+
+    .help-section {
+      background: var(--soft-pink);
     }
 
     .help-box {
       background: white;
-      padding: 45px;
-      border-radius: 20px;
+      max-width: 900px;
+      margin: auto;
+      padding: 48px;
+      border-radius: 24px;
       box-shadow: var(--shadow);
-      border-left: 6px solid var(--rose);
+      border-top: 6px solid var(--pink);
     }
 
     .help-box h2 {
-      font-size: clamp(2rem, 5vw, 3.2rem);
+      font-size: clamp(2.3rem, 5vw, 3.7rem);
       margin-bottom: 18px;
     }
 
-    .emergency {
-      margin-top: 25px;
-      padding: 20px;
-      background: #f6efef;
-      border-radius: 12px;
+    .emergency-box {
+      margin-top: 28px;
+      background: #f8f2f4;
+      border-radius: 16px;
+      padding: 23px;
+    }
+
+    .emergency-box strong {
+      display: block;
+      color: #6a3046;
+      margin-bottom: 5px;
     }
 
     .donate {
       text-align: center;
+      background: white;
     }
 
-    .donation-buttons {
-      margin-top: 30px;
+    .donate-inner {
+      max-width: 780px;
+      margin: auto;
+    }
+
+    .donation-options {
       display: flex;
       justify-content: center;
       flex-wrap: wrap;
-      gap: 12px;
+      gap: 13px;
+      margin-top: 30px;
     }
 
     .donation-option {
-      border: 1px solid #d9d2ca;
-      background: white;
-      border-radius: 12px;
-      padding: 15px 25px;
-      min-width: 140px;
+      min-width: 150px;
+      padding: 16px 22px;
+      border: 1px solid var(--lavender);
+      border-radius: 14px;
+      background: var(--light-lavender);
       font-weight: 700;
+      color: var(--deep-purple);
     }
 
-    .coming-soon {
+    .donation-option small {
       display: block;
       color: var(--muted);
-      font-weight: 400;
-      font-size: 0.78rem;
+      font-weight: normal;
       margin-top: 3px;
     }
 
-    .contact {
-      background: var(--rose-light);
+    .note {
+      color: var(--muted);
+      font-size: 0.88rem;
+      margin-top: 22px;
+    }
+
+    .closing {
+      min-height: 500px;
+      display: flex;
+      align-items: center;
       text-align: center;
+      color: white;
+      background:
+        linear-gradient(
+          rgba(39, 32, 50, 0.63),
+          rgba(39, 32, 50, 0.76)
+        ),
+        url("lg.jpg");
+      background-size: cover;
+      background-position: center;
+    }
+
+    .closing-content {
+      max-width: 760px;
+      margin: auto;
+      padding: 80px 24px;
+    }
+
+    .closing h2 {
+      font-size: clamp(2.7rem, 6vw, 4.5rem);
+      margin-bottom: 20px;
+    }
+
+    .closing p {
+      font-size: 1.15rem;
     }
 
     footer {
-      background: #242724;
-      color: #e9e9e9;
-      padding: 50px 24px 80px;
+      background: #25202c;
+      color: #e8e2ed;
       text-align: center;
+      padding: 55px 24px 85px;
     }
 
     footer h2 {
       font-size: 2rem;
-      margin-bottom: 10px;
+      margin-bottom: 11px;
     }
 
     footer p {
+      color: #cfc7d4;
       max-width: 650px;
-      margin: 8px auto;
-      color: #c8c8c8;
+      margin: 7px auto;
     }
 
-    .footer-small {
-      margin-top: 30px;
+    .copyright {
+      margin-top: 28px;
       font-size: 0.8rem;
     }
 
-    @media (max-width: 800px) {
+    @media (max-width: 850px) {
       .nav-inner {
-        align-items: flex-start;
         flex-direction: column;
+        align-items: flex-start;
       }
 
       .nav-links {
-        gap: 10px 14px;
+        gap: 9px 13px;
       }
 
       .hero {
-        min-height: 75vh;
+        min-height: 78vh;
+        background-position: 60% center;
+      }
+
+      .memorial-grid {
+        grid-template-columns: 1fr;
+        gap: 50px;
+      }
+
+      .portrait-frame {
+        max-width: 480px;
+        margin: auto;
       }
 
       .cards,
@@ -439,17 +580,42 @@
         grid-template-columns: 1fr;
       }
 
+      .photo-story {
+        grid-template-columns: repeat(2, 1fr);
+        grid-auto-rows: 210px;
+      }
+
       .section {
-        padding: 65px 20px;
+        padding: 70px 20px;
       }
 
       .help-box {
-        padding: 30px 22px;
+        padding: 32px 24px;
+      }
+    }
+
+    @media (max-width: 520px) {
+      .hero {
+        background-position: 64% center;
+      }
+
+      .hero-content {
+        padding-top: 80px;
+        padding-bottom: 80px;
+      }
+
+      .photo-story {
+        grid-template-columns: 1fr 1fr;
+        grid-auto-rows: 175px;
+      }
+
+      .photo-story .wide {
+        grid-column: span 2;
       }
 
       .quick-exit {
-        right: 12px;
-        bottom: 12px;
+        right: 10px;
+        bottom: 10px;
       }
     }
   </style>
@@ -457,22 +623,24 @@
 
 <body>
 
-  <div class="top-message">
+  <div class="emergency-bar">
     If you are in immediate danger, call 911.
   </div>
 
   <nav>
     <div class="nav-inner">
 
-      <a href="#home" class="logo">Smilee Kylee</a>
+      <a class="logo" href="#home">
+        Smilee Kylee
+      </a>
 
       <div class="nav-links">
-        <a href="#kylee">Kylee's Story</a>
+        <a href="#kylee">Kylee</a>
+        <a href="#memories">Memories</a>
         <a href="#mission">Our Mission</a>
-        <a href="#program">Our Program</a>
+        <a href="#program">The Program</a>
         <a href="#donate">Donate</a>
-        <a href="#contact">Contact</a>
-        <a href="#help" class="nav-help">Get Help</a>
+        <a href="#help" class="help-link">Get Help</a>
       </div>
 
     </div>
@@ -483,138 +651,274 @@
     <section class="hero" id="home">
       <div class="hero-content">
 
-        <div class="eyebrow">
-          In Memory of Kylee Monteiro
+        <div class="hero-copy">
+
+          <div class="eyebrow">
+            In Loving Memory of Kylee M. Monteiro
+          </div>
+
+          <h1>Smilee Kylee</h1>
+
+          <div class="hero-subtitle">
+            Her memory becomes someone else's hope.
+          </div>
+
+          <p>
+            Born from unimaginable loss and enduring love,
+            Smilee Kylee is a vision for a safe home where women
+            can heal, rebuild, and begin again.
+          </p>
+
+          <div class="buttons">
+
+            <a href="#kylee" class="button button-light">
+              Meet Kylee
+            </a>
+
+            <a href="#mission" class="button button-outline">
+              Our Mission
+            </a>
+
+          </div>
+
         </div>
-
-        <h1>Smilee Kylee</h1>
-
-        <div class="subtitle">
-          Her memory. Their safety. A future filled with hope.
-        </div>
-
-        <p>
-          Smilee Kylee is being created from love, loss, and the belief
-          that every woman deserves somewhere safe to begin again.
-        </p>
-
-        <div class="buttons">
-          <a href="#help" class="button button-light">
-            I Need Help
-          </a>
-
-          <a href="#donate" class="button button-outline">
-            Support Our Mission
-          </a>
-        </div>
-
       </div>
     </section>
 
 
-    <section class="section memorial" id="kylee">
-      <div class="narrow">
-
-        <div class="memorial-placeholder">
-          Kylee's photo will live here.
-        </div>
-
-        <div class="eyebrow">
-          The Heart Behind Our Name
-        </div>
-
-        <h2 class="section-title">
-          In Loving Memory of Kylee Monteiro
-        </h2>
-
-        <p class="lead">
-          Kylee was a sister, a daughter, a friend, and someone whose
-          life mattered deeply. Smilee Kylee is being created so that
-          her memory can continue through something living — a place
-          where women can find safety, support, dignity, and the
-          opportunity to begin again.
-        </p>
-
-        <p class="quote">
-          “Kylee's story does not end with our loss.
-          Her memory becomes hope.”
-        </p>
-
-      </div>
-    </section>
-
-
-    <section class="section soft-section" id="mission">
+    <section class="section intro" id="kylee">
       <div class="container">
 
-        <div class="eyebrow">Our Mission</div>
+        <div class="memorial-grid">
 
-        <h2 class="section-title">
-          A Safe Place to Begin Again
-        </h2>
+          <div class="portrait-frame">
+            <img
+              src="544608721_4190688461077036_4384659576428459428_n.jpg"
+              alt="Kylee Monteiro"
+            >
+          </div>
 
-        <p class="lead">
-          Smilee Kylee is being built with a vision of providing
-          housing and structured support for women 18 and older who
-          are experiencing homelessness, unsafe living situations,
-          abuse, pregnancy without adequate support, or other
-          circumstances that leave them without a safe home.
-        </p>
+          <div class="memorial-text">
+
+            <div class="eyebrow">
+              The Heart Behind Our Name
+            </div>
+
+            <h2 class="section-title">
+              Kylee M. Monteiro
+            </h2>
+
+            <div class="dates">
+              November 4, 2006 — August 19, 2025
+            </div>
+
+            <p class="lead" style="margin-top: 25px;">
+              Kylee was a sister, daughter, granddaughter,
+              friend, and so much more.
+            </p>
+
+            <p class="lead">
+              She was funny. She could be silly. She could make
+              a face at the camera one moment and look absolutely
+              beautiful the next. She grew from a little girl
+              holding her favorite things into a young woman with
+              a life and future of her own.
+            </p>
+
+            <p class="lead">
+              Smilee Kylee exists because her life mattered.
+              This organization will carry her name forward by
+              helping women who need somewhere safe to land and
+              someone willing to believe that their future is
+              still worth fighting for.
+            </p>
+
+            <div class="quote">
+              Her story does not end with our loss.
+              Her memory becomes hope.
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+
+    <section class="section life-section" id="memories">
+      <div class="container">
+
+        <div class="narrow center">
+
+          <div class="eyebrow">
+            A Life Remembered
+          </div>
+
+          <h2 class="section-title">
+            Remembering Kylee as Kylee
+          </h2>
+
+          <p class="lead">
+            Not only through the day we lost her,
+            but through childhood, family, laughter,
+            accomplishments, ordinary moments and the
+            person she became.
+          </p>
+
+        </div>
+
+        <div class="photo-story">
+
+          <img
+            class="tall"
+            src="535270693_10230812686321648_7000763581018243905_n.jpg"
+            alt="Kylee as a child"
+            loading="lazy"
+          >
+
+          <img
+            class="wide"
+            src="534709195_1470646080945022_8534622753613095277_n.jpg"
+            alt="Kylee celebrating graduation"
+            loading="lazy"
+          >
+
+          <img
+            src="535771147_10230812688281697_5872507385772841575_n.jpg"
+            alt="Kylee sitting by the water"
+            loading="lazy"
+          >
+
+          <img
+            src="536267869_24128318010186138_5864884620972159869_n.jpg"
+            alt="A family memory with Kylee"
+            loading="lazy"
+          >
+
+          <img
+            class="tall"
+            src="656153597_26193231943666922_5799060983736162287_n.jpg"
+            alt="Kylee dressed for a special occasion"
+            loading="lazy"
+          >
+
+          <img
+            src="657345559_26193231967000253_4751616395881030289_n.jpg"
+            alt="Kylee at graduation"
+            loading="lazy"
+          >
+
+          <img
+            src="535807032_122229547022187345_8159991788045962119_n.jpg"
+            alt="Kylee sharing a happy moment"
+            loading="lazy"
+          >
+
+          <img
+            class="wide"
+            src="767334201_2043827549604999_2125306938950814202_n.jpg"
+            alt="A fun memory with Kylee"
+            loading="lazy"
+          >
+
+          <img
+            src="576934323_1534292487913714_2079411978847318151_n.jpg"
+            alt="Kylee in her graduation cap and gown"
+            loading="lazy"
+          >
+
+          <img
+            src="656853571_26192752777048172_6271036138216469204_n.jpg"
+            alt="A candid photo of Kylee"
+            loading="lazy"
+          >
+
+        </div>
+
+      </div>
+    </section>
+
+
+    <section class="section mission" id="mission">
+      <div class="container">
+
+        <div class="mission-header">
+
+          <div class="eyebrow">
+            The Future
+          </div>
+
+          <h2 class="section-title">
+            A Safe Place to Begin Again
+          </h2>
+
+          <p class="lead">
+            Smilee Kylee is being created to support women
+            18 and older who need housing, safety, structure,
+            support, and a real opportunity to rebuild their lives.
+          </p>
+
+        </div>
 
         <div class="cards">
 
           <div class="card">
-            <div class="card-number">01</div>
-            <h3>Safety & Housing</h3>
+            <div class="card-icon">01</div>
+            <h3>Safe Housing</h3>
             <p>
-              A stable environment where women can rest, feel
-              protected, and focus on rebuilding their lives.
+              A stable and secure place where women can rest,
+              breathe, and begin working toward their future.
             </p>
           </div>
 
           <div class="card">
-            <div class="card-number">02</div>
-            <h3>Healing & Support</h3>
+            <div class="card-icon">02</div>
+            <h3>Therapy & Healing</h3>
             <p>
-              Structured participation in counseling and supportive
-              services designed to encourage healing and long-term
-              emotional wellness.
+              Structured participation in counseling and
+              supportive services focused on emotional health
+              and long-term stability.
             </p>
           </div>
 
           <div class="card">
-            <div class="card-number">03</div>
+            <div class="card-icon">03</div>
             <h3>Pregnancy Support</h3>
             <p>
-              Support for pregnant women 18 and older as they prepare
-              for motherhood and work toward a stable future.
+              Support for pregnant women 18 and older who need
+              safety, stability, education, resources, and
+              preparation for motherhood.
             </p>
           </div>
 
           <div class="card">
-            <div class="card-number">04</div>
+            <div class="card-icon">04</div>
             <h3>Financial Education</h3>
             <p>
-              Practical education focused on budgeting, saving,
-              credit, financial responsibility, and independence.
+              Learning how to budget, save money, understand
+              credit, manage expenses, and build financial
+              independence.
             </p>
           </div>
 
           <div class="card">
-            <div class="card-number">05</div>
-            <h3>Employment</h3>
+            <div class="card-icon">05</div>
+            <h3>Employment Support</h3>
             <p>
-              Assistance with resumes, job searching, interviews,
-              workplace preparation, and building reliable income.
+              Help with resumes, applications, job searching,
+              interviews, workplace preparation, and creating
+              dependable income.
             </p>
           </div>
 
           <div class="card">
-            <div class="card-number">06</div>
+            <div class="card-icon">06</div>
             <h3>Independent Living</h3>
             <p>
-              A structured path toward permanent housing, stability,
-              confidence, and a life beyond the shelter.
+              A structured path toward permanent housing,
+              confidence, stability, and independence beyond
+              the shelter.
             </p>
           </div>
 
@@ -627,33 +931,41 @@
     <section class="section journey" id="program">
       <div class="container">
 
-        <div class="eyebrow">The Journey Forward</div>
+        <div class="journey-intro">
 
-        <h2 class="section-title">
-          From Surviving to Living
-        </h2>
+          <div class="eyebrow">
+            The Smilee Kylee Program
+          </div>
 
-        <p>
-          Our goal is not simply to provide a place to sleep.
-          Our goal is to help each woman reach the day when she
-          no longer needs us.
-        </p>
+          <h2 class="section-title">
+            From Surviving to Living
+          </h2>
+
+          <p>
+            A shelter can provide a bed.
+            Smilee Kylee will work toward providing a path forward.
+          </p>
+
+        </div>
 
         <div class="journey-steps">
 
           <div class="journey-step">
             <strong>Safe Tonight</strong>
-            A secure place to rest and begin again.
+            Shelter, stability, dignity, and somewhere
+            to finally feel secure.
           </div>
 
           <div class="journey-step">
             <strong>Supported Tomorrow</strong>
-            Guidance, counseling, education, and opportunity.
+            Counseling, financial education, employment
+            assistance, life skills, and guidance.
           </div>
 
           <div class="journey-step">
             <strong>Independent Future</strong>
-            Employment, stability, permanent housing, and hope.
+            Income, permanent housing, confidence,
+            stability, and a life of her own.
           </div>
 
         </div>
@@ -662,94 +974,110 @@
     </section>
 
 
-    <section class="section soft-section" id="help">
-      <div class="container">
+    <section class="section help-section" id="help">
 
-        <div class="help-box">
+      <div class="help-box">
 
-          <div class="eyebrow">You Are Not Alone</div>
+        <div class="eyebrow">
+          Looking for Safety?
+        </div>
 
-          <h2>Do You Need a Safe Place?</h2>
+        <h2>
+          You Deserve Somewhere Safe.
+        </h2>
 
-          <p class="lead">
-            Smilee Kylee is still being developed and is not yet an
-            operating emergency shelter. As we grow, this page will
-            provide information about eligibility, applications,
-            available services, and how to reach our team safely.
-          </p>
+        <p class="lead">
+          Smilee Kylee is currently being developed and is
+          not yet an operating emergency shelter.
+          As the organization grows, this page will include
+          eligibility information, applications, available
+          services, and safe ways to contact our team.
+        </p>
 
-          <div class="emergency">
-            <strong>If you are in immediate danger:</strong>
-            Call 911 or contact a trusted local emergency or domestic
-            violence service. Do not wait for Smilee Kylee to open if
-            you need safety now.
-          </div>
+        <div class="emergency-box">
+
+          <strong>
+            If you are in immediate danger:
+          </strong>
+
+          Call 911 or contact an established emergency or
+          domestic violence service in your area.
+          Please do not wait for Smilee Kylee to open if
+          you need safety now.
 
         </div>
 
       </div>
+
     </section>
 
 
     <section class="section donate" id="donate">
-      <div class="narrow">
+      <div class="donate-inner">
 
-        <div class="eyebrow">Help Build Her Legacy</div>
+        <div class="eyebrow">
+          Help Build Her Legacy
+        </div>
 
         <h2 class="section-title">
           Support Smilee Kylee
         </h2>
 
         <p class="lead">
-          We are working toward a future where Smilee Kylee can open
-          its doors and provide women with safety, dignity, resources,
-          and a genuine opportunity to rebuild.
+          The vision is simple: turn love for Kylee into
+          safety and opportunity for women who need it.
+          Donation methods will be activated as the
+          organization is established and ready to accept funds.
         </p>
 
-        <div class="donation-buttons">
+        <div class="donation-options">
 
           <div class="donation-option">
             PayPal
-            <span class="coming-soon">Coming soon</span>
+            <small>Coming soon</small>
           </div>
 
           <div class="donation-option">
             Cash App
-            <span class="coming-soon">Coming soon</span>
+            <small>Coming soon</small>
           </div>
 
           <div class="donation-option">
             Zelle
-            <span class="coming-soon">Coming soon</span>
+            <small>Coming soon</small>
           </div>
 
         </div>
 
-        <p style="margin-top: 25px; color: var(--muted); font-size: 0.9rem;">
-          Donation links and information about the organization's
-          charitable status will be added before donations are accepted.
+        <p class="note">
+          Donation links and information regarding charitable
+          or tax-deductible status will be clearly posted before
+          donations are accepted.
         </p>
 
       </div>
     </section>
 
 
-    <section class="section contact" id="contact">
-      <div class="narrow">
+    <section class="closing">
 
-        <div class="eyebrow">Stay Connected</div>
+      <div class="closing-content">
 
-        <h2 class="section-title">
-          Smilee Kylee Is Just Beginning
+        <div class="eyebrow">
+          In Her Name
+        </div>
+
+        <h2>
+          Sadness can become purpose.
         </h2>
 
-        <p class="lead">
-          Contact information, volunteer opportunities, community
-          partnerships, updates, and ways to become involved will
-          be added as Smilee Kylee grows.
+        <p>
+          We cannot change what happened to Kylee.
+          We can choose what grows from the love she left behind.
         </p>
 
       </div>
+
     </section>
 
   </main>
@@ -760,15 +1088,15 @@
     <h2>Smilee Kylee</h2>
 
     <p>
-      Created in loving memory of Kylee Monteiro.
+      Created in loving memory of Kylee M. Monteiro.
     </p>
 
     <p>
-      May her memory become safety, healing, and hope
-      for someone who needs it.
+      May her memory become safety, healing,
+      opportunity and hope.
     </p>
 
-    <p class="footer-small">
+    <p class="copyright">
       © <span id="year"></span> Smilee Kylee.
       All rights reserved.
     </p>
@@ -786,12 +1114,14 @@
 
 
   <script>
+
     document.getElementById("year").textContent =
       new Date().getFullYear();
 
     function quickExit() {
       window.location.replace("https://www.google.com");
     }
+
   </script>
 
 </body>
