@@ -227,11 +227,6 @@
       color: white;
     }
 
-    .button-pink {
-      background: var(--pink);
-      color: #392d3b;
-    }
-
     .section {
       padding: 95px 24px;
     }
@@ -424,20 +419,14 @@
       padding: 30px 0;
     }
 
-    .journey-copy .section-title {
-      margin-bottom: 18px;
-    }
-
     .journey-copy > p {
       font-size: 1.08rem;
       color: rgba(255,255,255,0.88);
-      max-width: 560px;
     }
 
     .journey-steps {
       margin-top: 34px;
       display: grid;
-      grid-template-columns: 1fr;
       gap: 14px;
     }
 
@@ -483,7 +472,6 @@
       height: 100%;
       min-height: 520px;
       object-fit: cover;
-      object-position: center;
     }
 
     .shop-copy {
@@ -492,10 +480,6 @@
 
     .shop-copy p {
       margin-bottom: 18px;
-    }
-
-    .shop-copy .button {
-      margin-top: 10px;
     }
 
     .shop-note {
@@ -582,9 +566,39 @@
     }
 
     .zelle-card {
-      width: 100%;
       cursor: default;
-      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    .zelle-number {
+      display: block;
+      margin: 8px 0 14px;
+      color: var(--deep-purple) !important;
+      font-size: 1.05rem !important;
+      font-weight: 700;
+    }
+
+    .copy-button {
+      border: none;
+      border-radius: 999px;
+      padding: 10px 18px;
+      background: var(--deep-purple);
+      color: white;
+      font-weight: 700;
+      cursor: pointer;
+      margin-top: 8px;
+    }
+
+    .copy-button:hover {
+      opacity: 0.9;
+    }
+
+    .copy-message {
+      display: block;
+      min-height: 22px;
+      margin-top: 8px;
+      color: var(--deep-purple) !important;
+      font-size: 0.82rem !important;
+      font-weight: 700;
     }
 
     .note {
@@ -620,10 +634,6 @@
       margin-bottom: 20px;
     }
 
-    .closing p {
-      font-size: 1.15rem;
-    }
-
     footer {
       background: #25202c;
       color: #e8e2ed;
@@ -653,45 +663,14 @@
         align-items: flex-start;
       }
 
-      .nav-links {
-        gap: 9px 13px;
-      }
-
-      .hero {
-        min-height: 78vh;
-        background-position: 60% center;
-      }
-
-      .memorial-grid {
-        grid-template-columns: 1fr;
-        gap: 50px;
-      }
-
-      .portrait-frame {
-        max-width: 480px;
-        margin: auto;
-      }
-
-      .cards {
-        grid-template-columns: 1fr;
-      }
-
-      .journey-feature {
-        grid-template-columns: 1fr;
-      }
-
-      .journey-photo,
-      .journey-photo img {
-        min-height: 520px;
-      }
-
+      .memorial-grid,
+      .journey-feature,
       .shop-feature {
         grid-template-columns: 1fr;
       }
 
-      .shop-photo,
-      .shop-photo img {
-        min-height: 450px;
+      .cards {
+        grid-template-columns: 1fr;
       }
 
       .photo-story {
@@ -701,53 +680,6 @@
 
       .donation-options {
         grid-template-columns: 1fr;
-      }
-
-      .section {
-        padding: 70px 20px;
-      }
-
-      .help-box {
-        padding: 32px 24px;
-      }
-    }
-
-    @media (max-width: 520px) {
-      .hero {
-        background-position: 64% center;
-      }
-
-      .hero-content {
-        padding-top: 80px;
-        padding-bottom: 80px;
-      }
-
-      .photo-story {
-        grid-template-columns: 1fr 1fr;
-        grid-auto-rows: 175px;
-      }
-
-      .photo-story .wide {
-        grid-column: span 2;
-      }
-
-      .journey-photo,
-      .journey-photo img {
-        min-height: 430px;
-      }
-
-      .shop-photo,
-      .shop-photo img {
-        min-height: 390px;
-      }
-
-      .shop-copy {
-        padding: 20px 8px;
-      }
-
-      .quick-exit {
-        right: 10px;
-        bottom: 10px;
       }
     }
   </style>
@@ -762,9 +694,7 @@
   <nav>
     <div class="nav-inner">
 
-      <a class="logo" href="#home">
-        Smilee Kylee
-      </a>
+      <a class="logo" href="#home">Smilee Kylee</a>
 
       <div class="nav-links">
         <a href="#kylee">Kylee</a>
@@ -783,7 +713,6 @@
 
     <section class="hero" id="home">
       <div class="hero-content">
-
         <div class="hero-copy">
 
           <div class="eyebrow">
@@ -803,15 +732,8 @@
           </p>
 
           <div class="buttons">
-
-            <a href="#kylee" class="button button-light">
-              Meet Kylee
-            </a>
-
-            <a href="#mission" class="button button-outline">
-              Our Mission
-            </a>
-
+            <a href="#kylee" class="button button-light">Meet Kylee</a>
+            <a href="#mission" class="button button-outline">Our Mission</a>
           </div>
 
         </div>
@@ -833,19 +755,15 @@
 
           <div class="memorial-text">
 
-            <div class="eyebrow">
-              The Heart Behind Our Name
-            </div>
+            <div class="eyebrow">The Heart Behind Our Name</div>
 
-            <h2 class="section-title">
-              Kylee M. Monteiro
-            </h2>
+            <h2 class="section-title">Kylee M. Monteiro</h2>
 
             <div class="dates">
               November 4, 2006 — August 19, 2025
             </div>
 
-            <p class="lead" style="margin-top: 25px;">
+            <p class="lead" style="margin-top:25px;">
               Kylee was a sister, daughter, granddaughter,
               friend, and so much more.
             </p>
@@ -872,7 +790,6 @@
             </div>
 
           </div>
-
         </div>
 
       </div>
@@ -883,10 +800,7 @@
       <div class="container">
 
         <div class="narrow center">
-
-          <div class="eyebrow">
-            A Life Remembered
-          </div>
+          <div class="eyebrow">A Life Remembered</div>
 
           <h2 class="section-title">
             Remembering Kylee as Kylee
@@ -898,74 +812,49 @@
             accomplishments, ordinary moments and the
             person she became.
           </p>
-
         </div>
 
         <div class="photo-story">
 
-          <img
-            class="tall"
+          <img class="tall"
             src="535270693_10230812686321648_7000763581018243905_n.jpg"
-            alt="Kylee as a child"
-            loading="lazy"
-          >
+            alt="Kylee as a child">
 
-          <img
-            class="wide"
+          <img class="wide"
             src="534709195_1470646080945022_8534622753613095277_n.jpg"
-            alt="Kylee celebrating graduation"
-            loading="lazy"
-          >
+            alt="Kylee celebrating graduation">
 
           <img
             src="535771147_10230812688281697_5872507385772841575_n.jpg"
-            alt="Kylee sitting by the water"
-            loading="lazy"
-          >
+            alt="Kylee sitting by the water">
 
           <img
             src="536267869_24128318010186138_5864884620972159869_n.jpg"
-            alt="A family memory with Kylee"
-            loading="lazy"
-          >
+            alt="A family memory with Kylee">
 
-          <img
-            class="tall"
+          <img class="tall"
             src="656153597_26193231943666922_5799060983736162287_n.jpg"
-            alt="Kylee dressed for a special occasion"
-            loading="lazy"
-          >
+            alt="Kylee dressed for a special occasion">
 
           <img
             src="657345559_26193231967000253_4751616395881030289_n.jpg"
-            alt="Kylee at graduation"
-            loading="lazy"
-          >
+            alt="Kylee at graduation">
 
           <img
             src="535807032_122229547022187345_8159991788045962119_n.jpg"
-            alt="Kylee sharing a happy moment"
-            loading="lazy"
-          >
+            alt="Kylee sharing a happy moment">
 
-          <img
-            class="wide"
+          <img class="wide"
             src="767334201_2043827549604999_2125306938950814202_n.jpg"
-            alt="A fun memory with Kylee"
-            loading="lazy"
-          >
+            alt="A fun memory with Kylee">
 
           <img
             src="576934323_1534292487913714_2079411978847318151_n.jpg"
-            alt="Kylee in her graduation cap and gown"
-            loading="lazy"
-          >
+            alt="Kylee in her graduation cap and gown">
 
           <img
             src="656853571_26192752777048172_6271036138216469204_n.jpg"
-            alt="A candid photo of Kylee"
-            loading="lazy"
-          >
+            alt="A candid photo of Kylee">
 
         </div>
 
@@ -977,10 +866,7 @@
       <div class="container">
 
         <div class="mission-header">
-
-          <div class="eyebrow">
-            The Future
-          </div>
+          <div class="eyebrow">The Future</div>
 
           <h2 class="section-title">
             A Safe Place to Begin Again
@@ -991,7 +877,6 @@
             18 and older who need housing, safety, structure,
             support, and a real opportunity to rebuild their lives.
           </p>
-
         </div>
 
         <div class="cards">
@@ -1056,7 +941,6 @@
           </div>
 
         </div>
-
       </div>
     </section>
 
@@ -1069,9 +953,7 @@
           <div class="journey-photo">
             <img
               src="535771147_10230812688281697_5872507385772841575_n.jpg"
-              alt="Kylee sitting peacefully by the water"
-              loading="lazy"
-            >
+              alt="Kylee sitting peacefully by the water">
           </div>
 
           <div class="journey-copy">
@@ -1110,11 +992,9 @@
               </div>
 
             </div>
-
           </div>
 
         </div>
-
       </div>
     </section>
 
@@ -1127,9 +1007,7 @@
           <div class="shop-photo">
             <img
               src="534709195_1470646080945022_8534622753613095277_n.jpg"
-              alt="Kylee celebrating graduation"
-              loading="lazy"
-            >
+              alt="Kylee celebrating graduation">
           </div>
 
           <div class="shop-copy">
@@ -1169,7 +1047,6 @@
             </p>
 
           </div>
-
         </div>
 
       </div>
@@ -1198,9 +1075,7 @@
 
         <div class="emergency-box">
 
-          <strong>
-            If you are in immediate danger:
-          </strong>
+          <strong>If you are in immediate danger:</strong>
 
           Call 911 or contact an established emergency or
           domestic violence service in your area.
@@ -1210,7 +1085,6 @@
         </div>
 
       </div>
-
     </section>
 
 
@@ -1265,11 +1139,29 @@
           </a>
 
           <div class="donation-card zelle-card">
+
             <strong>Zelle</strong>
-            <span>
-              Zelle donation information is available directly
-              from Smilee Kylee.
+
+            <span>Send your Zelle donation to:</span>
+
+            <span class="zelle-number">
+              603-988-4110
             </span>
+
+            <button
+              class="copy-button"
+              onclick="copyZelleNumber()"
+              type="button"
+            >
+              Copy Zelle Number
+            </button>
+
+            <span
+              class="copy-message"
+              id="copyMessage"
+              aria-live="polite"
+            ></span>
+
           </div>
 
         </div>
@@ -1302,6 +1194,7 @@
         </p>
 
         <div class="buttons" style="justify-content:center;">
+
           <a
             href="https://smilee-kylee-shop.fourthwall.com/"
             target="_blank"
@@ -1317,10 +1210,10 @@
           >
             Support the Mission
           </a>
+
         </div>
 
       </div>
-
     </section>
 
   </main>
@@ -1357,12 +1250,50 @@
 
 
   <script>
+
     document.getElementById("year").textContent =
       new Date().getFullYear();
 
     function quickExit() {
       window.location.replace("https://www.google.com");
     }
+
+    function copyZelleNumber() {
+
+      const number = "6039884110";
+      const message = document.getElementById("copyMessage");
+
+      if (navigator.clipboard && window.isSecureContext) {
+
+        navigator.clipboard.writeText(number).then(function() {
+          message.textContent = "Copied!";
+        });
+
+      } else {
+
+        const textArea = document.createElement("textarea");
+
+        textArea.value = number;
+        textArea.style.position = "fixed";
+        textArea.style.opacity = "0";
+
+        document.body.appendChild(textArea);
+
+        textArea.focus();
+        textArea.select();
+
+        document.execCommand("copy");
+
+        document.body.removeChild(textArea);
+
+        message.textContent = "Copied!";
+      }
+
+      setTimeout(function() {
+        message.textContent = "";
+      }, 3000);
+    }
+
   </script>
 
 </body>
