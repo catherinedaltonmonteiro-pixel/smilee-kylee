@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Shop | Smilee Kylee</title>
+
+  <style>
+    :root {
+      --lavender: #d8c5e8;
+      --purple: #7d5a91;
+      --deep-purple: #553765;
+      --pink: #efd2df;
+      --cream: #fffaf5;
+      --white: #ffffff;
+      --charcoal: #342f35;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      background: var(--cream);
+      color: var(--charcoal);
+      line-height: 1.7;
+    }
+
+    .emergency-bar {
+      background: var(--deep-purple);
+      color: white;
+      text-align: center;
+      padding: 8px 20px;
+      font-size: 0.9rem;
+    }
+
+    nav {
+      background: rgba(255,255,255,0.97);
+      border-bottom: 1px solid #eadfea;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .nav-inner {
+      max-width: 1200px;
+      margin: auto;
+      padding: 15px 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .brand {
+      color: var(--deep-purple);
+      font-size: 1.35rem;
+      font-weight: 800;
+      text-decoration: none;
+      white-space: nowrap;
+    }
+
+    .nav-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 17px;
+    }
+
+    .nav-links a {
+      color: var(--charcoal);
+      text-decoration: none;
+      font-size: 0.92rem;
+      font-weight: 700;
+    }
+
+    .nav-links a:hover,
+    .nav-links a.active {
+      color: var(--purple);
+    }
+
+    .hero {
+      padding: 110px 24px;
+      text-align: center;
+      background:
+        linear-gradient(
+          rgba(67,42,78,0.78),
+          rgba(67,42,78,0.78)
+        ),
+        url("656153597_26193231943666922_5799060983736162287_n.jpg")
+        center 30% / cover no-repeat;
+      color: white;
+    }
+
+    .hero-inner {
+      max-width: 850px;
+      margin: auto;
+    }
+
+    .eyebrow {
+      text-transform: uppercase;
+      letter-spacing: 3px;
+      font-size: 0.8rem;
+      font-weight: 800;
+      margin-bottom: 12px;
+    }
+
+    h1 {
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(3rem, 7vw, 5.5rem);
+      line-height: 1;
+      margin: 0 0 25px;
+    }
+
+    h2 {
+      color: var(--deep-purple);
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(2.2rem, 5vw, 3.3rem);
+      line-height: 1.15;
+    }
+
+    h3 {
+      color: var(--deep-purple);
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 1.6rem;
+      margin-top: 0;
+    }
+
+    .hero p {
+      font-size: 1.2rem;
+    }
+
+    .section {
+      padding: 85px 24px;
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: auto;
+    }
+
+    .intro {
+      max-width: 800px;
+      margin: auto;
+      text-align: center;
+    }
+
+    .shop-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 26px;
+      margin-top: 50px;
+    }
+
+    .shop-card {
+      background: white;
+      border-radius: 24px;
+      padding: 35px;
+      text-align: center;
+      box-shadow: 0 12px 35px rgba(70,45,80,0.09);
+    }
+
+    .shop-icon {
+      width: 85px;
+      height: 85px;
+      border-radius: 50%;
+      margin: 0 auto 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #f3ebf7;
+      font-size: 2.4rem;
+    }
+
+    .shop-card p {
+      min-height: 85px;
+    }
+
+    .button {
+      display: inline-block;
+      border-radius: 999px;
+      padding: 13px 23px;
+      background: var(--deep-purple);
+      color: white;
+      text-decoration: none;
+      font-weight: 800;
+    }
+
+    .button:hover {
+      opacity: 0.9;
+    }
+
+    .lavender {
+      background: #f3ebf7;
+    }
+
+    .support-box {
+      max-width: 850px;
+      margin: auto;
+      background: white;
+      border-radius: 26px;
+      padding: 45px;
+      text-align: center;
+      box-shadow: 0 12px 35px rgba(70,45,80,0.08);
+    }
+
+    .support-box p {
+      max-width: 700px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .store-button {
+      margin-top: 20px;
+    }
+
+    .closing {
+      background: var(--deep-purple);
+      color: white;
+      text-align: center;
+      padding: 85px 24px;
+    }
+
+    .closing-inner {
+      max-width: 780px;
+      margin: auto;
+    }
+
+    .closing h2 {
+      color: white;
+    }
+
+    .closing p {
+      font-size: 1.1rem;
+    }
+
+    footer {
+      background: #2f2632;
+      color: #e9e1ea;
+      text-align: center;
+      padding: 38px 20px;
+      font-size: 0.9rem;
+    }
+
+    .quick-exit {
+      position: fixed;
+      right: 18px;
+      bottom: 18px;
+      z-index: 200;
+      border: none;
+      border-radius: 999px;
+      padding: 13px 20px;
+      background: var(--deep-purple);
+      color: white;
+      font-weight: 800;
+      cursor: pointer;
+      box-shadow: 0 8px 25px rgba(0,0,0,0.22);
+    }
+
+    @media (max-width: 900px) {
+      .nav-inner {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .shop-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .shop-card p {
+        min-height: auto;
+      }
+    }
+
+    @media (max-width: 520px) {
+      .hero {
+        padding: 75px 20px;
+      }
+
+      .section {
+        padding: 60px 20px;
+      }
+
+      .support-box {
+        padding: 30px 22px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="emergency-bar">
+    If you are in immediate danger, call 911.
+  </div>
+
+  <nav>
+    <div class="nav-inner">
+
+      <a class="brand" href="index.html">Smilee Kylee</a>
+
+      <div class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="kylee.html">Meet Kylee</a>
+        <a href="mission.html">Vision & Mission</a>
+        <a class="active" href="shop.html">Shop</a>
+        <a href="donate.html">Donate</a>
+        <a href="case.html">The Case</a>
+        <a href="story.html">What We Know</a>
+        <a href="help.html">Get Help</a>
+      </div>
+
+    </div>
+  </nav>
+
+  <header class="hero">
+
+    <div class="hero-inner">
+
+      <div class="eyebrow">
+        Wear Her Name. Carry Her Story.
+      </div>
+
+      <h1>Shop Smilee Kylee</h1>
+
+      <p>
+        Every item helps keep Kylee's memory visible and supports
+        the continued growth of Smilee Kylee.
+      </p>
+
+    </div>
+
+  </header>
+
+  <section class="section">
+
+    <div class="container">
+
+      <div class="intro">
+
+        <div class="eyebrow">Shop By Collection</div>
+
+        <h2>Choose Your Style</h2>
+
+        <p>
+          Shop Smilee Kylee apparel through our Fourthwall store.
+          Select a collection below to see the available designs,
+          sizes, and options.
+        </p>
+
+      </div>
+
+      <div class="shop-grid">
+
+        <div class="shop-card">
+
+          <div class="shop-icon">🧥</div>
+
+          <h3>Hoodies</h3>
+
+          <p>
+            Comfortable Smilee Kylee hoodies designed to help carry
+            Kylee's name and message wherever you go.
+          </p>
+
+          <a
+            class="button"
+            href="https://smilee-kylee-shop.fourthwall.com/collections/hoodies"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Shop Hoodies
+          </a>
+
+        </div>
+
+        <div class="shop-card">
+
+          <div class="shop-icon">👕</div>
+
+          <h3>T-Shirts</h3>
+
+          <p>
+            Shop Smilee Kylee T-shirts created to honor Kylee,
+            share her story, and help spread the mission.
+          </p>
+
+          <a
+            class="button"
+            href="https://smilee-kylee-shop.fourthwall.com/collections/t-shirts"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Shop T-Shirts
+          </a>
+
+        </div>
+
+        <div class="shop-card">
+
+          <div class="shop-icon">💜</div>
+
+          <h3>Sweaters</h3>
+
+          <p>
+            Browse Smilee Kylee sweaters for another way to
+            remember Kylee and support what is being built in her name.
+          </p>
+
+          <a
+            class="button"
+            href="https://smilee-kylee-shop.fourthwall.com/collections/sweaters"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Shop Sweaters
+          </a>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+  <section class="section lavender">
+
+    <div class="support-box">
+
+      <div class="eyebrow">Full Store</div>
+
+      <h2>See Everything</h2>
+
+      <p>
+        Want to browse the entire Smilee Kylee shop instead?
+        Visit the full Fourthwall storefront to see all currently
+        available merchandise.
+      </p>
+
+      <a
+        class="button store-button"
+        href="https://smilee-kylee-shop.fourthwall.com/"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        Visit the Full Shop
+      </a>
+
+    </div>
+
+  </section>
+
+  <section class="section">
+
+    <div class="support-box">
+
+      <div class="eyebrow">Why The Shop Matters</div>
+
+      <h2>More Than Merchandise</h2>
+
+      <p>
+        The Smilee Kylee shop is another way to keep Kylee's
+        memory alive and help more people learn about the mission
+        being built in her name.
+      </p>
+
+      <p>
+        Smilee Kylee is still developing, and every person who wears
+        her name helps carry her story into another room,
+        another conversation, and another community.
+      </p>
+
+      <p>
+        Merchandise purchases are not currently represented as
+        tax-deductible charitable contributions.
+      </p>
+
+    </div>
+
+  </section>
+
+  <section class="closing">
+
+    <div class="closing-inner">
+
+      <div class="eyebrow">For Kylee</div>
+
+      <h2>Her Memory Becomes Someone Else's Hope.</h2>
+
+      <p>
+        Thank you for helping us carry Kylee's name,
+        her smile, and the purpose growing from her story.
+      </p>
+
+    </div>
+
+  </section>
+
+  <footer>
+    © <span id="year"></span> Smilee Kylee · In Loving Memory of
+    Kylee M. Monteiro
+  </footer>
+
+  <button
+    class="quick-exit"
+    type="button"
+    onclick="quickExit()"
+  >
+    Quick Exit
+  </button>
+
+  <script>
+    document.getElementById("year").textContent =
+      new Date().getFullYear();
+
+    function quickExit() {
+      window.location.replace("https://www.google.com");
+    }
+  </script>
+
+</body>
+</html>
