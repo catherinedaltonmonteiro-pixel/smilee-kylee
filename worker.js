@@ -212,6 +212,12 @@ export default {
           );
         }
 
+        const memoryStatus = url.searchParams.get("status") || "pending";
+
+        if (memoryStatus === "approved") {
+          return await getAdminApprovedMemories(env);
+        }
+
         return await getPendingMemories(env);
       }
 
@@ -262,6 +268,31 @@ export default {
         return await denyMemory(
           env,
           Number(denyMemoryMatch[1])
+        );
+      }
+
+      // DELETE AN ALREADY-APPROVED MEMORY
+      // OWNER ONLY
+      const deleteApprovedMemoryMatch = url.pathname.match(
+        /^\/api\/admin\/memories\/(\d+)\/delete$/
+      );
+
+      if (
+        deleteApprovedMemoryMatch &&
+        request.method === "DELETE"
+      ) {
+        const access = await getAccess(request, env);
+
+        if (!access || access.role !== "owner") {
+          return jsonResponse(
+            { error: "Owner access required." },
+            403
+          );
+        }
+
+        return await deleteApprovedMemory(
+          env,
+          Number(deleteApprovedMemoryMatch[1])
         );
       }
 
@@ -442,6 +473,29 @@ async function getPendingMemories(env) {
 }
 
 
+async function getAdminApprovedMemories(env) {
+  const results =
+    await env.DB.prepare(`
+      SELECT
+        id,
+        name,
+        memory,
+        submitted_at,
+        approved_at
+      FROM memories
+      WHERE status = 'approved'
+      ORDER BY approved_at DESC
+    `)
+      .all();
+
+  return jsonResponse({
+    success: true,
+    memories:
+      results.results || []
+  });
+}
+
+
 async function approveMemory(
   env,
   memoryId
@@ -506,6 +560,42 @@ async function denyMemory(
     DELETE FROM memories
     WHERE id = ?
       AND status = 'pending'
+  `)
+    .bind(memoryId)
+    .run();
+
+  return jsonResponse({
+    success: true
+  });
+}
+
+
+async function deleteApprovedMemory(
+  env,
+  memoryId
+) {
+  const existing =
+    await env.DB.prepare(`
+      SELECT id
+      FROM memories
+      WHERE id = ?
+        AND status = 'approved'
+      LIMIT 1
+    `)
+      .bind(memoryId)
+      .first();
+
+  if (!existing) {
+    return jsonResponse(
+      { error: "Approved memory not found." },
+      404
+    );
+  }
+
+  await env.DB.prepare(`
+    DELETE FROM memories
+    WHERE id = ?
+      AND status = 'approved'
   `)
     .bind(memoryId)
     .run();
