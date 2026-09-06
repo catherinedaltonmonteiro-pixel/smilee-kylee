@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Case | Smilee Kylee</title>
+
+<style>
+:root{
+  --lavender:#d8c5e8;
+  --purple:#7d5a91;
+  --deep-purple:#553765;
+  --pink:#efd2df;
+  --cream:#fffaf5;
+  --white:#ffffff;
+  --charcoal:#342f35;
+}
+*{box-sizing:border-box}
+body{
+  margin:0;
+  font-family:Arial,Helvetica,sans-serif;
+  background:var(--cream);
+  color:var(--charcoal);
+  line-height:1.7;
+}
+.emergency-bar{
+  background:var(--deep-purple);
+  color:white;
+  text-align:center;
+  padding:8px 20px;
+  font-size:.9rem;
+}
+nav{
+  background:rgba(255,255,255,.97);
+  border-bottom:1px solid #eadfea;
+  position:sticky;
+  top:0;
+  z-index:100;
+}
+.nav-inner{
+  max-width:1200px;
+  margin:auto;
+  padding:15px 24px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:20px;
+}
+.brand{
+  color:var(--deep-purple);
+  font-size:1.35rem;
+  font-weight:800;
+  text-decoration:none;
+  white-space:nowrap;
+}
+.nav-links{
+  display:flex;
+  flex-wrap:wrap;
+  gap:17px;
+}
+.nav-links a{
+  color:var(--charcoal);
+  text-decoration:none;
+  font-size:.92rem;
+  font-weight:700;
+}
+.nav-links a:hover,.nav-links a.active{color:var(--purple)}
+
+.hero{
+  padding:105px 24px;
+  text-align:center;
+  background:
+    linear-gradient(rgba(58,36,68,.82),rgba(58,36,68,.82)),
+    url("576934323_1534292487913714_2079411978847318151_n.jpg")
+    center 30%/cover no-repeat;
+  color:white;
+}
+.hero-inner{max-width:850px;margin:auto}
+.eyebrow{
+  text-transform:uppercase;
+  letter-spacing:3px;
+  font-size:.8rem;
+  font-weight:800;
+  margin-bottom:12px;
+}
+h1,h2,h3{
+  font-family:Georgia,"Times New Roman",serif;
+}
+h1{
+  font-size:clamp(3rem,7vw,5.3rem);
+  line-height:1;
+  margin:0 0 25px;
+}
+h2{
+  color:var(--deep-purple);
+  font-size:clamp(2.1rem,5vw,3.2rem);
+  line-height:1.15;
+}
+h3{
+  color:var(--deep-purple);
+  font-size:1.45rem;
+}
+.hero p{font-size:1.15rem}
+
+.section{padding:80px 24px}
+.container{max-width:1000px;margin:auto}
+.center{text-align:center;max-width:800px;margin:auto}
+
+.status{
+  background:white;
+  border:2px solid var(--lavender);
+  border-radius:24px;
+  padding:35px;
+  margin-top:35px;
+}
+.status strong{color:var(--deep-purple)}
+
+.timeline{
+  max-width:850px;
+  margin:45px auto 0;
+}
+.timeline-item{
+  border-left:4px solid var(--lavender);
+  padding:0 0 35px 28px;
+  position:relative;
+}
+.timeline-item:before{
+  content:"";
+  position:absolute;
+  width:16px;
+  height:16px;
+  border-radius:50%;
+  background:var(--deep-purple);
+  left:-10px;
+  top:5px;
+}
+.date{
+  color:var(--purple);
+  font-weight:800;
+  text-transform:uppercase;
+  letter-spacing:1px;
+  font-size:.85rem;
+}
+
+.lavender{background:#f3ebf7}
+
+.cards{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:24px;
+  margin-top:40px;
+}
+.card{
+  background:white;
+  border-radius:22px;
+  padding:30px;
+  box-shadow:0 10px 30px rgba(70,45,80,.07);
+}
+
+.legal{
+  background:#fff;
+  border-left:5px solid var(--purple);
+  padding:28px;
+  margin-top:40px;
+}
+
+.update-box{
+  max-width:850px;
+  margin:auto;
+  background:white;
+  border-radius:24px;
+  padding:38px;
+  box-shadow:0 10px 30px rgba(70,45,80,.07);
+}
+
+.closing{
+  background:var(--deep-purple);
+  color:white;
+  text-align:center;
+  padding:80px 24px;
+}
+.closing-inner{max-width:760px;margin:auto}
+.closing h2{color:white}
+
+footer{
+  background:#2f2632;
+  color:#e9e1ea;
+  text-align:center;
+  padding:38px 20px;
+  font-size:.9rem;
+}
+.quick-exit{
+  position:fixed;
+  right:18px;
+  bottom:18px;
+  z-index:200;
+  border:none;
+  border-radius:999px;
+  padding:13px 20px;
+  background:var(--deep-purple);
+  color:white;
+  font-weight:800;
+  cursor:pointer;
+  box-shadow:0 8px 25px rgba(0,0,0,.22);
+}
+
+@media(max-width:850px){
+  .nav-inner{flex-direction:column;align-items:flex-start}
+  .cards{grid-template-columns:1fr}
+}
+</style>
+</head>
+
+<body>
+
+<div class="emergency-bar">
+If you are in immediate danger, call 911.
+</div>
+
+<nav>
+<div class="nav-inner">
+<a class="brand" href="index.html">Smilee Kylee</a>
+
+<div class="nav-links">
+<a href="index.html">Home</a>
+<a href="kylee.html">Meet Kylee</a>
+<a href="mission.html">Vision & Mission</a>
+<a href="shop.html">Shop</a>
+<a href="donate.html">Donate</a>
+<a class="active" href="case.html">The Case</a>
+<a href="story.html">What We Know</a>
+<a href="help.html">Get Help</a>
+</div>
+</div>
+</nav>
+
+<header class="hero">
+<div class="hero-inner">
+
+<div class="eyebrow">Justice for Kylee</div>
+
+<h1>The Case</h1>
+
+<p>
+This page follows the criminal court proceedings connected to
+the death of Kylee M. Monteiro and will be updated as reliable,
+publicly available information becomes available.
+</p>
+
+</div>
+</header>
+
+<section class="section">
+<div class="container">
+
+<div class="center">
+<div class="eyebrow">Current Status</div>
+<h2>Commonwealth v. Gregory Groom</h2>
+
+<p>
+Gregory Groom of Rehoboth, Massachusetts has been charged in
+connection with the death of 18-year-old Kylee Monteiro.
+</p>
+</div>
+
+<div class="status">
+
+<strong>Current publicly reported status:</strong>
+
+<p>
+A Bristol County grand jury indicted Gregory Groom in November
+2025 on charges of murder and witness intimidation.
+</p>
+
+<p>
+He was arraigned on the indictment in Fall River Superior Court
+on November 25, 2025. He pleaded not guilty and was ordered held
+without bail.
+</p>
+
+<p>
+This remains a criminal prosecution. A charge or indictment is
+an accusation, not a conviction. Gregory Groom is presumed
+innocent unless and until proven guilty in court.
+</p>
+
+</div>
+
+</div>
+</section>
+
+<section class="section lavender">
+<div class="container">
+
+<div class="center">
+<div class="eyebrow">Court Timeline</div>
+<h2>Key Publicly Reported Developments</h2>
+</div>
+
+<div class="timeline">
+
+<div class="timeline-item">
+<div class="date">August 19, 2025</div>
+<h3>Arrest & Recovery</h3>
+<p>
+Authorities announced charges against Gregory Groom relating to
+an alleged August 6 domestic violence incident involving Kylee.
+Later that day, investigators recovered human remains from the
+Rehoboth property where Groom lived.
+</p>
+</div>
+
+<div class="timeline-item">
+<div class="date">August 20, 2025</div>
+<h3>District Court Arraignment</h3>
+<p>
+Groom appeared in Taunton District Court. Prosecutors presented
+their allegations concerning Kylee's death and the investigation.
+A not-guilty plea was entered, and Groom was ordered held without
+bail.
+</p>
+</div>
+
+<div class="timeline-item">
+<div class="date">November 20, 2025</div>
+<h3>Grand Jury Indictment</h3>
+<p>
+The Bristol County District Attorney's Office announced that a
+grand jury had indicted Groom on charges of murder and witness
+intimidation, moving the prosecution to Superior Court.
+</p>
+</div>
+
+<div class="timeline-item">
+<div class="date">November 25, 2025</div>
+<h3>Superior Court Arraignment</h3>
+<p>
+Groom was arraigned in Fall River Superior Court on the
+indictment. He pleaded not guilty and remained held without bail.
+</p>
+</div>
+
+<div class="timeline-item">
+<div class="date">Current</div>
+<h3>Case Pending</h3>
+<p>
+This page will be updated when additional court dates, rulings,
+motions, trial information, or other verified developments become
+publicly available.
+</p>
+</div>
+
+</div>
+</div>
+</section>
+
+<section class="section">
+<div class="container">
+
+<div class="center">
+<div class="eyebrow">The Allegations</div>
+<h2>What Prosecutors Have Said in Court</h2>
+
+<p>
+The statements below describe prosecution allegations reported
+from court proceedings. They should not be confused with findings
+of guilt.
+</p>
+</div>
+
+<div class="cards">
+
+<div class="card">
+<h3>Kylee's Disappearance</h3>
+<p>
+According to prosecutors, Groom reported Kylee missing after she
+had been at his Rehoboth residence. Investigators subsequently
+focused their investigation on the property and the circumstances
+surrounding her disappearance.
+</p>
+</div>
+
+<div class="card">
+<h3>The Investigation</h3>
+<p>
+Prosecutors told the court that Groom later made statements to
+investigators concerning Kylee's death and provided information
+about where investigators could locate her remains.
+</p>
+</div>
+
+<div class="card">
+<h3>Recovery of Kylee</h3>
+<p>
+Investigators recovered Kylee's remains on the Rehoboth property
+on August 19, 2025, following information prosecutors say Groom
+provided during the investigation.
+</p>
+</div>
+
+<div class="card">
+<h3>The Indictment</h3>
+<p>
+In November 2025, a Bristol County grand jury returned an
+indictment charging Groom with murder and witness intimidation.
+The indictment brought the case into Superior Court.
+</p>
+</div>
+
+</div>
+
+<div class="legal">
+<strong>Important:</strong>
+The information on this page summarizes publicly reported court
+proceedings and statements attributed to prosecutors and law
+enforcement. Allegations are not findings of guilt. The defendant
+has pleaded not guilty and is entitled to the presumption of
+innocence throughout the criminal proceedings.
+</div>
+
+</div>
+</section>
+
+<section class="section lavender">
+<div class="update-box">
+
+<div class="eyebrow">Case Updates</div>
+
+<h2>We Will Keep This Page Updated</h2>
+
+<p>
+Court cases can take time. Hearings may be scheduled, postponed,
+or changed, and new filings may become available as the case
+moves forward.
+</p>
+
+<p>
+We want this page to remain accurate. Updates will be added when
+they can be supported by reliable public court information or
+official reporting.
+</p>
+
+<p>
+<strong>Last reviewed: September 6, 2026</strong>
+</p>
+
+</div>
+</section>
+
+<section class="closing">
+<div class="closing-inner">
+
+<div class="eyebrow">Kylee M. Monteiro</div>
+
+<h2>Justice Is Part of Her Story. It Is Not All of Her Story.</h2>
+
+<p>
+Kylee was a daughter, sister, friend, graduate, mother-to-be,
+and a young woman with dreams for her future.
+</p>
+
+<p>
+This page follows the court case. The rest of Smilee Kylee
+exists to make sure she is remembered for far more than the way
+her life ended.
+</p>
+
+</div>
+</section>
+
+<footer>
+© <span id="year"></span> Smilee Kylee · In Loving Memory of
+Kylee M. Monteiro
+</footer>
+
+<button class="quick-exit" type="button" onclick="quickExit()">
+Quick Exit
+</button>
+
+<script>
+document.getElementById("year").textContent =
+new Date().getFullYear();
+
+function quickExit(){
+  window.location.replace("https://www.google.com");
+}
+</script>
+
+</body>
+</html>
