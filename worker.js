@@ -197,6 +197,22 @@ export default {
         return await getApprovedMemories(env);
       }
 
+      // PUBLIC APPROVED MEMORY PICTURE
+      const publicMemoryImageMatch =
+        url.pathname.match(
+          /^\/api\/memories\/(\d+)\/image$/
+        );
+
+      if (
+        publicMemoryImageMatch &&
+        request.method === "GET"
+      ) {
+        return await getApprovedMemoryImage(
+          env,
+          Number(publicMemoryImageMatch[1])
+        );
+      }
+
       // ADMIN MEMORY INBOX
       // Owner and viewer can read pending memories.
       if (
@@ -395,6 +411,11 @@ async function submitMemory(request, env) {
     4000
   );
 
+  const imageData =
+    typeof data.imageData === "string"
+      ? data.imageData.trim()
+      : "";
+
   if (!name) {
     return jsonResponse(
       { error: "Please enter your name." },
@@ -409,17 +430,64 @@ async function submitMemory(request, env) {
     );
   }
 
-  await env.DB.prepare(`
-    INSERT INTO memories
-    (
-      name,
-      memory,
-      status
-    )
-    VALUES (?, ?, 'pending')
-  `)
-    .bind(name, memory)
-    .run();
+  if (imageData) {
+    const validImage =
+      /^data:image\/(jpeg|png|webp);base64,[A-Za-z0-9+/=]+$/.test(
+        imageData
+      );
+
+    if (!validImage) {
+      return jsonResponse(
+        {
+          error:
+            "The picture format is not supported."
+        },
+        400
+      );
+    }
+
+    if (imageData.length > 1600000) {
+      return jsonResponse(
+        {
+          error:
+            "The picture is too large. Please choose a smaller picture."
+        },
+        400
+      );
+    }
+  }
+
+  const inserted =
+    await env.DB.prepare(`
+      INSERT INTO memories
+      (
+        name,
+        memory,
+        status
+      )
+      VALUES (?, ?, 'pending')
+      RETURNING id
+    `)
+      .bind(name, memory)
+      .first();
+
+  const memoryId = Number(inserted.id);
+
+  if (imageData) {
+    await env.DB.prepare(`
+      INSERT INTO memory_images
+      (
+        memory_id,
+        image_data
+      )
+      VALUES (?, ?)
+    `)
+      .bind(
+        memoryId,
+        imageData
+      )
+      .run();
+  }
 
   return jsonResponse({
     success: true,
@@ -429,16 +497,23 @@ async function submitMemory(request, env) {
 }
 
 
+
 async function getApprovedMemories(env) {
   const results =
     await env.DB.prepare(`
       SELECT
-        id,
-        name,
-        memory,
-        approved_at
-      FROM memories
-      WHERE status = 'approved'
+        m.id,
+        m.name,
+        m.memory,
+        m.approved_at,
+        CASE
+          WHEN mi.memory_id IS NULL THEN 0
+          ELSE 1
+        END AS has_image
+      FROM memories m
+      LEFT JOIN memory_images mi
+        ON mi.memory_id = m.id
+      WHERE m.status = 'approved'
       ORDER BY RANDOM()
     `)
       .all();
@@ -451,17 +526,21 @@ async function getApprovedMemories(env) {
 }
 
 
+
 async function getPendingMemories(env) {
   const results =
     await env.DB.prepare(`
       SELECT
-        id,
-        name,
-        memory,
-        submitted_at
-      FROM memories
-      WHERE status = 'pending'
-      ORDER BY submitted_at DESC
+        m.id,
+        m.name,
+        m.memory,
+        m.submitted_at,
+        mi.image_data
+      FROM memories m
+      LEFT JOIN memory_images mi
+        ON mi.memory_id = m.id
+      WHERE m.status = 'pending'
+      ORDER BY m.submitted_at DESC
     `)
       .all();
 
@@ -473,18 +552,22 @@ async function getPendingMemories(env) {
 }
 
 
+
 async function getAdminApprovedMemories(env) {
   const results =
     await env.DB.prepare(`
       SELECT
-        id,
-        name,
-        memory,
-        submitted_at,
-        approved_at
-      FROM memories
-      WHERE status = 'approved'
-      ORDER BY approved_at DESC
+        m.id,
+        m.name,
+        m.memory,
+        m.submitted_at,
+        m.approved_at,
+        mi.image_data
+      FROM memories m
+      LEFT JOIN memory_images mi
+        ON mi.memory_id = m.id
+      WHERE m.status = 'approved'
+      ORDER BY m.approved_at DESC
     `)
       .all();
 
@@ -492,6 +575,71 @@ async function getAdminApprovedMemories(env) {
     success: true,
     memories:
       results.results || []
+  });
+}
+
+
+async function getApprovedMemoryImage(
+  env,
+  memoryId
+) {
+  const result =
+    await env.DB.prepare(`
+      SELECT mi.image_data
+      FROM memory_images mi
+      INNER JOIN memories m
+        ON m.id = mi.memory_id
+      WHERE mi.memory_id = ?
+        AND m.status = 'approved'
+      LIMIT 1
+    `)
+      .bind(memoryId)
+      .first();
+
+  if (!result || !result.image_data) {
+    return new Response(
+      "Image not found.",
+      { status: 404 }
+    );
+  }
+
+  const match =
+    String(result.image_data).match(
+      /^data:image\/(jpeg|png|webp);base64,(.+)$/
+    );
+
+  if (!match) {
+    return new Response(
+      "Invalid image.",
+      { status: 500 }
+    );
+  }
+
+  const subtype = match[1];
+  const binary = atob(match[2]);
+  const bytes = new Uint8Array(binary.length);
+
+  for (
+    let index = 0;
+    index < binary.length;
+    index++
+  ) {
+    bytes[index] =
+      binary.charCodeAt(index);
+  }
+
+  const contentType =
+    subtype === "png"
+      ? "image/png"
+      : subtype === "webp"
+      ? "image/webp"
+      : "image/jpeg";
+
+  return new Response(bytes, {
+    headers: {
+      "Content-Type": contentType,
+      "Cache-Control": "public, max-age=3600"
+    }
   });
 }
 
@@ -557,6 +705,13 @@ async function denyMemory(
   }
 
   await env.DB.prepare(`
+    DELETE FROM memory_images
+    WHERE memory_id = ?
+  `)
+    .bind(memoryId)
+    .run();
+
+  await env.DB.prepare(`
     DELETE FROM memories
     WHERE id = ?
       AND status = 'pending'
@@ -591,6 +746,13 @@ async function deleteApprovedMemory(
       404
     );
   }
+
+  await env.DB.prepare(`
+    DELETE FROM memory_images
+    WHERE memory_id = ?
+  `)
+    .bind(memoryId)
+    .run();
 
   await env.DB.prepare(`
     DELETE FROM memories
