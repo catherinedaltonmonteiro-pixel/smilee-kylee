@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Question Inbox | Smilee Kylee</title>
+
+<style>
+:root{
+  --lavender:#d8c5e8;
+  --purple:#7d5a91;
+  --deep-purple:#553765;
+  --pink:#efd2df;
+  --cream:#fffaf5;
+  --white:#ffffff;
+  --charcoal:#342f35;
+  --border:#eadfea;
+}
+
+*{
+  box-sizing:border-box;
+}
+
+body{
+  margin:0;
+  font-family:Arial,Helvetica,sans-serif;
+  background:var(--cream);
+  color:var(--charcoal);
+}
+
+header{
+  background:var(--deep-purple);
+  color:white;
+  padding:28px 20px;
+  text-align:center;
+}
+
+header h1{
+  margin:0;
+  font-family:Georgia,"Times New Roman",serif;
+}
+
+.wrap{
+  max-width:1100px;
+  margin:40px auto;
+  padding:0 20px 60px;
+}
+
+.login-box{
+  max-width:440px;
+  margin:70px auto;
+  background:white;
+  border:2px solid var(--lavender);
+  border-radius:22px;
+  padding:30px;
+  box-shadow:0 12px 30px rgba(70,45,80,.08);
+}
+
+.login-box h2{
+  margin-top:0;
+  color:var(--deep-purple);
+  font-family:Georgia,"Times New Roman",serif;
+}
+
+label{
+  display:block;
+  font-weight:700;
+  margin-bottom:8px;
+}
+
+input,
+select{
+  width:100%;
+  padding:13px 14px;
+  border:1px solid #d8cbdc;
+  border-radius:10px;
+  font:inherit;
+}
+
+button{
+  border:none;
+  border-radius:999px;
+  padding:12px 18px;
+  background:var(--deep-purple);
+  color:white;
+  font-weight:800;
+  cursor:pointer;
+}
+
+button:hover{
+  opacity:.9;
+}
+
+.login-button{
+  margin-top:16px;
+  width:100%;
+}
+
+.error{
+  margin-top:14px;
+  color:#9b1c31;
+  font-weight:700;
+}
+
+.admin-area{
+  display:none;
+}
+
+.toolbar{
+  display:flex;
+  justify-content:space-between;
+  gap:15px;
+  align-items:center;
+  flex-wrap:wrap;
+  margin-bottom:25px;
+}
+
+.folder-tabs{
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap;
+}
+
+.folder-tabs button{
+  background:white;
+  color:var(--deep-purple);
+  border:1px solid var(--lavender);
+}
+
+.folder-tabs button.active{
+  background:var(--deep-purple);
+  color:white;
+}
+
+.submission-list{
+  display:grid;
+  gap:18px;
+}
+
+.submission-card{
+  background:white;
+  border:1px solid var(--border);
+  border-radius:18px;
+  padding:24px;
+  box-shadow:0 8px 24px rgba(70,45,80,.05);
+}
+
+.submission-meta{
+  display:flex;
+  justify-content:space-between;
+  gap:15px;
+  flex-wrap:wrap;
+  margin-bottom:15px;
+  color:#746b75;
+  font-size:.9rem;
+}
+
+.submission-card h3{
+  color:var(--deep-purple);
+  font-family:Georgia,"Times New Roman",serif;
+  margin:0 0 10px;
+}
+
+.commentary{
+  margin-top:15px;
+  padding:15px;
+  background:#f8f2fa;
+  border-radius:12px;
+}
+
+.actions{
+  margin-top:20px;
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap;
+  align-items:center;
+}
+
+.actions select{
+  max-width:260px;
+}
+
+.delete-button{
+  background:#8c2f42;
+}
+
+.empty{
+  background:white;
+  border:1px solid var(--border);
+  border-radius:18px;
+  padding:35px;
+  text-align:center;
+  color:#746b75;
+}
+
+.logout{
+  background:white;
+  color:var(--deep-purple);
+  border:1px solid var(--lavender);
+}
+
+@media(max-width:650px){
+  .actions{
+    display:grid;
+  }
+
+  .actions select,
+  .actions button{
+    width:100%;
+    max-width:none;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <h1>Smilee Kylee Question Inbox</h1>
+</header>
+
+<div class="wrap">
+
+  <div id="loginBox" class="login-box">
+    <h2>Private Access</h2>
+    <p>Enter your numeric passcode to open the question inbox.</p>
+
+    <label for="passcode">Passcode</label>
+    <input
+      id="passcode"
+      type="password"
+      inputmode="numeric"
+      autocomplete="off"
+      placeholder="Enter passcode"
+    >
+
+    <button class="login-button" onclick="login()">Open Inbox</button>
+
+    <div id="loginError" class="error"></div>
+  </div>
+
+  <div id="adminArea" class="admin-area">
+
+    <div class="toolbar">
+      <div class="folder-tabs">
+        <button data-folder="inbox" class="active">Inbox</button>
+        <button data-folder="next">Next in Line</button>
+        <button data-folder="work">Work in Progress</button>
+        <button data-folder="future">Address in the Future</button>
+        <button data-folder="backburner">Back Burner</button>
+      </div>
+
+      <button class="logout" onclick="logout()">Log Out</button>
+    </div>
+
+    <div id="submissionList" class="submission-list"></div>
+
+  </div>
+
+</div>
+
+<script>
+let adminPasscode = "";
+let currentFolder = "inbox";
+
+const folderNames = {
+  inbox: "Inbox",
+  next: "Next in Line",
+  work: "Work in Progress",
+  future: "Address in the Future",
+  backburner: "Back Burner"
+};
+
+async function login(){
+  const input = document.getElementById("passcode");
+  const errorBox = document.getElementById("loginError");
+
+  errorBox.textContent = "";
+
+  const passcode = input.value.trim();
+
+  if(!passcode){
+    errorBox.textContent = "Enter your passcode.";
+    return;
+  }
+
+  try{
+    const response = await fetch("/api/admin/login",{
+      method:"POST",
+      headers:{
+        "Content-Type":"application/json"
+      },
+      body:JSON.stringify({
+        passcode:passcode
+      })
+    });
+
+    const data = await response.json();
+
+    if(!response.ok){
+      errorBox.textContent =
+        data.error || "Unable to log in.";
+      return;
+    }
+
+    adminPasscode = passcode;
+
+    document.getElementById("loginBox").style.display = "none";
+    document.getElementById("adminArea").style.display = "block";
+
+    input.value = "";
+
+    await loadSubmissions();
+
+  }catch(error){
+    errorBox.textContent =
+      "Unable to connect. Please try again.";
+  }
+}
+
+async function loadSubmissions(){
+  const list = document.getElementById("submissionList");
+
+  list.innerHTML = "<div class='empty'>Loading...</div>";
+
+  try{
+    const response = await fetch(
+      "/api/admin/submissions?folder=" +
+      encodeURIComponent(currentFolder),
+      {
+        headers:{
+          "X-Admin-Passcode":adminPasscode
+        }
+      }
+    );
+
+    const data = await response.json();
+
+    if(response.status === 401){
+      logout();
+      return;
+    }
+
+    if(!response.ok){
+      list.innerHTML =
+        "<div class='empty'>Unable to load submissions.</div>";
+      return;
+    }
+
+    const submissions = data.submissions || [];
+
+    if(submissions.length === 0){
+      list.innerHTML =
+        "<div class='empty'>No submissions in this folder.</div>";
+      return;
+    }
+
+    list.innerHTML = "";
+
+    submissions.forEach(submission=>{
+      list.appendChild(createCard(submission));
+    });
+
+  }catch(error){
+    list.innerHTML =
+      "<div class='empty'>Unable to connect to the inbox.</div>";
+  }
+}
+
+function createCard(submission){
+  const card = document.createElement("div");
+  card.className = "submission-card";
+
+  const safeName =
+    submission.name && submission.name.trim()
+      ? submission.name
+      : "Anonymous";
+
+  const date = submission.submitted_at
+    ? new Date(
+        submission.submitted_at.replace(" ","T") + "Z"
+      ).toLocaleString()
+    : "";
+
+  const meta = document.createElement("div");
+  meta.className = "submission-meta";
+
+  const name = document.createElement("span");
+  name.textContent = safeName;
+
+  const submitted = document.createElement("span");
+  submitted.textContent = date;
+
+  meta.appendChild(name);
+  meta.appendChild(submitted);
+
+  const title = document.createElement("h3");
+  title.textContent =
+    "Question #" + submission.id;
+
+  const question = document.createElement("div");
+  question.textContent = submission.question;
+
+  card.appendChild(meta);
+  card.appendChild(title);
+  card.appendChild(question);
+
+  if(
+    submission.commentary &&
+    submission.commentary.trim()
+  ){
+    const commentary = document.createElement("div");
+    commentary.className = "commentary";
+
+    const strong = document.createElement("strong");
+    strong.textContent = "Additional commentary:";
+
+    const text = document.createElement("div");
+    text.textContent = submission.commentary;
+
+    commentary.appendChild(strong);
+    commentary.appendChild(text);
+
+    card.appendChild(commentary);
+  }
+
+  const actions = document.createElement("div");
+  actions.className = "actions";
+
+  const select = document.createElement("select");
+
+  Object.entries(folderNames).forEach(([value,label])=>{
+    const option = document.createElement("option");
+    option.value = value;
+    option.textContent = label;
+
+    if(value === currentFolder){
+      option.selected = true;
+    }
+
+    select.appendChild(option);
+  });
+
+  const moveButton = document.createElement("button");
+  moveButton.textContent = "Move";
+
+  moveButton.onclick = async ()=>{
+    await moveSubmission(
+      submission.id,
+      select.value
+    );
+  };
+
+  const deleteButton = document.createElement("button");
+  deleteButton.textContent = "Delete";
+  deleteButton.className = "delete-button";
+
+  deleteButton.onclick = async ()=>{
+    const confirmed = confirm(
+      "Delete this submission permanently?"
+    );
+
+    if(!confirmed){
+      return;
+    }
+
+    await deleteSubmission(submission.id);
+  };
+
+  actions.appendChild(select);
+  actions.appendChild(moveButton);
+  actions.appendChild(deleteButton);
+
+  card.appendChild(actions);
+
+  return card;
+}
+
+async function moveSubmission(id,folder){
+  try{
+    const response = await fetch(
+      "/api/admin/submissions/" + id + "/move",
+      {
+        method:"POST",
+        headers:{
+          "Content-Type":"application/json",
+          "X-Admin-Passcode":adminPasscode
+        },
+        body:JSON.stringify({
+          folder:folder
+        })
+      }
+    );
+
+    if(response.ok){
+      await loadSubmissions();
+    }else{
+      alert("Unable to move this submission.");
+    }
+
+  }catch(error){
+    alert("Unable to move this submission.");
+  }
+}
+
+async function deleteSubmission(id){
+  try{
+    const response = await fetch(
+      "/api/admin/submissions/" + id,
+      {
+        method:"DELETE",
+        headers:{
+          "X-Admin-Passcode":adminPasscode
+        }
+      }
+    );
+
+    if(response.ok){
+      await loadSubmissions();
+    }else{
+      alert("Unable to delete this submission.");
+    }
+
+  }catch(error){
+    alert("Unable to delete this submission.");
+  }
+}
+
+function logout(){
+  adminPasscode = "";
+
+  document.getElementById("adminArea").style.display = "none";
+  document.getElementById("loginBox").style.display = "block";
+  document.getElementById("submissionList").innerHTML = "";
+}
+
+document.querySelectorAll(".folder-tabs button")
+  .forEach(button=>{
+    button.addEventListener("click",async ()=>{
+      document
+        .querySelectorAll(".folder-tabs button")
+        .forEach(item=>{
+          item.classList.remove("active");
+        });
+
+      button.classList.add("active");
+
+      currentFolder =
+        button.getAttribute("data-folder");
+
+      await loadSubmissions();
+    });
+  });
+
+document.getElementById("passcode")
+  .addEventListener("keydown",event=>{
+    if(event.key === "Enter"){
+      login();
+    }
+  });
+</script>
+
+</body>
+</html>
