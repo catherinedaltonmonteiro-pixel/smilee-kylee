@@ -37,6 +37,16 @@
       font-size: 0.9rem;
     }
 
+
+    .funding-notice {
+      background: #f3ebf7;
+      color: var(--deep-purple);
+      text-align: center;
+      padding: 10px 22px;
+      font-size: 0.85rem;
+      border-bottom: 1px solid var(--lavender);
+    }
+
     nav {
       background: rgba(255,255,255,0.97);
       border-bottom: 1px solid #eadfea;
@@ -296,6 +306,11 @@
     If you are in immediate danger, call 911.
   </div>
 
+  <div class="funding-notice">
+    <strong>Funding Notice:</strong>
+    Donations, merchandise proceeds after costs and fees, and other financial support go toward building Smilee Kylee and its future programs, resources, and supportive housing for women in need.
+  </div>
+
   <nav>
     <div class="nav-inner">
 
@@ -519,6 +534,12 @@
     function quickExit() {
       window.location.replace("https://www.google.com");
     }
+
+    document.addEventListener("keydown", function(event) {
+      if (event.key === "Escape") {
+        window.location.replace("https://www.google.com");
+      }
+    });
   </script>
 
 </body>
