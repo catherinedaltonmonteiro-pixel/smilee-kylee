@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Public Questions | Smilee Kylee</title>
+<style>
+:root{
+  --lavender:#d8c5e8;
+  --purple:#7d5a91;
+  --deep-purple:#553765;
+  --pink:#efd2df;
+  --cream:#fffaf5;
+  --white:#ffffff;
+  --charcoal:#342f35;
+}
+
+*{box-sizing:border-box}
+
+body{
+  margin:0;
+  font-family:Arial,Helvetica,sans-serif;
+  background:var(--cream);
+  color:var(--charcoal);
+  line-height:1.75;
+}
+
+.emergency-bar{
+  background:var(--deep-purple);
+  color:white;
+  text-align:center;
+  padding:8px 20px;
+  font-size:.9rem;
+}
+
+.funding-notice{
+  background:#f3ebf7;
+  color:var(--deep-purple);
+  text-align:center;
+  padding:10px 22px;
+  font-size:.85rem;
+  border-bottom:1px solid var(--lavender);
+}
+
+nav{
+  background:rgba(255,255,255,.97);
+  border-bottom:1px solid #eadfea;
+  position:sticky;
+  top:0;
+  z-index:100;
+}
+
+.nav-inner{
+  max-width:1200px;
+  margin:auto;
+  padding:15px 24px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:20px;
+}
+
+.brand{
+  color:var(--deep-purple);
+  font-size:1.35rem;
+  font-weight:800;
+  text-decoration:none;
+  white-space:nowrap;
+}
+
+.nav-links{
+  display:flex;
+  flex-wrap:wrap;
+  gap:17px;
+}
+
+.nav-links a{
+  color:var(--charcoal);
+  text-decoration:none;
+  font-size:.92rem;
+  font-weight:700;
+}
+
+.nav-links a:hover,
+.nav-links a.active{
+  color:var(--purple);
+}
+
+.hero{
+  padding:110px 24px;
+  text-align:center;
+  background:
+    linear-gradient(rgba(58,36,68,.80),rgba(58,36,68,.80)),
+    url("656153597_26193231943666922_5799060983736162287_n.jpg")
+    center 30%/cover no-repeat;
+  color:white;
+}
+
+.hero-inner{
+  max-width:850px;
+  margin:auto;
+}
+
+.eyebrow{
+  text-transform:uppercase;
+  letter-spacing:3px;
+  font-size:.8rem;
+  font-weight:800;
+  margin-bottom:12px;
+}
+
+h1,h2,h3{
+  font-family:Georgia,"Times New Roman",serif;
+}
+
+h1{
+  font-size:clamp(3rem,7vw,5.4rem);
+  line-height:1;
+  margin:0 0 25px;
+}
+
+h2{
+  color:var(--deep-purple);
+  font-size:clamp(2.1rem,5vw,3.2rem);
+  line-height:1.15;
+}
+
+h3{
+  color:var(--deep-purple);
+  font-size:1.5rem;
+}
+
+.hero p{
+  font-size:1.2rem;
+}
+
+.section{
+  padding:80px 24px;
+}
+
+.container{
+  max-width:950px;
+  margin:auto;
+}
+
+.center{
+  max-width:800px;
+  margin:auto;
+  text-align:center;
+}
+
+.lavender{
+  background:#f3ebf7;
+}
+
+.story-block{
+  max-width:850px;
+  margin:40px auto 0;
+}
+
+.quote{
+  margin:35px 0;
+  padding:30px;
+  background:white;
+  border-left:5px solid var(--purple);
+  border-radius:0 18px 18px 0;
+  font-family:Georgia,"Times New Roman",serif;
+  font-size:1.2rem;
+  color:var(--deep-purple);
+}
+
+.timeline{
+  max-width:850px;
+  margin:45px auto 0;
+}
+
+.timeline-item{
+  border-left:4px solid var(--lavender);
+  padding:0 0 38px 28px;
+  position:relative;
+}
+
+.timeline-item:before{
+  content:"";
+  position:absolute;
+  width:16px;
+  height:16px;
+  border-radius:50%;
+  background:var(--deep-purple);
+  left:-10px;
+  top:6px;
+}
+
+.date{
+  color:var(--purple);
+  font-weight:800;
+  text-transform:uppercase;
+  letter-spacing:1px;
+  font-size:.85rem;
+}
+
+.questions{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:22px;
+  margin-top:40px;
+}
+
+.question{
+  background:white;
+  padding:28px;
+  border-radius:20px;
+  box-shadow:0 10px 28px rgba(70,45,80,.06);
+  font-family:Georgia,"Times New Roman",serif;
+  color:var(--deep-purple);
+  font-size:1.12rem;
+  font-weight:700;
+}
+
+.family-note{
+  background:white;
+  border:2px solid var(--lavender);
+  border-radius:24px;
+  padding:38px;
+  margin-top:40px;
+}
+
+.important{
+  background:var(--deep-purple);
+  color:white;
+  padding:55px 30px;
+  text-align:center;
+}
+
+.important-inner{
+  max-width:800px;
+  margin:auto;
+}
+
+.important h2{
+  color:white;
+}
+
+.important strong{
+  display:block;
+  font-family:Georgia,"Times New Roman",serif;
+  font-size:1.5rem;
+  margin:20px 0;
+}
+
+.legal{
+  max-width:850px;
+  margin:auto;
+  border-left:5px solid var(--purple);
+  background:white;
+  padding:28px;
+}
+
+.closing{
+  background:#2f2632;
+  color:white;
+  text-align:center;
+  padding:85px 24px;
+}
+
+.closing-inner{
+  max-width:800px;
+  margin:auto;
+}
+
+.closing h2{
+  color:white;
+}
+
+.closing strong{
+  display:block;
+  font-family:Georgia,"Times New Roman",serif;
+  font-size:1.5rem;
+  margin-top:22px;
+}
+
+footer{
+  background:#251e27;
+  color:#e9e1ea;
+  padding:55px 24px 85px;
+  font-size:.9rem;
+}
+
+.footer-inner{
+  max-width:1100px;
+  margin:auto;
+}
+
+.footer-grid{
+  display:grid;
+  grid-template-columns:1.4fr 1fr 1fr;
+  gap:42px;
+  align-items:start;
+}
+
+.footer-brand h2{
+  color:white;
+  font-size:2rem;
+  margin:0 0 11px;
+}
+
+.footer-brand p{
+  color:#cfc7d4;
+  max-width:420px;
+  margin:7px 0;
+}
+
+.footer-column h3{
+  color:white;
+  font-size:1.15rem;
+  margin:0 0 14px;
+}
+
+.footer-links{
+  display:grid;
+  gap:9px;
+}
+
+.footer-links a{
+  color:#cfc7d4;
+  text-decoration:none;
+}
+
+.footer-links a:hover{
+  color:white;
+  text-decoration:underline;
+}
+
+.footer-divider{
+  height:1px;
+  background:rgba(255,255,255,.12);
+  margin:34px 0 24px;
+}
+
+.footer-bottom{
+  text-align:center;
+  color:#cfc7d4;
+}
+
+.footer-bottom p{
+  margin:6px auto;
+}
+
+.copyright{
+  margin-top:14px;
+  font-size:.8rem;
+}
+
+.quick-exit{
+  position:fixed;
+  right:18px;
+  bottom:18px;
+  z-index:200;
+  border:none;
+  border-radius:999px;
+  padding:13px 20px;
+  background:var(--deep-purple);
+  color:white;
+  font-weight:800;
+  cursor:pointer;
+  box-shadow:0 8px 25px rgba(0,0,0,.22);
+}
+
+@media(max-width:850px){
+  .nav-inner{
+    flex-direction:column;
+    align-items:flex-start;
+  }
+
+  .questions{
+    grid-template-columns:1fr;
+  }
+
+  .footer-grid{
+    grid-template-columns:1fr;
+    gap:30px;
+  }
+}
+
+.question-list{
+  max-width:900px;
+  margin:42px auto 0;
+  display:grid;
+  gap:18px;
+}
+.question-card{
+  background:white;
+  border:1px solid #eadfea;
+  border-radius:20px;
+  padding:25px 28px;
+  box-shadow:0 8px 24px rgba(70,45,80,.05);
+  display:flex;
+  gap:18px;
+  align-items:flex-start;
+}
+.question-number{
+  flex:0 0 38px;
+  width:38px;
+  height:38px;
+  border-radius:50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background:var(--deep-purple);
+  color:white;
+  font-weight:800;
+}
+.question-text{
+  font-family:Georgia,"Times New Roman",serif;
+  color:var(--deep-purple);
+  font-size:1.12rem;
+  font-weight:700;
+  line-height:1.55;
+}
+.section-intro{
+  max-width:800px;
+  margin:0 auto 20px;
+  text-align:center;
+}
+.answer-note{
+  max-width:820px;
+  margin:35px auto 0;
+  padding:22px 26px;
+  border-left:5px solid var(--purple);
+  background:#f8f2fa;
+}
+@media(max-width:600px){
+  .question-card{padding:20px;gap:13px}
+  .question-number{flex-basis:34px;width:34px;height:34px}
+}
+</style>
+</head>
+<body>
+<div class="emergency-bar">
+If you are in immediate danger, call 911.
+</div>
+
+<div class="funding-notice">
+<strong>Funding Notice:</strong>
+Donations, merchandise proceeds after costs and fees, and other financial support go toward building Smilee Kylee and its future programs, resources, and supportive housing for women in need.
+</div>
+
+<nav>
+<div class="nav-inner">
+
+<a class="brand" href="index.html">Smilee Kylee</a>
+
+<div class="nav-links">
+<a href="index.html">Home</a>
+<a href="kylee.html">Meet Kylee</a>
+<a href="mission.html">Vision & Mission</a>
+<a href="shop.html">Shop</a>
+<a href="donate.html">Donate</a>
+<a href="case.html">The Case</a>
+<a href="story.html">What We Know</a>
+<a class="active" href="questions.html">Public Questions</a>
+<a href="help.html">Get Help</a>
+</div>
+
+</div>
+</nav>
+
+<header class="hero">
+  <div class="hero-inner">
+    <div class="eyebrow">Questions Surrounding Kylee's Case</div>
+    <h1>Public Questions</h1>
+    <p>There are parts of Kylee's story that remain unanswered, and there are other questions our family can answer from what we personally experienced.</p>
+  </div>
+</header>
+
+<section class="section lavender">
+  <div class="container">
+    <div class="section-intro">
+      <div class="eyebrow">Questions We Have Too</div>
+      <h2>Questions We Cannot Answer</h2>
+      <p>These are questions we believe deserve answers. We will not fill the gaps with assumptions or present unanswered questions as facts.</p>
+    </div>
+    <div class="question-list">
+      <div class="question-card"><div class="question-number">1</div><div class="question-text">Why was Kylee living at Bethesda House in the first place?</div></div>
+<div class="question-card"><div class="question-number">2</div><div class="question-text">Why was a pregnant 18-year-old discharged from Bethesda House after missing a meeting following a hospital visit?</div></div>
+<div class="question-card"><div class="question-number">3</div><div class="question-text">Why was Kylee taken back to Gregory Groom's home after being discharged?</div></div>
+<div class="question-card"><div class="question-number">4</div><div class="question-text">Who specifically made the decision to transport her there, and what information did that person have about the situation?</div></div>
+<div class="question-card"><div class="question-number">5</div><div class="question-text">Did Bethesda House know about any previous allegations of domestic violence or safety concerns involving Gregory?</div></div>
+<div class="question-card"><div class="question-number">6</div><div class="question-text">Why did Kylee refuse her sister's offer to come pick her up after describing an alleged assault?</div></div>
+<div class="question-card"><div class="question-number">7</div><div class="question-text">What happened during the roughly 30 minutes between Kylee's frightening first message and her later message saying she was safe?</div></div>
+<div class="question-card"><div class="question-number">8</div><div class="question-text">What exactly happened between Kylee's last confirmed contact with her family and the time she was reported missing?</div></div>
+<div class="question-card"><div class="question-number">9</div><div class="question-text">Why was Gregory the person who reported Kylee missing?</div></div>
+<div class="question-card"><div class="question-number">10</div><div class="question-text">Why did Gregory participate in efforts to find Kylee if prosecutors allege he already knew where she was?</div></div>
+<div class="question-card"><div class="question-number">11</div><div class="question-text">Who made the apparent kidnapping/hostage call to Kylee's sisters while everyone was searching for her?</div></div>
+<div class="question-card"><div class="question-number">12</div><div class="question-text">Why wasn't Kylee found during the earlier search of the Rehoboth property?</div></div>
+<div class="question-card"><div class="question-number">13</div><div class="question-text">If prosecutors allege Gregory admitted killing Kylee and then provided a hand-drawn map leading investigators to where she was buried, why should this case be resolved through a plea agreement instead of a trial?</div></div>
+<div class="question-card"><div class="question-number">14</div><div class="question-text">If the prosecution can prove that Kylee was killed, buried on the property, and that Gregory knew where her body was located, what level of accountability would truly reflect what happened to Kylee and her unborn baby?</div></div>
+<div class="question-card"><div class="question-number">15</div><div class="question-text">What evidence will prosecutors present to a jury to prove their allegations against Gregory—and will Kylee's family have the opportunity to see the entire case heard in court?</div></div>
+    </div>
+    <div class="answer-note"><strong>These questions are not accusations or findings of guilt.</strong> Where a question refers to allegations made by prosecutors, those allegations remain subject to the criminal court process.</div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="section-intro">
+      <div class="eyebrow">Our Family's Perspective</div>
+      <h2>Questions We Can Answer</h2>
+      <p>These are questions we can begin answering from our family's experiences, conversations, recollections, and the information available to us. Answers will be added to this page.</p>
+    </div>
+    <div class="question-list">
+      <div class="question-card"><div class="question-number">1</div><div class="question-text">What was the last independently verified phone call, text, social-media activity, or other digital activity from Kylee herself?</div></div>
+<div class="question-card"><div class="question-number">2</div><div class="question-text">Was Kylee's phone ever recovered, and if so, what did investigators learn from it?</div></div>
+<div class="question-card"><div class="question-number">3</div><div class="question-text">What did phone-location data show about Kylee's movements during her final hours?</div></div>
+<div class="question-card"><div class="question-number">4</div><div class="question-text">Were Gregory's phone records and location data consistent with the account he initially gave investigators?</div></div>
+<div class="question-card"><div class="question-number">5</div><div class="question-text">Were there security cameras, doorbell cameras, traffic cameras, or other surveillance near the property that captured Kylee or Gregory?</div></div>
+<div class="question-card"><div class="question-number">6</div><div class="question-text">Did any neighbors hear or see anything unusual around the time investigators believe Kylee died?</div></div>
+<div class="question-card"><div class="question-number">7</div><div class="question-text">What did Kylee tell friends—not just family—about what was happening in the days before she disappeared?</div></div>
+<div class="question-card"><div class="question-number">8</div><div class="question-text">Had anyone outside the family recently seen injuries on Kylee or heard her describe alleged violence?</div></div>
+<div class="question-card"><div class="question-number">9</div><div class="question-text">Did Kylee tell anyone she was afraid of Gregory before the August 6 messages?</div></div>
+<div class="question-card"><div class="question-number">10</div><div class="question-text">What belongings did Kylee have with her when she returned to the property?</div></div>
+<div class="question-card"><div class="question-number">11</div><div class="question-text">What happened to Kylee's personal belongings after she disappeared—including Bob and her Elmo blanket?</div></div>
+<div class="question-card"><div class="question-number">12</div><div class="question-text">Was Kylee allegedly killed where she was eventually found, or do prosecutors believe her body was moved afterward?</div></div>
+<div class="question-card"><div class="question-number">13</div><div class="question-text">What did the medical examiner determine about Kylee's cause and manner of death, and how much of that information has been made public?</div></div>
+<div class="question-card"><div class="question-number">14</div><div class="question-text">Was a suspected weapon recovered, and has forensic testing connected any weapon to Kylee's death?</div></div>
+<div class="question-card"><div class="question-number">15</div><div class="question-text">What exactly is the witness-intimidation charge connected to, and who was allegedly being intimidated?</div></div>
+<div class="question-card"><div class="question-number">16</div><div class="question-text">When did the family first realize something was seriously wrong and that Kylee might actually be missing?</div></div>
+<div class="question-card"><div class="question-number">17</div><div class="question-text">What was Gregory telling Kylee's family directly while everyone was searching for her?</div></div>
+<div class="question-card"><div class="question-number">18</div><div class="question-text">Did anything Gregory said or did during the search make the family suspicious at the time, or did those things only seem significant afterward?</div></div>
+<div class="question-card"><div class="question-number">19</div><div class="question-text">What efforts did Kylee's family personally make to find her before they learned she had died?</div></div>
+<div class="question-card"><div class="question-number">20</div><div class="question-text">Looking back now, were there things Kylee said or did in the days or weeks before her disappearance that the family understands differently today?</div></div>
+    </div>
+  </div>
+</section>
+
+<section class="section lavender">
+  <div class="legal">
+    <strong>Important legal note:</strong>
+    <p>Gregory Groom has been charged in connection with Kylee's death and has pleaded not guilty. Statements about what he allegedly told investigators or what prosecutors believe occurred are allegations and prosecution claims unless and until established in court. A criminal charge is not a conviction, and a defendant is presumed innocent unless proven guilty.</p>
+    <p>Questions on this page are presented to identify information the family and public may want clarified. The existence of a question should not be interpreted as proof that its premise is true.</p>
+  </div>
+</section>
+
+<footer>
+<div class="footer-inner">
+
+<div class="footer-grid">
+
+<div class="footer-brand">
+<h2>Smilee Kylee</h2>
+<p>Created in loving memory of Kylee M. Monteiro.</p>
+<p>Her memory becomes someone else's hope.</p>
+</div>
+
+<div class="footer-column">
+<h3>Explore</h3>
+<div class="footer-links">
+<a href="index.html">Home</a>
+<a href="kylee.html">Meet Kylee</a>
+<a href="mission.html">Vision &amp; Mission</a>
+<a href="case.html">The Case</a>
+<a href="story.html">What We Know</a>
+<a href="questions.html">Public Questions</a>
+<a href="help.html">Get Help</a>
+</div>
+</div>
+
+<div class="footer-column">
+<h3>Support Smilee Kylee</h3>
+<div class="footer-links">
+<a href="shop.html">Shop Smilee Kylee</a>
+<a href="donate.html">Donate</a>
+<a href="https://www.paypal.com/ncp/payment/BKQGJZW65HJS4" target="_blank" rel="noopener noreferrer">PayPal</a>
+<a href="https://cash.app/$justice4Kylee" target="_blank" rel="noopener noreferrer">Cash App</a>
+<a href="https://venmo.com/u/smileekylee" target="_blank" rel="noopener noreferrer">Venmo</a>
+<a href="https://smilee-kylee-shop.fourthwall.com/" target="_blank" rel="noopener noreferrer">Fourthwall Shop</a>
+</div>
+</div>
+
+</div>
+
+<div class="footer-divider"></div>
+
+<div class="footer-bottom">
+<p>May her memory become safety, healing, opportunity and hope.</p>
+<p class="copyright">
+© <span id="year"></span> Smilee Kylee. All rights reserved.
+</p>
+</div>
+
+</div>
+</footer>
+
+<button class="quick-exit" type="button" onclick="quickExit()">
+Quick Exit
+</button>
+
+<script>
+document.getElementById("year").textContent =
+new Date().getFullYear();
+
+function quickExit(){
+  window.location.replace("https://www.google.com");
+}
+</script>
+
+</body>
+</html>
