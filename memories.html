@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Memories of Kylee | Smilee Kylee</title>
+
+  <style>
+    :root{
+      --lavender:#d8c5e8;
+      --purple:#7d5a91;
+      --deep-purple:#553765;
+      --pink:#efd2df;
+      --cream:#fffaf5;
+      --white:#ffffff;
+      --charcoal:#342f35;
+    }
+
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+
+    body{
+      margin:0;
+      font-family:Arial,Helvetica,sans-serif;
+      background:var(--cream);
+      color:var(--charcoal);
+      line-height:1.7;
+    }
+
+    .emergency-bar{
+      background:var(--deep-purple);
+      color:white;
+      text-align:center;
+      padding:8px 20px;
+      font-size:.9rem;
+    }
+
+    .funding-notice{
+      background:#f3ebf7;
+      color:var(--deep-purple);
+      text-align:center;
+      padding:10px 22px;
+      font-size:.85rem;
+      border-bottom:1px solid var(--lavender);
+    }
+
+    nav{
+      background:rgba(255,255,255,.97);
+      border-bottom:1px solid #eadfea;
+      position:sticky;
+      top:0;
+      z-index:100;
+    }
+
+    .nav-inner{
+      max-width:1200px;
+      margin:auto;
+      padding:15px 24px;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:20px;
+    }
+
+    .brand{
+      color:var(--deep-purple);
+      font-size:1.35rem;
+      font-weight:800;
+      text-decoration:none;
+      white-space:nowrap;
+    }
+
+    .nav-links{
+      display:flex;
+      flex-wrap:wrap;
+      gap:17px;
+      align-items:center;
+    }
+
+    .nav-links a{
+      color:var(--charcoal);
+      text-decoration:none;
+      font-size:.92rem;
+      font-weight:700;
+    }
+
+    .nav-links a:hover,.nav-links a.active{color:var(--purple)}
+
+    .hero{
+      text-align:center;
+      padding:85px 24px 55px;
+      background:linear-gradient(135deg,#f3ebf7,#fffaf5,#fdf0f5);
+    }
+
+    .eyebrow{
+      text-transform:uppercase;
+      letter-spacing:3px;
+      font-size:.8rem;
+      font-weight:800;
+      color:var(--purple);
+      margin-bottom:10px;
+    }
+
+    h1,h2,h3{
+      font-family:Georgia,"Times New Roman",serif;
+      color:var(--deep-purple);
+    }
+
+    h1{
+      font-size:clamp(3rem,7vw,5.6rem);
+      line-height:1;
+      margin:0 0 20px;
+    }
+
+    .hero p{
+      max-width:760px;
+      margin:auto;
+      font-size:1.15rem;
+    }
+
+    .notice{
+      max-width:950px;
+      margin:35px auto 0;
+      padding:20px 24px;
+      border:1px solid var(--lavender);
+      border-radius:18px;
+      background:white;
+      text-align:left;
+      font-size:.92rem;
+    }
+
+    .board-wrap{
+      max-width:1250px;
+      margin:auto;
+      padding:60px 24px 110px;
+    }
+
+    .board-header{
+      max-width:750px;
+      margin-bottom:35px;
+    }
+
+    .board-header h2{
+      font-size:clamp(2.2rem,5vw,3.5rem);
+      margin:0 0 10px;
+    }
+
+    .memory-board{
+      columns:3 290px;
+      column-gap:24px;
+    }
+
+    .memory-card{
+      break-inside:avoid;
+      display:inline-block;
+      width:100%;
+      background:white;
+      padding:27px;
+      margin:0 0 24px;
+      border-radius:20px;
+      box-shadow:0 10px 30px rgba(70,45,80,.09);
+      border-top:5px solid var(--lavender);
+    }
+
+    .memory-card:nth-child(3n+2){background:#fdf0f5}
+    .memory-card:nth-child(3n+3){background:#f3ebf7}
+
+    .memory-text{
+      white-space:pre-wrap;
+      font-family:Georgia,"Times New Roman",serif;
+      font-size:1.08rem;
+    }
+
+    .memory-name{
+      margin-top:18px;
+      font-weight:800;
+      color:var(--deep-purple);
+    }
+
+    .empty{
+      background:white;
+      padding:35px;
+      border-radius:20px;
+      text-align:center;
+      box-shadow:0 10px 30px rgba(70,45,80,.07);
+    }
+
+    .share-panel{
+      position:fixed;
+      right:22px;
+      top:50%;
+      transform:translateY(-50%);
+      z-index:150;
+      display:flex;
+      align-items:flex-start;
+      gap:12px;
+    }
+
+    .share-button{
+      border:0;
+      border-radius:999px;
+      padding:17px 24px;
+      background:var(--deep-purple);
+      color:white;
+      font-weight:800;
+      font-size:1rem;
+      cursor:pointer;
+      box-shadow:0 10px 28px rgba(0,0,0,.2);
+    }
+
+    .share-box{
+      width:min(390px,calc(100vw - 40px));
+      background:white;
+      border-radius:22px;
+      padding:25px;
+      box-shadow:0 15px 45px rgba(0,0,0,.22);
+      display:none;
+    }
+
+    .share-box.open{display:block}
+
+    .share-box h3{
+      margin:0 0 7px;
+      font-size:1.6rem;
+    }
+
+    .share-box p{
+      margin:0 0 16px;
+      font-size:.9rem;
+    }
+
+    label{
+      display:block;
+      font-weight:800;
+      color:var(--deep-purple);
+      margin:13px 0 6px;
+    }
+
+    input,textarea{
+      width:100%;
+      padding:12px;
+      border:1px solid #d9cedd;
+      border-radius:12px;
+      font:inherit;
+      background:#fffdfb;
+    }
+
+    textarea{
+      min-height:150px;
+      resize:vertical;
+    }
+
+    .submit-button{
+      width:100%;
+      margin-top:17px;
+      border:0;
+      border-radius:999px;
+      padding:13px 20px;
+      background:var(--purple);
+      color:white;
+      font-weight:800;
+      cursor:pointer;
+    }
+
+    .form-message{
+      margin-top:12px!important;
+      font-weight:700;
+      color:var(--deep-purple);
+    }
+
+    footer{
+      background:#2f2632;
+      color:#e9e1ea;
+      padding:55px 24px 85px;
+      font-size:.9rem;
+    }
+
+    .footer-inner{max-width:1100px;margin:auto}
+    .footer-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:42px}
+    .footer-brand h2{color:white;margin:0 0 11px}
+    .footer-brand p{color:#cfc7d4;margin:7px 0}
+    .footer-column h3{color:white;margin:0 0 14px;font-size:1.15rem}
+    .footer-links{display:grid;gap:9px}
+    .footer-links a{color:#cfc7d4;text-decoration:none}
+    .footer-links a:hover{color:white;text-decoration:underline}
+    .footer-divider{height:1px;background:rgba(255,255,255,.12);margin:34px 0 24px}
+    .footer-bottom{text-align:center;color:#cfc7d4}
+    .footer-bottom p{margin:6px auto}
+
+    .return-top{
+      position:fixed;
+      right:18px;
+      bottom:18px;
+      z-index:140;
+      border:0;
+      border-radius:999px;
+      padding:13px 20px;
+      background:var(--deep-purple);
+      color:white;
+      font-weight:800;
+      cursor:pointer;
+      box-shadow:0 8px 25px rgba(0,0,0,.22);
+    }
+
+    @media(max-width:900px){
+      .nav-inner{flex-direction:column;align-items:flex-start}
+      .footer-grid{grid-template-columns:1fr}
+      .share-panel{
+        position:fixed;
+        top:auto;
+        right:18px;
+        bottom:72px;
+        transform:none;
+        flex-direction:column-reverse;
+        align-items:flex-end;
+      }
+      .share-box{max-height:70vh;overflow:auto}
+    }
+  </style>
+</head>
+
+<body>
+  <div class="emergency-bar">If you are in immediate danger, call 911.</div>
+
+  <div class="funding-notice">
+    <strong>Funding Notice:</strong>
+    Donations, merchandise proceeds after costs and fees, and other financial support go toward building Smilee Kylee and its future programs, resources, and supportive housing for women in need.
+  </div>
+
+  <nav>
+    <div class="nav-inner">
+      <a class="brand" href="index.html">Smilee Kylee</a>
+      <div class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="kylee.html">Meet Kylee</a>
+        <a href="mission.html">Vision &amp; Mission</a>
+        <a href="shop.html">Shop</a>
+        <a href="donate.html">Donate</a>
+        <a href="case.html">The Case</a>
+        <a href="story.html">What We Know</a>
+        <a href="questions.html">Public Questions</a>
+        <a class="active" href="memories.html">Memories</a>
+        <a href="help.html">Get Help</a>
+      </div>
+    </div>
+  </nav>
+
+  <header class="hero">
+    <div class="eyebrow">In Loving Memory of Kylee M. Monteiro</div>
+    <h1>Memories of Kylee</h1>
+    <p>
+      A place for the people who knew and loved Kylee to preserve the moments,
+      stories, laughter, and little things they remember about her.
+    </p>
+
+    <div class="notice">
+      <strong>Community &amp; Case Notice:</strong>
+      This page is intended to honor Kylee and preserve genuine memories of her.
+      Submissions containing mockery, harassment, threats, bullying, impersonation,
+      or attempts to interfere with the ongoing criminal case will not be published.
+      Where appropriate, concerning submissions may be preserved and reported to
+      law enforcement. Submission does not guarantee publication.
+    </div>
+  </header>
+
+  <main class="board-wrap">
+    <div class="board-header">
+      <div class="eyebrow">Her Memory Lives Here</div>
+      <h2>Kylee's Memory Board</h2>
+      <p>
+        These memories were shared by people whose lives crossed paths with Kylee.
+        Every submission is reviewed before appearing here.
+      </p>
+    </div>
+
+    <div id="memoryBoard" class="memory-board">
+      <div class="empty">Loading memories...</div>
+    </div>
+  </main>
+
+  <div class="share-panel">
+    <div id="shareBox" class="share-box">
+      <h3>Share Your Memory</h3>
+      <p>Your memory will be sent privately for approval before it appears on this page.</p>
+
+      <form id="memoryForm">
+        <label for="memoryName">Your Name</label>
+        <input id="memoryName" name="name" maxlength="100" required>
+
+        <label for="memoryText">Your Memory of Kylee</label>
+        <textarea id="memoryText" name="memory" maxlength="4000" required></textarea>
+
+        <button class="submit-button" type="submit">Send Memory for Approval</button>
+        <p id="formMessage" class="form-message" aria-live="polite"></p>
+      </form>
+    </div>
+
+    <button id="shareButton" class="share-button" type="button">
+      Share Your Memory
+    </button>
+  </div>
+
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <h2>Smilee Kylee</h2>
+          <p>Created in loving memory of Kylee M. Monteiro.</p>
+          <p>Her memory becomes someone else's hope.</p>
+        </div>
+
+        <div class="footer-column">
+          <h3>Explore</h3>
+          <div class="footer-links">
+            <a href="index.html">Home</a>
+            <a href="kylee.html">Meet Kylee</a>
+            <a href="mission.html">Vision &amp; Mission</a>
+            <a href="case.html">The Case</a>
+            <a href="story.html">What We Know</a>
+            <a href="questions.html">Public Questions</a>
+            <a href="memories.html">Memories</a>
+            <a href="help.html">Get Help</a>
+          </div>
+        </div>
+
+        <div class="footer-column">
+          <h3>Support Smilee Kylee</h3>
+          <div class="footer-links">
+            <a href="shop.html">Shop Smilee Kylee</a>
+            <a href="donate.html">Donate</a>
+            <a href="https://www.paypal.com/ncp/payment/BKQGJZW65HJS4" target="_blank" rel="noopener noreferrer">PayPal</a>
+            <a href="https://cash.app/$justice4Kylee" target="_blank" rel="noopener noreferrer">Cash App</a>
+            <a href="https://venmo.com/u/smileekylee" target="_blank" rel="noopener noreferrer">Venmo</a>
+            <a href="https://smilee-kylee-shop.fourthwall.com/" target="_blank" rel="noopener noreferrer">Fourthwall Shop</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-divider"></div>
+      <div class="footer-bottom">
+        <p>May her memory become safety, healing, opportunity and hope.</p>
+        <p>© <span id="year"></span> Smilee Kylee. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <button class="return-top" type="button" onclick="returnToTop()">Return to Top</button>
+
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+
+    const shareButton = document.getElementById("shareButton");
+    const shareBox = document.getElementById("shareBox");
+    const memoryForm = document.getElementById("memoryForm");
+    const formMessage = document.getElementById("formMessage");
+    const memoryBoard = document.getElementById("memoryBoard");
+
+    shareButton.addEventListener("click", function(){
+      shareBox.classList.toggle("open");
+    });
+
+    function makeMemoryCard(memory){
+      const card = document.createElement("article");
+      card.className = "memory-card";
+
+      const text = document.createElement("div");
+      text.className = "memory-text";
+      text.textContent = memory.memory;
+
+      const name = document.createElement("div");
+      name.className = "memory-name";
+      name.textContent = "— " + memory.name;
+
+      card.appendChild(text);
+      card.appendChild(name);
+      return card;
+    }
+
+    async function loadMemories(){
+      try{
+        const response = await fetch("/api/memories", {
+          method: "GET",
+          headers: { "Accept": "application/json" }
+        });
+
+        const data = await response.json();
+
+        if(!response.ok){
+          throw new Error(data.error || "Unable to load memories.");
+        }
+
+        memoryBoard.textContent = "";
+
+        if(!data.memories || data.memories.length === 0){
+          const empty = document.createElement("div");
+          empty.className = "empty";
+          empty.textContent = "Approved memories will appear here.";
+          memoryBoard.appendChild(empty);
+          return;
+        }
+
+        data.memories.forEach(function(memory){
+          memoryBoard.appendChild(makeMemoryCard(memory));
+        });
+      }catch(error){
+        memoryBoard.textContent = "";
+        const empty = document.createElement("div");
+        empty.className = "empty";
+        empty.textContent = "Memories are temporarily unavailable. Please try again later.";
+        memoryBoard.appendChild(empty);
+      }
+    }
+
+    memoryForm.addEventListener("submit", async function(event){
+      event.preventDefault();
+      formMessage.textContent = "Sending...";
+
+      const name = document.getElementById("memoryName").value.trim();
+      const memory = document.getElementById("memoryText").value.trim();
+
+      try{
+        const response = await fetch("/api/memories", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ name, memory })
+        });
+
+        const data = await response.json();
+
+        if(!response.ok){
+          throw new Error(data.error || "Unable to submit your memory.");
+        }
+
+        memoryForm.reset();
+        formMessage.textContent =
+          "Thank you. Your memory has been sent for approval.";
+      }catch(error){
+        formMessage.textContent =
+          error.message || "Unable to submit your memory. Please try again.";
+      }
+    });
+
+    function returnToTop(){
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+
+    loadMemories();
+  </script>
+</body>
+</html>
