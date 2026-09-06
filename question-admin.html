@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="robots" content="noindex,nofollow,noarchive">
-<title>Question Inbox | Smilee Kylee</title>
+<title>Admin Inbox | Smilee Kylee</title>
 
 <style>
 :root{
@@ -382,20 +382,61 @@ button:disabled{
     width:100%;
   }
 }
+
+.inbox-type-tabs{
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap;
+  margin-bottom:18px;
+}
+
+.inbox-type-tabs button{
+  background:white;
+  color:var(--deep-purple);
+  border:1px solid var(--lavender);
+}
+
+.inbox-type-tabs button.active{
+  background:var(--deep-purple);
+  color:white;
+}
+
+.approve-button{
+  background:#2f6d44;
+}
+
+.deny-button{
+  background:#8c2f42;
+}
+
+.memory-text{
+  white-space:pre-wrap;
+  line-height:1.7;
+}
+
+.memory-note{
+  margin:0 0 22px;
+  padding:15px 18px;
+  background:#f8f2fa;
+  border-left:5px solid var(--purple);
+  border-radius:0 12px 12px 0;
+  color:#5e5361;
+}
+
 </style>
 </head>
 
 <body>
 
 <header>
-  <h1>Smilee Kylee Question Inbox</h1>
+  <h1>Smilee Kylee Admin Inbox</h1>
 </header>
 
 <div class="wrap">
 
   <div id="loginBox" class="login-box">
     <h2>Private Access</h2>
-    <p>Enter your numeric passcode to open the question inbox.</p>
+    <p>Enter your numeric passcode to open the private admin inbox.</p>
 
     <label for="passcode">Passcode</label>
     <input
@@ -486,9 +527,22 @@ button:disabled{
 
     </div>
 
+    <div class="inbox-type-tabs">
+      <button id="questionsTab" class="active" type="button">
+        Questions
+      </button>
+      <button id="memoriesTab" type="button">
+        Pending Memories
+      </button>
+    </div>
+
+    <div id="memoryNote" class="memory-note" style="display:none;">
+      Approved memories are published to the public Memories page. Denied memories are permanently deleted.
+    </div>
+
     <div class="toolbar">
 
-      <div class="folder-tabs">
+      <div id="folderTabs" class="folder-tabs">
         <button data-folder="inbox" class="active">Inbox</button>
         <button data-folder="next">Next in Line</button>
         <button data-folder="work">Work in Progress</button>
@@ -526,6 +580,7 @@ let adminPasscode = "";
 let currentFolder = "inbox";
 let currentRole = "";
 let currentLabel = "";
+let currentView = "questions";
 
 const folderNames = {
   inbox: "Inbox",
@@ -579,7 +634,7 @@ async function login(){
 
     setupAccessDisplay();
 
-    await loadSubmissions();
+    await loadCurrentView();
 
   }catch(error){
     errorBox.textContent =
@@ -607,6 +662,236 @@ function setupAccessDisplay(){
   }
 }
 
+
+
+function setInboxView(view){
+  currentView = view === "memories" ? "memories" : "questions";
+
+  const questionsTab = document.getElementById("questionsTab");
+  const memoriesTab = document.getElementById("memoriesTab");
+  const folderTabs = document.getElementById("folderTabs");
+  const memoryNote = document.getElementById("memoryNote");
+
+  questionsTab.classList.toggle("active", currentView === "questions");
+  memoriesTab.classList.toggle("active", currentView === "memories");
+
+  folderTabs.style.display =
+    currentView === "questions" ? "flex" : "none";
+
+  memoryNote.style.display =
+    currentView === "memories" ? "block" : "none";
+
+  loadCurrentView();
+}
+
+
+async function loadCurrentView(){
+  if(currentView === "memories"){
+    await loadMemories();
+  }else{
+    await loadSubmissions();
+  }
+}
+
+
+async function loadMemories(){
+  const list = document.getElementById("submissionList");
+
+  list.innerHTML =
+    "<div class='empty'>Loading memories...</div>";
+
+  try{
+    const response = await fetch(
+      "/api/admin/memories",
+      {
+        headers:{
+          "X-Admin-Passcode":adminPasscode
+        }
+      }
+    );
+
+    const data = await response.json();
+
+    if(response.status === 401){
+      logout();
+      return;
+    }
+
+    if(!response.ok){
+      list.innerHTML =
+        "<div class='empty'>Unable to load memories.</div>";
+      return;
+    }
+
+    const memories = data.memories || [];
+
+    if(memories.length === 0){
+      list.innerHTML =
+        "<div class='empty'>No memories are waiting for approval.</div>";
+      return;
+    }
+
+    list.innerHTML = "";
+
+    memories.forEach(memory=>{
+      list.appendChild(createMemoryCard(memory));
+    });
+
+  }catch(error){
+    list.innerHTML =
+      "<div class='empty'>Unable to connect to the memory inbox.</div>";
+  }
+}
+
+
+function createMemoryCard(memory){
+  const card = document.createElement("div");
+  card.className = "submission-card";
+
+  const safeName =
+    memory.name && memory.name.trim()
+      ? memory.name
+      : "Unknown";
+
+  const date = memory.submitted_at
+    ? new Date(
+        memory.submitted_at.replace(" ","T") + "Z"
+      ).toLocaleString()
+    : "";
+
+  const meta = document.createElement("div");
+  meta.className = "submission-meta";
+
+  const name = document.createElement("span");
+  name.textContent = safeName;
+
+  const submitted = document.createElement("span");
+  submitted.textContent = date;
+
+  meta.appendChild(name);
+  meta.appendChild(submitted);
+
+  const title = document.createElement("h3");
+  title.textContent = "Memory #" + memory.id;
+
+  const memoryText = document.createElement("div");
+  memoryText.className = "memory-text";
+  memoryText.textContent = memory.memory;
+
+  card.appendChild(meta);
+  card.appendChild(title);
+  card.appendChild(memoryText);
+
+  if(currentRole === "owner"){
+    const actions = document.createElement("div");
+    actions.className = "actions";
+
+    const approveButton = document.createElement("button");
+    approveButton.className = "approve-button";
+    approveButton.textContent = "Approve";
+
+    approveButton.onclick = async ()=>{
+      const confirmed = confirm(
+        "Approve this memory and publish it on the public Memories page?"
+      );
+
+      if(!confirmed){
+        return;
+      }
+
+      await approveMemory(memory.id);
+    };
+
+    const denyButton = document.createElement("button");
+    denyButton.className = "deny-button";
+    denyButton.textContent = "Deny";
+
+    denyButton.onclick = async ()=>{
+      const confirmed = confirm(
+        "Deny and permanently delete this memory?"
+      );
+
+      if(!confirmed){
+        return;
+      }
+
+      await denyMemory(memory.id);
+    };
+
+    actions.appendChild(approveButton);
+    actions.appendChild(denyButton);
+
+    card.appendChild(actions);
+  }
+
+  return card;
+}
+
+
+async function approveMemory(id){
+  if(currentRole !== "owner"){
+    return;
+  }
+
+  try{
+    const response = await fetch(
+      "/api/admin/memories/" + id + "/approve",
+      {
+        method:"POST",
+        headers:{
+          "X-Admin-Passcode":adminPasscode
+        }
+      }
+    );
+
+    const data = await response.json();
+
+    if(response.ok){
+      await loadMemories();
+    }else{
+      alert(
+        data.error ||
+        "Unable to approve this memory."
+      );
+    }
+
+  }catch(error){
+    alert("Unable to approve this memory.");
+  }
+}
+
+
+async function denyMemory(id){
+  if(currentRole !== "owner"){
+    return;
+  }
+
+  try{
+    const response = await fetch(
+      "/api/admin/memories/" + id + "/deny",
+      {
+        method:"DELETE",
+        headers:{
+          "X-Admin-Passcode":adminPasscode
+        }
+      }
+    );
+
+    const data = await response.json();
+
+    if(response.ok){
+      await loadMemories();
+    }else{
+      alert(
+        data.error ||
+        "Unable to deny this memory."
+      );
+    }
+
+  }catch(error){
+    alert("Unable to deny this memory.");
+  }
+}
 
 async function loadSubmissions(){
   const list = document.getElementById("submissionList");
@@ -1111,12 +1396,17 @@ function logout(){
   currentRole = "";
   currentLabel = "";
   currentFolder = "inbox";
+  currentView = "questions";
 
   document.getElementById("adminArea").style.display = "none";
   document.getElementById("loginBox").style.display = "block";
   document.getElementById("submissionList").innerHTML = "";
   document.getElementById("codePanel").style.display = "none";
   document.getElementById("manageCodesButton").style.display = "none";
+  document.getElementById("questionsTab").classList.add("active");
+  document.getElementById("memoriesTab").classList.remove("active");
+  document.getElementById("folderTabs").style.display = "flex";
+  document.getElementById("memoryNote").style.display = "none";
 
   document.getElementById("passcode").value = "";
   document.getElementById("loginError").textContent = "";
@@ -1131,6 +1421,18 @@ function logout(){
       }
     });
 }
+
+
+
+document.getElementById("questionsTab")
+  .addEventListener("click",()=>{
+    setInboxView("questions");
+  });
+
+document.getElementById("memoriesTab")
+  .addEventListener("click",()=>{
+    setInboxView("memories");
+  });
 
 
 document.querySelectorAll(".folder-tabs button")
