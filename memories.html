@@ -146,30 +146,34 @@
     }
 
     .memory-board{
-      columns:3 280px;
-      column-gap:34px;
-      padding:18px 10px 10px;
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+      gap:34px 28px;
+      align-items:start;
+      padding:22px 10px 10px;
     }
 
     .memory-card{
       --tilt:0deg;
-      break-inside:avoid;
-      display:inline-block;
       position:relative;
-      width:94%;
+      display:flex;
+      flex-direction:column;
+      justify-content:center;
+      align-items:center;
+      text-align:center;
+      min-height:240px;
+      padding:34px;
       background:white;
-      padding:30px 29px;
-      margin:12px 3% 34px;
       box-shadow:0 14px 34px rgba(70,45,80,.12);
       transform:rotate(var(--tilt));
       transform-origin:center;
       transition:transform .2s ease, box-shadow .2s ease;
-      vertical-align:top;
-      overflow:visible;
+      overflow:hidden;
+      margin:0 auto;
     }
 
     .memory-card:hover{
-      transform:rotate(0deg) translateY(-4px) scale(1.015);
+      transform:rotate(0deg) translateY(-4px) scale(1.02);
       box-shadow:0 18px 38px rgba(70,45,80,.17);
       z-index:3;
     }
@@ -178,68 +182,85 @@
     .memory-card:nth-child(3n+2){background:#fdf0f5}
     .memory-card:nth-child(3n+3){background:#f3ebf7}
 
-    /* Scrapbook / collage shapes */
-    .memory-card.shape-soft{
-      border-radius:34px 12px 36px 18px;
-      border:2px solid rgba(216,197,232,.85);
-    }
-
-    .memory-card.shape-blob{
-      border-radius:38% 62% 46% 54% / 28% 36% 64% 72%;
-      padding:39px 34px;
-      min-height:220px;
-    }
-
-    .memory-card.shape-arch{
-      border-radius:120px 120px 28px 28px;
-      padding-top:52px;
-      border-bottom:5px solid var(--lavender);
-    }
-
-    .memory-card.shape-ticket{
-      border-radius:8px 34px 8px 34px;
-      border:2px dashed rgba(125,90,145,.42);
-    }
-
-    .memory-card.shape-note{
-      border-radius:4px;
-      padding-top:38px;
-      box-shadow:0 15px 28px rgba(70,45,80,.12);
-    }
-
-    .memory-card.shape-note::before{
-      content:"";
-      position:absolute;
-      width:82px;
-      height:24px;
-      top:-11px;
-      left:50%;
-      transform:translateX(-50%) rotate(-3deg);
-      background:rgba(239,210,223,.72);
-      box-shadow:0 2px 5px rgba(70,45,80,.08);
-    }
-
-    .memory-card.shape-petal{
-      border-radius:58px 18px 58px 18px;
-      border-left:5px solid rgba(239,210,223,.88);
-    }
-
-    .memory-card.shape-cloud{
-      border-radius:48px 48px 24px 48px;
-      padding:36px 32px;
-      border:3px solid rgba(216,197,232,.7);
-    }
-
-    .memory-card.shape-pin::before{
-      content:"";
-      position:absolute;
-      top:10px;
-      right:16px;
-      width:12px;
-      height:12px;
+    .shape-circle{
+      width:250px;
+      height:250px;
       border-radius:50%;
-      background:var(--purple);
-      box-shadow:0 2px 5px rgba(0,0,0,.2);
+      padding:42px;
+    }
+
+    .shape-square{
+      width:250px;
+      min-height:250px;
+      border-radius:18px;
+    }
+
+    .shape-oval{
+      width:290px;
+      min-height:210px;
+      border-radius:50%;
+      padding:36px 44px;
+    }
+
+    .shape-star{
+      width:285px;
+      min-height:285px;
+      padding:58px 54px;
+      clip-path:polygon(
+        50% 0%,
+        61% 34%,
+        98% 35%,
+        68% 57%,
+        79% 93%,
+        50% 72%,
+        21% 93%,
+        32% 57%,
+        2% 35%,
+        39% 34%
+      );
+    }
+
+    .shape-triangle{
+      width:300px;
+      min-height:270px;
+      padding:78px 56px 40px;
+      clip-path:polygon(50% 0%,100% 100%,0% 100%);
+    }
+
+    .shape-diamond{
+      width:245px;
+      min-height:245px;
+      padding:48px;
+      clip-path:polygon(50% 0%,100% 50%,50% 100%,0% 50%);
+    }
+
+    .shape-hexagon{
+      width:275px;
+      min-height:240px;
+      padding:42px;
+      clip-path:polygon(25% 6%,75% 6%,100% 50%,75% 94%,25% 94%,0% 50%);
+    }
+
+    .shape-heart{
+      width:285px;
+      min-height:255px;
+      padding:62px 50px 42px;
+      clip-path:polygon(
+        50% 92%,
+        10% 52%,
+        3% 34%,
+        6% 17%,
+        18% 6%,
+        33% 4%,
+        46% 14%,
+        50% 20%,
+        54% 14%,
+        67% 4%,
+        82% 6%,
+        94% 17%,
+        97% 34%,
+        90% 52%
+      );
     }
 
     .memory-text{
@@ -247,30 +268,38 @@
       z-index:1;
       white-space:pre-wrap;
       font-family:Georgia,"Times New Roman",serif;
-      font-size:1.08rem;
-      line-height:1.7;
+      font-size:1.03rem;
+      line-height:1.6;
+      max-width:100%;
     }
 
     .memory-name{
       position:relative;
       z-index:1;
-      margin-top:18px;
+      margin-top:16px;
       font-weight:800;
       color:var(--deep-purple);
     }
 
     @media (max-width:700px){
       .memory-board{
-        columns:1;
-        padding-left:6px;
-        padding-right:6px;
+        grid-template-columns:1fr;
+        gap:28px;
       }
 
       .memory-card{
-        width:92%;
-        margin-left:4%;
-        margin-right:4%;
         transform:rotate(calc(var(--tilt) * .45));
+      }
+
+      .shape-circle,
+      .shape-square,
+      .shape-oval,
+      .shape-star,
+      .shape-triangle,
+      .shape-diamond,
+      .shape-hexagon,
+      .shape-heart{
+        width:min(88vw,300px);
       }
     }
 
@@ -557,34 +586,24 @@
     });
 
     const memoryShapes = [
-      "shape-soft",
-      "shape-blob",
-      "shape-arch",
-      "shape-ticket",
-      "shape-note",
-      "shape-petal",
-      "shape-cloud"
+      "shape-circle",
+      "shape-star",
+      "shape-triangle",
+      "shape-square",
+      "shape-oval",
+      "shape-diamond",
+      "shape-hexagon",
+      "shape-heart"
     ];
 
-    const memoryTilts = ["-2.2deg","1.5deg","-1deg","2deg","-.6deg","1deg"];
+    const memoryTilts = ["-2deg","1.5deg","-1deg","2deg","-.75deg","1deg","-1.4deg","1.8deg"];
 
     function makeMemoryCard(memory, index){
       const card = document.createElement("article");
 
       const shape = memoryShapes[index % memoryShapes.length];
-      const pinClass = index % 4 === 1 ? " shape-pin" : "";
-
-      card.className = "memory-card " + shape + pinClass;
+      card.className = "memory-card " + shape;
       card.style.setProperty("--tilt", memoryTilts[index % memoryTilts.length]);
-
-      if(index % 5 === 2){
-        card.style.marginTop = "30px";
-      }
-
-      if(index % 6 === 4){
-        card.style.width = "88%";
-        card.style.marginLeft = "8%";
-      }
 
       const text = document.createElement("div");
       text.className = "memory-text";
