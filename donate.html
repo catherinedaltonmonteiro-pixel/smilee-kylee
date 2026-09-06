@@ -1,0 +1,637 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Donate | Smilee Kylee</title>
+
+  <style>
+    :root {
+      --lavender: #d8c5e8;
+      --purple: #7d5a91;
+      --deep-purple: #553765;
+      --pink: #efd2df;
+      --cream: #fffaf5;
+      --white: #ffffff;
+      --charcoal: #342f35;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      background: var(--cream);
+      color: var(--charcoal);
+      line-height: 1.7;
+    }
+
+    .emergency-bar {
+      background: var(--deep-purple);
+      color: white;
+      text-align: center;
+      padding: 8px 20px;
+      font-size: 0.9rem;
+    }
+
+    nav {
+      background: rgba(255,255,255,0.97);
+      border-bottom: 1px solid #eadfea;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .nav-inner {
+      max-width: 1200px;
+      margin: auto;
+      padding: 15px 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .brand {
+      color: var(--deep-purple);
+      font-size: 1.35rem;
+      font-weight: 800;
+      text-decoration: none;
+      white-space: nowrap;
+    }
+
+    .nav-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 17px;
+    }
+
+    .nav-links a {
+      color: var(--charcoal);
+      text-decoration: none;
+      font-size: 0.92rem;
+      font-weight: 700;
+    }
+
+    .nav-links a:hover,
+    .nav-links a.active {
+      color: var(--purple);
+    }
+
+    .hero {
+      padding: 110px 24px;
+      text-align: center;
+      background:
+        linear-gradient(
+          rgba(67,42,78,0.82),
+          rgba(67,42,78,0.82)
+        ),
+        url("576934323_1534292487913714_2079411978847318151_n.jpg")
+        center 30% / cover no-repeat;
+      color: white;
+    }
+
+    .hero-inner {
+      max-width: 850px;
+      margin: auto;
+    }
+
+    .eyebrow {
+      text-transform: uppercase;
+      letter-spacing: 3px;
+      font-size: 0.8rem;
+      font-weight: 800;
+      margin-bottom: 12px;
+    }
+
+    h1 {
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(3rem, 7vw, 5.5rem);
+      line-height: 1;
+      margin: 0 0 25px;
+    }
+
+    .hero p {
+      font-size: 1.2rem;
+    }
+
+    .section {
+      padding: 85px 24px;
+    }
+
+    .container {
+      max-width: 1050px;
+      margin: auto;
+    }
+
+    .intro {
+      max-width: 800px;
+      margin: auto;
+      text-align: center;
+    }
+
+    h2 {
+      color: var(--deep-purple);
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(2.2rem, 5vw, 3.3rem);
+      line-height: 1.15;
+    }
+
+    h3 {
+      color: var(--deep-purple);
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 1.5rem;
+    }
+
+    .lead {
+      color: var(--deep-purple);
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 1.3rem;
+      font-weight: 700;
+    }
+
+    .donation-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 25px;
+      margin-top: 50px;
+    }
+
+    .donation-card {
+      background: white;
+      border-radius: 24px;
+      padding: 35px;
+      text-align: center;
+      box-shadow: 0 12px 35px rgba(70,45,80,0.09);
+    }
+
+    .donation-card h3 {
+      margin-top: 0;
+    }
+
+    .donation-card p {
+      min-height: 52px;
+    }
+
+    .button {
+      display: inline-block;
+      border: none;
+      border-radius: 999px;
+      padding: 13px 23px;
+      background: var(--deep-purple);
+      color: white;
+      text-decoration: none;
+      font-weight: 800;
+      cursor: pointer;
+      font-size: 0.95rem;
+    }
+
+    .button:hover {
+      opacity: 0.9;
+    }
+
+    .zelle-number {
+      display: block;
+      margin: 12px 0 20px;
+      color: var(--deep-purple);
+      font-size: 1.25rem;
+      font-weight: 800;
+    }
+
+    .copy-message {
+      display: block;
+      min-height: 25px;
+      margin-top: 10px;
+      color: var(--deep-purple);
+      font-weight: 800;
+    }
+
+    .lavender {
+      background: #f3ebf7;
+    }
+
+    .use-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 22px;
+      margin-top: 45px;
+    }
+
+    .use-card {
+      background: white;
+      padding: 28px;
+      border-radius: 20px;
+      box-shadow: 0 10px 28px rgba(70,45,80,0.06);
+    }
+
+    .use-card strong {
+      display: block;
+      color: var(--deep-purple);
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 1.3rem;
+      margin-bottom: 8px;
+    }
+
+    .notice {
+      max-width: 850px;
+      margin: auto;
+      background: white;
+      border: 2px solid var(--lavender);
+      border-radius: 24px;
+      padding: 38px;
+    }
+
+    .closing {
+      background: var(--deep-purple);
+      color: white;
+      text-align: center;
+      padding: 85px 24px;
+    }
+
+    .closing-inner {
+      max-width: 780px;
+      margin: auto;
+    }
+
+    .closing h2 {
+      color: white;
+    }
+
+    .closing p {
+      font-size: 1.1rem;
+    }
+
+    footer {
+      background: #2f2632;
+      color: #e9e1ea;
+      text-align: center;
+      padding: 38px 20px;
+      font-size: 0.9rem;
+    }
+
+    .quick-exit {
+      position: fixed;
+      right: 18px;
+      bottom: 18px;
+      z-index: 200;
+      border: none;
+      border-radius: 999px;
+      padding: 13px 20px;
+      background: var(--deep-purple);
+      color: white;
+      font-weight: 800;
+      cursor: pointer;
+      box-shadow: 0 8px 25px rgba(0,0,0,0.22);
+    }
+
+    @media (max-width: 850px) {
+      .nav-inner {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .donation-grid,
+      .use-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .donation-card p {
+        min-height: auto;
+      }
+    }
+
+    @media (max-width: 520px) {
+      .hero {
+        padding: 75px 20px;
+      }
+
+      .section {
+        padding: 60px 20px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="emergency-bar">
+    If you are in immediate danger, call 911.
+  </div>
+
+  <nav>
+    <div class="nav-inner">
+
+      <a class="brand" href="index.html">Smilee Kylee</a>
+
+      <div class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="kylee.html">Meet Kylee</a>
+        <a href="mission.html">Vision & Mission</a>
+        <a href="shop.html">Shop</a>
+        <a class="active" href="donate.html">Donate</a>
+        <a href="case.html">The Case</a>
+        <a href="story.html">What We Know</a>
+        <a href="help.html">Get Help</a>
+      </div>
+
+    </div>
+  </nav>
+
+  <header class="hero">
+
+    <div class="hero-inner">
+
+      <div class="eyebrow">
+        Help Build Her Legacy
+      </div>
+
+      <h1>Support Smilee Kylee</h1>
+
+      <p>
+        Every contribution helps us continue building Smilee Kylee
+        in Kylee's memory and move closer to our long-term vision
+        of creating meaningful support for women in need.
+      </p>
+
+    </div>
+
+  </header>
+
+  <section class="section">
+
+    <div class="container">
+
+      <div class="intro">
+
+        <div class="eyebrow">Ways To Give</div>
+
+        <h2>Help Us Build What Comes Next</h2>
+
+        <p>
+          Smilee Kylee is still growing. We are working toward a
+          future where Kylee's name is attached not only to her story,
+          but to a place where women can find safety, resources,
+          support, and another chance.
+        </p>
+
+        <p class="lead">
+          We couldn't build that place in time for Kylee.
+          We want to build it in her name.
+        </p>
+
+      </div>
+
+      <div class="donation-grid">
+
+        <div class="donation-card">
+
+          <h3>PayPal</h3>
+
+          <p>
+            Make a contribution securely through our PayPal
+            payment page.
+          </p>
+
+          <a
+            class="button"
+            href="https://www.paypal.com/ncp/payment/BKQGJZW65HJS4"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Donate with PayPal
+          </a>
+
+        </div>
+
+        <div class="donation-card">
+
+          <h3>Cash App</h3>
+
+          <p>
+            Support Smilee Kylee through Cash App.
+            Our Cash App is <strong>$justice4Kylee</strong>.
+          </p>
+
+          <a
+            class="button"
+            href="https://cash.app/$justice4Kylee"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Open Cash App
+          </a>
+
+        </div>
+
+        <div class="donation-card">
+
+          <h3>Venmo</h3>
+
+          <p>
+            Support Smilee Kylee through Venmo.
+            Find us at <strong>@smileekylee</strong>.
+          </p>
+
+          <a
+            class="button"
+            href="https://venmo.com/u/smileekylee"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Open Venmo
+          </a>
+
+        </div>
+
+        <div class="donation-card">
+
+          <h3>Zelle</h3>
+
+          <p>
+            Send your Zelle contribution to:
+          </p>
+
+          <span class="zelle-number">
+            863-333-1307
+          </span>
+
+          <button
+            class="button"
+            type="button"
+            onclick="copyZelleNumber()"
+          >
+            Copy Zelle Number
+          </button>
+
+          <span
+            class="copy-message"
+            id="copyMessage"
+            aria-live="polite"
+          ></span>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+  <section class="section lavender">
+
+    <div class="container">
+
+      <div class="intro">
+
+        <div class="eyebrow">The Bigger Goal</div>
+
+        <h2>What We're Working Toward</h2>
+
+        <p>
+          Our long-term goal is to build a shelter and support program
+          for women that combines safe housing with practical,
+          compassionate help.
+        </p>
+
+      </div>
+
+      <div class="use-grid">
+
+        <div class="use-card">
+          <strong>Building Smilee Kylee</strong>
+          Supporting the development and growth of the organization
+          as we work toward making the larger vision possible.
+        </div>
+
+        <div class="use-card">
+          <strong>Resources & Support</strong>
+          Building connections, educational resources, and future
+          programs designed to help women move toward stability.
+        </div>
+
+        <div class="use-card">
+          <strong>The Future Shelter</strong>
+          Working toward our ultimate goal of a safe home where women
+          can heal, learn, rebuild, and prepare for independent living.
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+  <section class="section">
+
+    <div class="notice">
+
+      <div class="eyebrow">Important Information</div>
+
+      <h3>Smilee Kylee Is Still Developing</h3>
+
+      <p>
+        Smilee Kylee is currently being built and is not yet operating
+        a residential shelter or emergency housing program.
+      </p>
+
+      <p>
+        Smilee Kylee does not currently represent donations as
+        tax-deductible. Information about charitable status will be
+        updated as the organization develops.
+      </p>
+
+      <p>
+        We believe supporters deserve clear information about where
+        Smilee Kylee is today and where we hope to take it tomorrow.
+        This page will continue to be updated as the organization grows.
+      </p>
+
+    </div>
+
+  </section>
+
+  <section class="closing">
+
+    <div class="closing-inner">
+
+      <div class="eyebrow">In Kylee's Name</div>
+
+      <h2>Help Her Memory Become Someone Else's Hope.</h2>
+
+      <p>
+        Every step toward this vision carries Kylee's name,
+        her smile, and the lessons her life left with us.
+      </p>
+
+      <p>
+        Thank you for believing that something meaningful can
+        still grow from her story.
+      </p>
+
+    </div>
+
+  </section>
+
+  <footer>
+    © <span id="year"></span> Smilee Kylee · In Loving Memory of
+    Kylee M. Monteiro
+  </footer>
+
+  <button
+    class="quick-exit"
+    type="button"
+    onclick="quickExit()"
+  >
+    Quick Exit
+  </button>
+
+  <script>
+    document.getElementById("year").textContent =
+      new Date().getFullYear();
+
+    function quickExit() {
+      window.location.replace("https://www.google.com");
+    }
+
+    function copyZelleNumber() {
+
+      const number = "8633331307";
+      const message = document.getElementById("copyMessage");
+
+      if (navigator.clipboard && window.isSecureContext) {
+
+        navigator.clipboard.writeText(number).then(function() {
+          message.textContent = "Copied!";
+        });
+
+      } else {
+
+        const textArea = document.createElement("textarea");
+
+        textArea.value = number;
+        textArea.style.position = "fixed";
+        textArea.style.opacity = "0";
+
+        document.body.appendChild(textArea);
+
+        textArea.focus();
+        textArea.select();
+
+        document.execCommand("copy");
+
+        document.body.removeChild(textArea);
+
+        message.textContent = "Copied!";
+      }
+
+      setTimeout(function() {
+        message.textContent = "";
+      }, 3000);
+    }
+  </script>
+
+</body>
+</html>
