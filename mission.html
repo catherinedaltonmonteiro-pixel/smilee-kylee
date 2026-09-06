@@ -860,17 +860,17 @@
   <button
     class="quick-exit"
     type="button"
-    onclick="quickExit()"
+    onclick="returnToTop()"
   >
-    Quick Exit
+    Return to Top
   </button>
 
   <script>
     document.getElementById("year").textContent =
       new Date().getFullYear();
 
-    function quickExit() {
-      window.location.replace("https://www.google.com");
+    function returnToTop() {
+      window.scrollTo({ top: 0, behavior: "smooth" });
     }
 
     document.addEventListener("keydown", function(event) {
