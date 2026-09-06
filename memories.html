@@ -145,6 +145,16 @@
       margin:0 0 10px;
     }
 
+    .read-instruction{
+      display:inline-block;
+      margin-top:12px;
+      padding:12px 18px;
+      border-radius:999px;
+      background:#f3ebf7;
+      color:var(--deep-purple);
+      font-weight:800;
+    }
+
     .memory-board{
       display:grid;
       grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
@@ -624,6 +634,7 @@
         These memories were shared by people whose lives crossed paths with Kylee.
         Every submission is reviewed before appearing here.
       </p>
+      <p class="read-instruction">Click on each memory to read the full memory.</p>
     </div>
 
     <div id="memoryBoard" class="memory-board">
@@ -756,11 +767,14 @@
       shareBox.classList.toggle("open");
     });
 
-    const memoryShapes = [
-      "shape-circle",
+    const textMemoryShapes = [
+      "shape-square",
+      "shape-circle"
+    ];
+
+    const photoMemoryShapes = [
       "shape-star",
       "shape-triangle",
-      "shape-square",
       "shape-oval",
       "shape-diamond",
       "shape-hexagon",
@@ -772,7 +786,8 @@
     function makeMemoryCard(memory, index){
       const card = document.createElement("article");
 
-      const shape = memoryShapes[index % memoryShapes.length];
+      const shapes = memory.has_image ? photoMemoryShapes : textMemoryShapes;
+      const shape = shapes[index % shapes.length];
       card.className = "memory-card " + shape;
       card.style.setProperty("--tilt", memoryTilts[index % memoryTilts.length]);
 
@@ -845,6 +860,27 @@
       backdrop.setAttribute("aria-hidden", "true");
       document.body.style.overflow = "";
     }
+
+    const memoryModalBackdrop = document.getElementById("memoryModalBackdrop");
+    const memoryModalClose = document.getElementById("memoryModalClose");
+
+    memoryModalClose.addEventListener("click", function(event){
+      event.preventDefault();
+      event.stopPropagation();
+      closeMemoryModal();
+    });
+
+    memoryModalBackdrop.addEventListener("click", function(event){
+      if(event.target === memoryModalBackdrop){
+        closeMemoryModal();
+      }
+    });
+
+    document.addEventListener("keydown", function(event){
+      if(event.key === "Escape" && memoryModalBackdrop.classList.contains("open")){
+        closeMemoryModal();
+      }
+    });
 
     async function loadMemories(){
       try{
