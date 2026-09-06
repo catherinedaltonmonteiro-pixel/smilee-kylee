@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>Shop | Smilee Kylee</title>
+  <title>Donate | Smilee Kylee</title>
 
   <style>
     :root {
@@ -96,10 +96,10 @@
       text-align: center;
       background:
         linear-gradient(
-          rgba(67,42,78,0.78),
-          rgba(67,42,78,0.78)
+          rgba(67,42,78,0.82),
+          rgba(67,42,78,0.82)
         ),
-        url("656153597_26193231943666922_5799060983736162287_n.jpg")
+        url("576934323_1534292487913714_2079411978847318151_n.jpg")
         center 30% / cover no-repeat;
       color: white;
     }
@@ -124,6 +124,25 @@
       margin: 0 0 25px;
     }
 
+    .hero p {
+      font-size: 1.2rem;
+    }
+
+    .section {
+      padding: 85px 24px;
+    }
+
+    .container {
+      max-width: 1050px;
+      margin: auto;
+    }
+
+    .intro {
+      max-width: 800px;
+      margin: auto;
+      text-align: center;
+    }
+
     h2 {
       color: var(--deep-purple);
       font-family: Georgia, "Times New Roman", serif;
@@ -134,37 +153,24 @@
     h3 {
       color: var(--deep-purple);
       font-family: Georgia, "Times New Roman", serif;
-      font-size: 1.6rem;
-      margin-top: 0;
+      font-size: 1.5rem;
     }
 
-    .hero p {
-      font-size: 1.2rem;
+    .lead {
+      color: var(--deep-purple);
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 1.3rem;
+      font-weight: 700;
     }
 
-    .section {
-      padding: 85px 24px;
-    }
-
-    .container {
-      max-width: 1100px;
-      margin: auto;
-    }
-
-    .intro {
-      max-width: 800px;
-      margin: auto;
-      text-align: center;
-    }
-
-    .shop-grid {
+    .donation-grid {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 26px;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 25px;
       margin-top: 50px;
     }
 
-    .shop-card {
+    .donation-card {
       background: white;
       border-radius: 24px;
       padding: 35px;
@@ -172,58 +178,80 @@
       box-shadow: 0 12px 35px rgba(70,45,80,0.09);
     }
 
-    .shop-icon {
-      width: 85px;
-      height: 85px;
-      border-radius: 50%;
-      margin: 0 auto 20px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: #f3ebf7;
-      font-size: 2.4rem;
+    .donation-card h3 {
+      margin-top: 0;
     }
 
-    .shop-card p {
-      min-height: 85px;
+    .donation-card p {
+      min-height: 52px;
     }
 
     .button {
       display: inline-block;
+      border: none;
       border-radius: 999px;
       padding: 13px 23px;
       background: var(--deep-purple);
       color: white;
       text-decoration: none;
       font-weight: 800;
+      cursor: pointer;
+      font-size: 0.95rem;
     }
 
     .button:hover {
       opacity: 0.9;
     }
 
+    .zelle-number {
+      display: block;
+      margin: 12px 0 20px;
+      color: var(--deep-purple);
+      font-size: 1.25rem;
+      font-weight: 800;
+    }
+
+    .copy-message {
+      display: block;
+      min-height: 25px;
+      margin-top: 10px;
+      color: var(--deep-purple);
+      font-weight: 800;
+    }
+
     .lavender {
       background: #f3ebf7;
     }
 
-    .support-box {
+    .use-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 22px;
+      margin-top: 45px;
+    }
+
+    .use-card {
+      background: white;
+      padding: 28px;
+      border-radius: 20px;
+      box-shadow: 0 10px 28px rgba(70,45,80,0.06);
+    }
+
+    .use-card strong {
+      display: block;
+      color: var(--deep-purple);
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 1.3rem;
+      margin-bottom: 8px;
+    }
+
+    .notice {
       max-width: 850px;
       margin: auto;
       background: white;
-      border-radius: 26px;
-      padding: 45px;
-      text-align: center;
-      box-shadow: 0 12px 35px rgba(70,45,80,0.08);
-    }
-
-    .support-box p {
-      max-width: 700px;
-      margin-left: auto;
-      margin-right: auto;
-    }
-
-    .store-button {
-      margin-top: 20px;
+      border: 2px solid var(--lavender);
+      border-radius: 24px;
+      padding: 38px;
     }
 
     .closing {
@@ -334,17 +362,18 @@
       box-shadow: 0 8px 25px rgba(0,0,0,0.22);
     }
 
-    @media (max-width: 900px) {
+    @media (max-width: 850px) {
       .nav-inner {
         flex-direction: column;
         align-items: flex-start;
       }
 
-      .shop-grid {
+      .donation-grid,
+      .use-grid {
         grid-template-columns: 1fr;
       }
 
-      .shop-card p {
+      .donation-card p {
         min-height: auto;
       }
 
@@ -362,10 +391,6 @@
       .section {
         padding: 60px 20px;
       }
-
-      .support-box {
-        padding: 30px 22px;
-      }
     }
   </style>
 </head>
@@ -374,17 +399,22 @@
 
   <div id="site-shared-top"></div>
 
-<div class="hero-inner">
+
+
+  <header class="hero">
+
+    <div class="hero-inner">
 
       <div class="eyebrow">
-        Wear Her Name. Carry Her Story.
+        Help Build Her Legacy
       </div>
 
-      <h1>Shop Smilee Kylee</h1>
+      <h1>Support Smilee Kylee</h1>
 
       <p>
-        Every item helps keep Kylee's memory visible and supports
-        the continued growth of Smilee Kylee.
+        Every contribution helps us continue building Smilee Kylee
+        in Kylee's memory and move closer to our long-term vision
+        of creating meaningful support for women in need.
       </p>
 
     </div>
@@ -397,83 +427,111 @@
 
       <div class="intro">
 
-        <div class="eyebrow">Shop By Collection</div>
+        <div class="eyebrow">Ways To Give</div>
 
-        <h2>Choose Your Style</h2>
+        <h2>Help Us Build What Comes Next</h2>
 
         <p>
-          Shop Smilee Kylee apparel through our Fourthwall store.
-          Select a collection below to see the available designs,
-          sizes, and options.
+          Smilee Kylee is still growing. We are working toward a
+          future where Kylee's name is attached not only to her story,
+          but to a place where women can find safety, resources,
+          support, and another chance.
+        </p>
+
+        <p class="lead">
+          We couldn't build that place in time for Kylee.
+          We want to build it in her name.
         </p>
 
       </div>
 
-      <div class="shop-grid">
+      <div class="donation-grid">
 
-        <div class="shop-card">
+        <div class="donation-card">
 
-          <div class="shop-icon">🧥</div>
-
-          <h3>Hoodies</h3>
+          <h3>PayPal</h3>
 
           <p>
-            Comfortable Smilee Kylee hoodies designed to help carry
-            Kylee's name and message wherever you go.
+            Make a contribution securely through our PayPal
+            payment page.
           </p>
 
           <a
             class="button"
-            href="https://smilee-kylee-shop.fourthwall.com/collections/hoodies"
+            href="https://www.paypal.com/ncp/payment/BKQGJZW65HJS4"
             target="_blank"
             rel="noopener noreferrer"
           >
-            Shop Hoodies
+            Donate with PayPal
           </a>
 
         </div>
 
-        <div class="shop-card">
+        <div class="donation-card">
 
-          <div class="shop-icon">👕</div>
-
-          <h3>T-Shirts</h3>
+          <h3>Cash App</h3>
 
           <p>
-            Shop Smilee Kylee T-shirts created to honor Kylee,
-            share her story, and help spread the mission.
+            Support Smilee Kylee through Cash App.
+            Our Cash App is <strong>$justice4Kylee</strong>.
           </p>
 
           <a
             class="button"
-            href="https://smilee-kylee-shop.fourthwall.com/collections/t-shirts"
+            href="https://cash.app/$justice4Kylee"
             target="_blank"
             rel="noopener noreferrer"
           >
-            Shop T-Shirts
+            Open Cash App
           </a>
 
         </div>
 
-        <div class="shop-card">
+        <div class="donation-card">
 
-          <div class="shop-icon">💜</div>
-
-          <h3>Sweaters</h3>
+          <h3>Venmo</h3>
 
           <p>
-            Browse Smilee Kylee sweaters for another way to
-            remember Kylee and support what is being built in her name.
+            Support Smilee Kylee through Venmo.
+            Find us at <strong>@smileekylee</strong>.
           </p>
 
           <a
             class="button"
-            href="https://smilee-kylee-shop.fourthwall.com/collections/sweaters"
+            href="https://venmo.com/u/smileekylee"
             target="_blank"
             rel="noopener noreferrer"
           >
-            Shop Sweaters
+            Open Venmo
           </a>
+
+        </div>
+
+        <div class="donation-card">
+
+          <h3>Zelle</h3>
+
+          <p>
+            Send your Zelle contribution to:
+          </p>
+
+          <span class="zelle-number">
+            863-333-1307
+          </span>
+
+          <button
+            class="button"
+            type="button"
+            onclick="copyZelleNumber()"
+          >
+            Copy Zelle Number
+          </button>
+
+          <span
+            class="copy-message"
+            id="copyMessage"
+            aria-live="polite"
+          ></span>
 
         </div>
 
@@ -485,26 +543,43 @@
 
   <section class="section lavender">
 
-    <div class="support-box">
+    <div class="container">
 
-      <div class="eyebrow">Full Store</div>
+      <div class="intro">
 
-      <h2>See Everything</h2>
+        <div class="eyebrow">The Bigger Goal</div>
 
-      <p>
-        Want to browse the entire Smilee Kylee shop instead?
-        Visit the full Fourthwall storefront to see all currently
-        available merchandise.
-      </p>
+        <h2>What We're Working Toward</h2>
 
-      <a
-        class="button store-button"
-        href="https://smilee-kylee-shop.fourthwall.com/"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        Visit the Full Shop
-      </a>
+        <p>
+          Our long-term goal is to build a shelter and support program
+          for women that combines safe housing with practical,
+          compassionate help.
+        </p>
+
+      </div>
+
+      <div class="use-grid">
+
+        <div class="use-card">
+          <strong>Building Smilee Kylee</strong>
+          Supporting the development and growth of the organization
+          as we work toward making the larger vision possible.
+        </div>
+
+        <div class="use-card">
+          <strong>Resources & Support</strong>
+          Building connections, educational resources, and future
+          programs designed to help women move toward stability.
+        </div>
+
+        <div class="use-card">
+          <strong>The Future Shelter</strong>
+          Working toward our ultimate goal of a safe home where women
+          can heal, learn, rebuild, and prepare for independent living.
+        </div>
+
+      </div>
 
     </div>
 
@@ -512,27 +587,27 @@
 
   <section class="section">
 
-    <div class="support-box">
+    <div class="notice">
 
-      <div class="eyebrow">Why The Shop Matters</div>
+      <div class="eyebrow">Important Information</div>
 
-      <h2>More Than Merchandise</h2>
+      <h3>Smilee Kylee Is Still Developing</h3>
 
       <p>
-        The Smilee Kylee shop is another way to keep Kylee's
-        memory alive and help more people learn about the mission
-        being built in her name.
+        Smilee Kylee is currently being built and is not yet operating
+        a residential shelter or emergency housing program.
       </p>
 
       <p>
-        Smilee Kylee is still developing, and every person who wears
-        her name helps carry her story into another room,
-        another conversation, and another community.
+        Smilee Kylee does not currently represent donations as
+        tax-deductible. Information about charitable status will be
+        updated as the organization develops.
       </p>
 
       <p>
-        Merchandise purchases are not currently represented as
-        tax-deductible charitable contributions.
+        We believe supporters deserve clear information about where
+        Smilee Kylee is today and where we hope to take it tomorrow.
+        This page will continue to be updated as the organization grows.
       </p>
 
     </div>
@@ -543,13 +618,18 @@
 
     <div class="closing-inner">
 
-      <div class="eyebrow">For Kylee</div>
+      <div class="eyebrow">In Kylee's Name</div>
 
-      <h2>Her Memory Becomes Someone Else's Hope.</h2>
+      <h2>Help Her Memory Become Someone Else's Hope.</h2>
 
       <p>
-        Thank you for helping us carry Kylee's name,
-        her smile, and the purpose growing from her story.
+        Every step toward this vision carries Kylee's name,
+        her smile, and the lessons her life left with us.
+      </p>
+
+      <p>
+        Thank you for believing that something meaningful can
+        still grow from her story.
       </p>
 
     </div>
