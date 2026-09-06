@@ -433,6 +433,119 @@ footer{
   .question-card{padding:20px;gap:13px}
   .question-number{flex-basis:34px;width:34px;height:34px}
 }
+
+
+.submit-question-wrap{
+  text-align:center;
+  margin:38px auto 0;
+}
+
+.open-question-form{
+  border:none;
+  border-radius:999px;
+  padding:15px 26px;
+  background:var(--deep-purple);
+  color:white;
+  font-weight:800;
+  font-size:1rem;
+  cursor:pointer;
+  box-shadow:0 8px 24px rgba(70,45,80,.18);
+}
+
+.question-modal{
+  position:fixed;
+  inset:0;
+  background:rgba(37,30,39,.72);
+  display:none;
+  align-items:center;
+  justify-content:center;
+  padding:24px;
+  z-index:500;
+}
+
+.question-modal.open{
+  display:flex;
+}
+
+.question-modal-card{
+  width:min(680px,100%);
+  max-height:90vh;
+  overflow:auto;
+  background:white;
+  border-radius:24px;
+  padding:32px;
+  box-shadow:0 20px 60px rgba(0,0,0,.28);
+  position:relative;
+}
+
+.question-modal-card h2{
+  margin-top:0;
+  padding-right:45px;
+}
+
+.close-question-modal{
+  position:absolute;
+  right:18px;
+  top:16px;
+  width:38px;
+  height:38px;
+  border:none;
+  border-radius:50%;
+  background:#f3ebf7;
+  color:var(--deep-purple);
+  font-size:1.5rem;
+  font-weight:800;
+  cursor:pointer;
+}
+
+.public-question-form label{
+  display:block;
+  margin:16px 0 7px;
+  color:var(--deep-purple);
+  font-weight:800;
+}
+
+.public-question-form input,
+.public-question-form textarea{
+  width:100%;
+  border:1px solid #d9cedd;
+  border-radius:12px;
+  padding:13px;
+  font:inherit;
+  background:#fffdfb;
+}
+
+.public-question-form textarea{
+  min-height:140px;
+  resize:vertical;
+}
+
+.public-question-form .commentary-box{
+  min-height:110px;
+}
+
+.public-question-form button[type="submit"]{
+  margin-top:20px;
+  border:none;
+  border-radius:999px;
+  padding:13px 22px;
+  background:var(--deep-purple);
+  color:white;
+  font-weight:800;
+  cursor:pointer;
+}
+
+.public-question-form button:disabled{
+  opacity:.65;
+  cursor:not-allowed;
+}
+
+.form-status{
+  margin-top:15px;
+  color:var(--deep-purple);
+  font-weight:700;
+}
+
 </style>
 </head>
 <body>
@@ -534,6 +647,50 @@ Donations, merchandise proceeds after costs and fees, and other financial suppor
 </section>
 
 <section class="section lavender">
+  <div class="container">
+    <div class="section-intro">
+      <div class="eyebrow">A Question We Haven't Listed?</div>
+      <h2>Submit a Public Question</h2>
+      <p>
+        You may submit a question for the family to review. Submissions are sent privately
+        to the Smilee Kylee admin inbox and are not automatically published.
+      </p>
+    </div>
+
+    <div class="submit-question-wrap">
+      <button id="openQuestionForm" class="open-question-form" type="button">
+        Submit a Question
+      </button>
+    </div>
+  </div>
+</section>
+
+<div id="questionModal" class="question-modal" aria-hidden="true">
+  <div class="question-modal-card" role="dialog" aria-modal="true" aria-labelledby="questionModalTitle">
+    <button id="closeQuestionForm" class="close-question-modal" type="button" aria-label="Close form">&times;</button>
+
+    <h2 id="questionModalTitle">Submit a Public Question</h2>
+    <p>
+      Your submission will be sent privately to the Smilee Kylee admin inbox for review.
+    </p>
+
+    <form id="publicQuestionForm" class="public-question-form">
+      <label for="questionName">Name <span style="font-weight:400;">(optional)</span></label>
+      <input id="questionName" name="name" type="text" maxlength="100">
+
+      <label for="questionText">Question</label>
+      <textarea id="questionText" name="question" maxlength="2000" required></textarea>
+
+      <label for="questionCommentary">Additional Commentary <span style="font-weight:400;">(optional)</span></label>
+      <textarea id="questionCommentary" class="commentary-box" name="commentary" maxlength="4000"></textarea>
+
+      <button id="questionSubmitButton" type="submit">Submit Question</button>
+      <div id="questionFormStatus" class="form-status" aria-live="polite"></div>
+    </form>
+  </div>
+</div>
+
+<section class="section lavender">
   <div class="legal">
     <strong>Important legal note:</strong>
     <p>Gregory Groom has been charged in connection with Kylee's death and has pleaded not guilty. Statements about what he allegedly told investigators or what prosecutors believe occurred are allegations and prosecution claims unless and until established in court. A criminal charge is not a conviction, and a defendant is presumed innocent unless proven guilty.</p>
@@ -602,6 +759,109 @@ new Date().getFullYear();
 function returnToTop(){
   window.scrollTo({top:0, behavior:"smooth"});
 }
+
+const questionModal =
+document.getElementById("questionModal");
+
+const openQuestionForm =
+document.getElementById("openQuestionForm");
+
+const closeQuestionForm =
+document.getElementById("closeQuestionForm");
+
+if(openQuestionForm && questionModal){
+  openQuestionForm.addEventListener("click", function(){
+    questionModal.classList.add("open");
+    questionModal.setAttribute("aria-hidden","false");
+    document.body.style.overflow = "hidden";
+
+    setTimeout(function(){
+      document.getElementById("questionName").focus();
+    }, 50);
+  });
+}
+
+function closeQuestionPopup(){
+  if(!questionModal) return;
+
+  questionModal.classList.remove("open");
+  questionModal.setAttribute("aria-hidden","true");
+  document.body.style.overflow = "";
+}
+
+if(closeQuestionForm){
+  closeQuestionForm.addEventListener("click", closeQuestionPopup);
+}
+
+if(questionModal){
+  questionModal.addEventListener("click", function(event){
+    if(event.target === questionModal){
+      closeQuestionPopup();
+    }
+  });
+}
+
+document.addEventListener("keydown", function(event){
+  if(event.key === "Escape" && questionModal?.classList.contains("open")){
+    closeQuestionPopup();
+  }
+});
+
+const publicQuestionForm =
+document.getElementById("publicQuestionForm");
+
+if(publicQuestionForm){
+  publicQuestionForm.addEventListener("submit", async function(event){
+    event.preventDefault();
+
+    const submitButton =
+      document.getElementById("questionSubmitButton");
+    const status =
+      document.getElementById("questionFormStatus");
+
+    submitButton.disabled = true;
+    status.textContent = "Submitting...";
+
+    const payload = {
+      name:
+        document.getElementById("questionName").value.trim(),
+      question:
+        document.getElementById("questionText").value.trim(),
+      commentary:
+        document.getElementById("questionCommentary").value.trim()
+    };
+
+    try{
+      const response = await fetch("/api/questions", {
+        method:"POST",
+        headers:{
+          "Content-Type":"application/json"
+        },
+        body:JSON.stringify(payload)
+      });
+
+      const data = await response.json();
+
+      if(!response.ok){
+        throw new Error(
+          data.error ||
+          "Unable to submit your question. Please try again."
+        );
+      }
+
+      publicQuestionForm.reset();
+      status.textContent =
+        "Thank you. Your question has been submitted.";
+    }catch(error){
+      status.textContent =
+        "Unable to submit your question. Please try again.";
+    }finally{
+      submitButton.disabled = false;
+    }
+  });
+}
+
+
 </script>
 
 </body>
