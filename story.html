@@ -1,0 +1,865 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>What Happened to Kylee | Smilee Kylee</title>
+
+<style>
+:root{
+  --lavender:#d8c5e8;
+  --purple:#7d5a91;
+  --deep-purple:#553765;
+  --pink:#efd2df;
+  --cream:#fffaf5;
+  --white:#ffffff;
+  --charcoal:#342f35;
+}
+
+*{box-sizing:border-box}
+
+body{
+  margin:0;
+  font-family:Arial,Helvetica,sans-serif;
+  background:var(--cream);
+  color:var(--charcoal);
+  line-height:1.75;
+}
+
+.emergency-bar{
+  background:var(--deep-purple);
+  color:white;
+  text-align:center;
+  padding:8px 20px;
+  font-size:.9rem;
+}
+
+.funding-notice{
+  background:#f3ebf7;
+  color:var(--deep-purple);
+  text-align:center;
+  padding:10px 22px;
+  font-size:.85rem;
+  border-bottom:1px solid var(--lavender);
+}
+
+nav{
+  background:rgba(255,255,255,.97);
+  border-bottom:1px solid #eadfea;
+  position:sticky;
+  top:0;
+  z-index:100;
+}
+
+.nav-inner{
+  max-width:1200px;
+  margin:auto;
+  padding:15px 24px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:20px;
+}
+
+.brand{
+  color:var(--deep-purple);
+  font-size:1.35rem;
+  font-weight:800;
+  text-decoration:none;
+  white-space:nowrap;
+}
+
+.nav-links{
+  display:flex;
+  flex-wrap:wrap;
+  gap:17px;
+}
+
+.nav-links a{
+  color:var(--charcoal);
+  text-decoration:none;
+  font-size:.92rem;
+  font-weight:700;
+}
+
+.nav-links a:hover,
+.nav-links a.active{
+  color:var(--purple);
+}
+
+.hero{
+  padding:110px 24px;
+  text-align:center;
+  background:
+    linear-gradient(rgba(58,36,68,.80),rgba(58,36,68,.80)),
+    url("656153597_26193231943666922_5799060983736162287_n.jpg")
+    center 30%/cover no-repeat;
+  color:white;
+}
+
+.hero-inner{
+  max-width:850px;
+  margin:auto;
+}
+
+.eyebrow{
+  text-transform:uppercase;
+  letter-spacing:3px;
+  font-size:.8rem;
+  font-weight:800;
+  margin-bottom:12px;
+}
+
+h1,h2,h3{
+  font-family:Georgia,"Times New Roman",serif;
+}
+
+h1{
+  font-size:clamp(3rem,7vw,5.4rem);
+  line-height:1;
+  margin:0 0 25px;
+}
+
+h2{
+  color:var(--deep-purple);
+  font-size:clamp(2.1rem,5vw,3.2rem);
+  line-height:1.15;
+}
+
+h3{
+  color:var(--deep-purple);
+  font-size:1.5rem;
+}
+
+.hero p{
+  font-size:1.2rem;
+}
+
+.section{
+  padding:80px 24px;
+}
+
+.container{
+  max-width:950px;
+  margin:auto;
+}
+
+.center{
+  max-width:800px;
+  margin:auto;
+  text-align:center;
+}
+
+.lavender{
+  background:#f3ebf7;
+}
+
+.story-block{
+  max-width:850px;
+  margin:40px auto 0;
+}
+
+.quote{
+  margin:35px 0;
+  padding:30px;
+  background:white;
+  border-left:5px solid var(--purple);
+  border-radius:0 18px 18px 0;
+  font-family:Georgia,"Times New Roman",serif;
+  font-size:1.2rem;
+  color:var(--deep-purple);
+}
+
+.timeline{
+  max-width:850px;
+  margin:45px auto 0;
+}
+
+.timeline-item{
+  border-left:4px solid var(--lavender);
+  padding:0 0 38px 28px;
+  position:relative;
+}
+
+.timeline-item:before{
+  content:"";
+  position:absolute;
+  width:16px;
+  height:16px;
+  border-radius:50%;
+  background:var(--deep-purple);
+  left:-10px;
+  top:6px;
+}
+
+.date{
+  color:var(--purple);
+  font-weight:800;
+  text-transform:uppercase;
+  letter-spacing:1px;
+  font-size:.85rem;
+}
+
+.questions{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:22px;
+  margin-top:40px;
+}
+
+.question{
+  background:white;
+  padding:28px;
+  border-radius:20px;
+  box-shadow:0 10px 28px rgba(70,45,80,.06);
+  font-family:Georgia,"Times New Roman",serif;
+  color:var(--deep-purple);
+  font-size:1.12rem;
+  font-weight:700;
+}
+
+.family-note{
+  background:white;
+  border:2px solid var(--lavender);
+  border-radius:24px;
+  padding:38px;
+  margin-top:40px;
+}
+
+.important{
+  background:var(--deep-purple);
+  color:white;
+  padding:55px 30px;
+  text-align:center;
+}
+
+.important-inner{
+  max-width:800px;
+  margin:auto;
+}
+
+.important h2{
+  color:white;
+}
+
+.important strong{
+  display:block;
+  font-family:Georgia,"Times New Roman",serif;
+  font-size:1.5rem;
+  margin:20px 0;
+}
+
+.legal{
+  max-width:850px;
+  margin:auto;
+  border-left:5px solid var(--purple);
+  background:white;
+  padding:28px;
+}
+
+.closing{
+  background:#2f2632;
+  color:white;
+  text-align:center;
+  padding:85px 24px;
+}
+
+.closing-inner{
+  max-width:800px;
+  margin:auto;
+}
+
+.closing h2{
+  color:white;
+}
+
+.closing strong{
+  display:block;
+  font-family:Georgia,"Times New Roman",serif;
+  font-size:1.5rem;
+  margin-top:22px;
+}
+
+footer{
+  background:#251e27;
+  color:#e9e1ea;
+  text-align:center;
+  padding:38px 20px;
+  font-size:.9rem;
+}
+
+.quick-exit{
+  position:fixed;
+  right:18px;
+  bottom:18px;
+  z-index:200;
+  border:none;
+  border-radius:999px;
+  padding:13px 20px;
+  background:var(--deep-purple);
+  color:white;
+  font-weight:800;
+  cursor:pointer;
+  box-shadow:0 8px 25px rgba(0,0,0,.22);
+}
+
+@media(max-width:850px){
+  .nav-inner{
+    flex-direction:column;
+    align-items:flex-start;
+  }
+
+  .questions{
+    grid-template-columns:1fr;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<div class="emergency-bar">
+If you are in immediate danger, call 911.
+</div>
+
+<div class="funding-notice">
+<strong>Funding Notice:</strong>
+Donations, merchandise proceeds after costs and fees, and other financial support go toward building Smilee Kylee and its future programs, resources, and supportive housing for women in need.
+</div>
+
+<nav>
+<div class="nav-inner">
+
+<a class="brand" href="index.html">Smilee Kylee</a>
+
+<div class="nav-links">
+<a href="index.html">Home</a>
+<a href="kylee.html">Meet Kylee</a>
+<a href="mission.html">Vision & Mission</a>
+<a href="shop.html">Shop</a>
+<a href="donate.html">Donate</a>
+<a href="case.html">The Case</a>
+<a class="active" href="story.html">What We Know</a>
+<a href="help.html">Get Help</a>
+</div>
+
+</div>
+</nav>
+
+<header class="hero">
+
+<div class="hero-inner">
+
+<div class="eyebrow">Her Story</div>
+
+<h1>What Happened to Kylee</h1>
+
+<p>
+Before we tell you how Kylee died, we need you to understand
+how desperately we fought to believe she was still alive.
+</p>
+
+</div>
+
+</header>
+
+<section class="section">
+
+<div class="container">
+
+<div class="center">
+
+<div class="eyebrow">Before Everything Changed</div>
+
+<h2>She Was Supposed to Come Home</h2>
+
+<p>
+Kylee wasn't supposed to become a missing-person poster.
+She wasn't supposed to become a case number.
+She wasn't supposed to become a story people read,
+feel sad about for a moment, and then forget.
+</p>
+
+<p>
+<strong>She was supposed to come home.</strong>
+</p>
+
+</div>
+
+</div>
+
+</section>
+
+<section class="section lavender">
+
+<div class="container">
+
+<div class="story-block">
+
+<div class="eyebrow">The Week Everything Changed</div>
+
+<h2>A Future She Was Trying to Build</h2>
+
+<p>
+That week, Kylee experienced complications with her pregnancy
+and was sent to the hospital.
+</p>
+
+<p>
+She returned to Bethesda House early the following morning.
+According to our family's understanding of what happened,
+Kylee was exhausted, fell asleep, and missed a required
+morning meeting.
+</p>
+
+<p>
+Two days later, she was discharged from the program for
+breaking policy. Transportation was arranged that took Kylee
+back to Gregory Groom's home in Rehoboth.
+</p>
+
+<p>
+That decision is something our family continues to question.
+What was supposed to be a stepping stone toward stability for
+Kylee and her baby instead placed her back in circumstances
+that would soon become the center of a homicide investigation.
+</p>
+
+</div>
+
+</div>
+
+</section>
+
+<section class="section">
+
+<div class="container">
+
+<div class="story-block">
+
+<div class="eyebrow">August 6, 2025</div>
+
+<h2>The Last Time We Tried to Bring Her Home</h2>
+
+<p>
+After Kylee returned to Gregory's home, she contacted her
+sisters and described a violent incident.
+</p>
+
+<div class="quote">
+“He threw me on the ground and pulled my hair and strangled me.
+My phones at 4% if I die, it was Greg.”
+<br><br>
+<strong>— Kylee, August 6, 2025, 7:43 p.m.</strong>
+</div>
+
+<p>
+One of Kylee's sisters spoke by phone with Kylee and Gregory.
+She tried to calm the situation and repeatedly offered to pick
+Kylee up so she could sleep at a family member's home while
+everyone figured out what to do next.
+</p>
+
+<p>
+Kylee declined.
+</p>
+
+<div class="quote">
+“We're fine now, he calmed down. We're going to talk about our
+baby and our future together... I'm safe, I promise.
+I love you so much.”
+<br><br>
+<strong>— Kylee, August 6, 2025, approximately 8:13 p.m.</strong>
+</div>
+
+<p>
+Her family wanted her home. Kylee believed the immediate danger
+had passed.
+</p>
+
+</div>
+
+</div>
+
+</section>
+
+<section class="section lavender">
+
+<div class="container">
+
+<div class="story-block">
+
+<div class="eyebrow">Then She Was Gone</div>
+
+<h2>Kylee Disappeared</h2>
+
+<p>
+Kylee's last known whereabouts centered on Gregory's Rehoboth
+property.
+</p>
+
+<p>
+Gregory reported Kylee missing. Her sisters were contacted by
+police and provided additional information. The family then
+began its own desperate effort to find Kylee.
+</p>
+
+<p>
+Gregory also participated in efforts to search for her.
+</p>
+
+<p>
+As the investigation expanded, local and state law enforcement
+searched for Kylee. Search efforts included specialized
+personnel and equipment.
+</p>
+
+<p>
+Family, friends, police, and members of the community searched
+wherever they thought Kylee might be.
+</p>
+
+<p>
+As long as Kylee had not been found, her family could still
+hold onto one possibility:
+</p>
+
+<div class="quote">
+Maybe she was still alive.
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<section class="section">
+
+<div class="container">
+
+<div class="story-block">
+
+<div class="eyebrow">Hope, Fear & Confusion</div>
+
+<h2>The Kidnapping Call</h2>
+
+<p>
+During the search, Kylee's sisters received a frightening call
+that appeared to portray a kidnapping. They believed they could
+hear someone crying in the background.
+</p>
+
+<p>
+In the panic, they contacted the detective investigating
+Kylee's disappearance.
+</p>
+
+<p>
+The call was ultimately determined to be a hoax.
+</p>
+
+<p>
+For Kylee's family, it added another layer of fear to an
+already unbearable search. They did not know what information
+was real, whether Kylee was hurt, or whether she was somewhere
+waiting for them to find her.
+</p>
+
+</div>
+
+</div>
+
+</section>
+
+<section class="section lavender">
+
+<div class="container">
+
+<div class="story-block">
+
+<div class="eyebrow">Another Possibility</div>
+
+<h2>The Hitchhiking Story</h2>
+
+<p>
+During the investigation, Gregory offered explanations for
+where Kylee might have gone, including a story involving a
+vehicle that had allegedly offered them a ride while they were
+walking.
+</p>
+
+<p>
+For her family, every possible lead mattered.
+</p>
+
+<p>
+Maybe someone picked her up. Maybe she left in a car.
+Maybe she was somewhere investigators had not searched.
+</p>
+
+<p>
+Every possibility meant one thing:
+<strong>maybe Kylee was still alive.</strong>
+</p>
+
+</div>
+
+</div>
+
+</section>
+
+<section class="section">
+
+<div class="container">
+
+<div class="story-block">
+
+<div class="eyebrow">August 19, 2025</div>
+
+<h2>The Investigation Changed</h2>
+
+<p>
+According to statements prosecutors later made in court,
+Gregory admitted during questioning to an earlier domestic
+violence incident involving Kylee.
+</p>
+
+<p>
+Prosecutors further allege that Gregory ultimately told
+investigators he had killed Kylee and provided a hand-drawn
+map showing investigators where to search on the Rehoboth
+property.
+</p>
+
+<p>
+Investigators followed that information.
+</p>
+
+<p>
+Kylee's remains were located approximately five feet
+underground.
+</p>
+
+<div class="quote">
+After nearly two weeks of hoping she would walk through a door,
+answer a phone, or somehow be found alive, our family finally
+learned where Kylee was.
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<section class="important">
+
+<div class="important-inner">
+
+<div class="eyebrow">August 19, 2025</div>
+
+<h2>The Day We Found Kylee</h2>
+
+<p>
+Kylee was not walking through a door.
+She was not calling.
+She was not somewhere waiting for us to find her.
+</p>
+
+<p>
+She had been buried beneath the ground.
+</p>
+
+<p>
+And with Kylee was the baby she had already begun dreaming
+about raising.
+</p>
+
+<strong>Our family lost Kylee and the future she imagined with her baby.</strong>
+
+<p>
+Kylee had just graduated high school.
+She was learning how to navigate adulthood.
+She was preparing to become a mother.
+</p>
+
+<p>
+The baby she dreamed of wrapping in the same Elmo blanket
+that had wrapped Kylee when she was little would never get
+that chance.
+</p>
+
+<p>
+August 19 changed our family forever.
+</p>
+
+</div>
+
+</section>
+
+<section class="section lavender">
+
+<div class="container">
+
+<div class="center">
+
+<div class="eyebrow">Questions That Remain</div>
+
+<h2>The Questions We Cannot Let Disappear</h2>
+
+<p>
+Some things are established through the investigation and
+court proceedings. Other things remain questions our family
+continues to ask.
+</p>
+
+</div>
+
+<div class="questions">
+
+<div class="question">
+Why was Kylee discharged while she was pregnant, exhausted,
+vulnerable, and trying to find stability?
+</div>
+
+<div class="question">
+Why was transportation arranged that returned her to Gregory's
+home?
+</div>
+
+<div class="question">
+What exactly happened during Kylee's final hours?
+</div>
+
+<div class="question">
+Were there opportunities for someone to intervene before
+Kylee returned to that property?
+</div>
+
+<div class="question">
+Why did earlier searches of the property fail to locate her?
+</div>
+
+<div class="question">
+Is every circumstance surrounding what happened to Kylee
+fully understood?
+</div>
+
+<div class="question">
+How will the loss of Kylee's unborn baby be recognized as
+the criminal case moves forward?
+</div>
+
+<div class="question">
+What will accountability ultimately look like for Kylee
+and her family?
+</div>
+
+</div>
+
+<div class="family-note">
+
+<h3>What We Know — And What We Don't</h3>
+
+<p>
+We will not present unanswered questions as proven facts.
+Where our family has questions, we will call them questions.
+Where prosecutors have made allegations, we will identify
+them as allegations. Where something has been established
+through reliable public information, we will identify it
+accordingly.
+</p>
+
+<p>
+As additional verified information becomes available,
+this page will be updated.
+</p>
+
+</div>
+
+</div>
+
+</section>
+
+<section class="section">
+
+<div class="legal">
+
+<strong>Important legal note:</strong>
+
+<p>
+Gregory Groom has been charged in connection with Kylee's
+death and has pleaded not guilty. Statements concerning what
+he allegedly told investigators or what prosecutors believe
+occurred are allegations and prosecution claims unless and
+until established in court. A criminal charge is not a
+conviction, and a defendant is presumed innocent unless
+proven guilty.
+</p>
+
+<p>
+Parts of this page also describe the Monteiro family's
+experiences, recollections, questions, and understanding of
+events. Those portions are presented as the family's account
+and should not be interpreted as independent judicial
+findings.
+</p>
+
+</div>
+
+</section>
+
+<section class="closing">
+
+<div class="closing-inner">
+
+<div class="eyebrow">Her Story Must Become Something More</div>
+
+<h2>Please Don't Let Kylee's Life End With the Day She Died.</h2>
+
+<p>
+Stand with us. Speak her name. Demand accountability.
+And help us build something that could help another young
+woman before her story becomes another tragedy.
+</p>
+
+<p>
+If Kylee's life cannot be saved anymore, perhaps what we
+learn from her story can help save someone else's.
+</p>
+
+<strong>
+For Kylee.<br>
+For her baby.<br>
+For every woman who deserves someone to say,
+“We're not giving up on you.”
+</strong>
+
+<h2>Justice for Kylee.<br>Her Memory Becomes Someone Else's Hope.</h2>
+
+</div>
+
+</section>
+
+<footer>
+© <span id="year"></span> Smilee Kylee · In Loving Memory of
+Kylee M. Monteiro
+</footer>
+
+<button class="quick-exit" type="button" onclick="quickExit()">
+Quick Exit
+</button>
+
+<script>
+document.getElementById("year").textContent =
+new Date().getFullYear();
+
+function quickExit(){
+  window.location.replace("https://www.google.com");
+}
+</script>
+
+</body>
+</html>
