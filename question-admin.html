@@ -601,13 +601,8 @@ function setupAccessDisplay(){
 
     manageButton.style.display = "inline-block";
   }else{
-    badge.textContent = currentLabel
-      ? "View Only — " + currentLabel
-      : "View-Only Access";
-
-    message.textContent =
-      "You can read submitted questions, but you cannot move, edit, or delete them.";
-
+    badge.textContent = "Admin";
+    message.textContent = "";
     manageButton.style.display = "none";
   }
 }
