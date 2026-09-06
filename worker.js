@@ -181,6 +181,90 @@ export default {
         );
       }
 
+      // PUBLIC MEMORY SUBMISSION
+      if (
+        url.pathname === "/api/memories" &&
+        request.method === "POST"
+      ) {
+        return await submitMemory(request, env);
+      }
+
+      // PUBLIC APPROVED MEMORIES
+      if (
+        url.pathname === "/api/memories" &&
+        request.method === "GET"
+      ) {
+        return await getApprovedMemories(env);
+      }
+
+      // ADMIN MEMORY INBOX
+      // Owner and viewer can read pending memories.
+      if (
+        url.pathname === "/api/admin/memories" &&
+        request.method === "GET"
+      ) {
+        const access = await getAccess(request, env);
+
+        if (!access) {
+          return jsonResponse(
+            { error: "Unauthorized" },
+            401
+          );
+        }
+
+        return await getPendingMemories(env);
+      }
+
+      // APPROVE MEMORY
+      // OWNER ONLY
+      const approveMemoryMatch = url.pathname.match(
+        /^\/api\/admin\/memories\/(\d+)\/approve$/
+      );
+
+      if (
+        approveMemoryMatch &&
+        request.method === "POST"
+      ) {
+        const access = await getAccess(request, env);
+
+        if (!access || access.role !== "owner") {
+          return jsonResponse(
+            { error: "Owner access required." },
+            403
+          );
+        }
+
+        return await approveMemory(
+          env,
+          Number(approveMemoryMatch[1])
+        );
+      }
+
+      // DENY MEMORY
+      // OWNER ONLY
+      const denyMemoryMatch = url.pathname.match(
+        /^\/api\/admin\/memories\/(\d+)\/deny$/
+      );
+
+      if (
+        denyMemoryMatch &&
+        request.method === "DELETE"
+      ) {
+        const access = await getAccess(request, env);
+
+        if (!access || access.role !== "owner") {
+          return jsonResponse(
+            { error: "Owner access required." },
+            403
+          );
+        }
+
+        return await denyMemory(
+          env,
+          Number(denyMemoryMatch[1])
+        );
+      }
+
       // SERVE WEBSITE FILES
       if (env.ASSETS) {
         return env.ASSETS.fetch(request);
@@ -259,6 +343,175 @@ async function submitQuestion(request, env) {
     success: true,
     message:
       "Your question has been submitted."
+  });
+}
+
+
+// ======================================
+// MEMORIES
+// ======================================
+
+async function submitMemory(request, env) {
+  const data = await request.json();
+
+  const name = cleanText(
+    data.name,
+    100
+  );
+
+  const memory = cleanText(
+    data.memory,
+    4000
+  );
+
+  if (!name) {
+    return jsonResponse(
+      { error: "Please enter your name." },
+      400
+    );
+  }
+
+  if (!memory) {
+    return jsonResponse(
+      { error: "Please share your memory of Kylee." },
+      400
+    );
+  }
+
+  await env.DB.prepare(`
+    INSERT INTO memories
+    (
+      name,
+      memory,
+      status
+    )
+    VALUES (?, ?, 'pending')
+  `)
+    .bind(name, memory)
+    .run();
+
+  return jsonResponse({
+    success: true,
+    message:
+      "Thank you. Your memory has been sent for approval."
+  });
+}
+
+
+async function getApprovedMemories(env) {
+  const results =
+    await env.DB.prepare(`
+      SELECT
+        id,
+        name,
+        memory,
+        approved_at
+      FROM memories
+      WHERE status = 'approved'
+      ORDER BY RANDOM()
+    `)
+      .all();
+
+  return jsonResponse({
+    success: true,
+    memories:
+      results.results || []
+  });
+}
+
+
+async function getPendingMemories(env) {
+  const results =
+    await env.DB.prepare(`
+      SELECT
+        id,
+        name,
+        memory,
+        submitted_at
+      FROM memories
+      WHERE status = 'pending'
+      ORDER BY submitted_at DESC
+    `)
+      .all();
+
+  return jsonResponse({
+    success: true,
+    memories:
+      results.results || []
+  });
+}
+
+
+async function approveMemory(
+  env,
+  memoryId
+) {
+  const existing =
+    await env.DB.prepare(`
+      SELECT id
+      FROM memories
+      WHERE id = ?
+        AND status = 'pending'
+      LIMIT 1
+    `)
+      .bind(memoryId)
+      .first();
+
+  if (!existing) {
+    return jsonResponse(
+      { error: "Pending memory not found." },
+      404
+    );
+  }
+
+  await env.DB.prepare(`
+    UPDATE memories
+    SET
+      status = 'approved',
+      approved_at = CURRENT_TIMESTAMP
+    WHERE id = ?
+  `)
+    .bind(memoryId)
+    .run();
+
+  return jsonResponse({
+    success: true
+  });
+}
+
+
+async function denyMemory(
+  env,
+  memoryId
+) {
+  const existing =
+    await env.DB.prepare(`
+      SELECT id
+      FROM memories
+      WHERE id = ?
+        AND status = 'pending'
+      LIMIT 1
+    `)
+      .bind(memoryId)
+      .first();
+
+  if (!existing) {
+    return jsonResponse(
+      { error: "Pending memory not found." },
+      404
+    );
+  }
+
+  await env.DB.prepare(`
+    DELETE FROM memories
+    WHERE id = ?
+      AND status = 'pending'
+  `)
+    .bind(memoryId)
+    .run();
+
+  return jsonResponse({
+    success: true
   });
 }
 
