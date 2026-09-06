@@ -1,0 +1,945 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Meet Kylee | Smilee Kylee</title>
+
+  <style>
+    :root {
+      --lavender: #d8c5e8;
+      --purple: #7d5a91;
+      --deep-purple: #553765;
+      --pink: #efd2df;
+      --cream: #fffaf5;
+      --white: #ffffff;
+      --charcoal: #342f35;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      background: var(--cream);
+      color: var(--charcoal);
+      line-height: 1.8;
+    }
+
+    img {
+      max-width: 100%;
+      display: block;
+    }
+
+    /* EMERGENCY BAR */
+
+    .emergency-bar {
+      background: var(--deep-purple);
+      color: white;
+      text-align: center;
+      padding: 8px 20px;
+      font-size: 0.9rem;
+    }
+
+    /* NAVIGATION */
+
+    nav {
+      background: rgba(255,255,255,0.97);
+      border-bottom: 1px solid #eadfea;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .nav-inner {
+      max-width: 1200px;
+      margin: auto;
+      padding: 15px 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .brand {
+      color: var(--deep-purple);
+      font-size: 1.35rem;
+      font-weight: 800;
+      text-decoration: none;
+      white-space: nowrap;
+    }
+
+    .nav-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 17px;
+      align-items: center;
+    }
+
+    .nav-links a {
+      color: var(--charcoal);
+      text-decoration: none;
+      font-size: 0.92rem;
+      font-weight: 700;
+    }
+
+    .nav-links a:hover,
+    .nav-links a.active {
+      color: var(--purple);
+    }
+
+    /* HERO */
+
+    .hero {
+      min-height: 78vh;
+      position: relative;
+      display: flex;
+      align-items: flex-end;
+      background:
+        linear-gradient(
+          90deg,
+          rgba(42,27,48,0.78),
+          rgba(42,27,48,0.28)
+        ),
+        url("656153597_26193231943666922_5799060983736162287_n.jpg")
+        center 25% / cover no-repeat;
+    }
+
+    .hero-content {
+      width: 100%;
+      max-width: 1200px;
+      margin: auto;
+      padding: 90px 30px;
+      color: white;
+    }
+
+    .eyebrow {
+      text-transform: uppercase;
+      letter-spacing: 3px;
+      font-size: 0.8rem;
+      font-weight: 800;
+      margin-bottom: 12px;
+    }
+
+    .hero h1 {
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(3.2rem, 8vw, 6.8rem);
+      line-height: 0.95;
+      margin: 0 0 22px;
+    }
+
+    .hero p {
+      max-width: 700px;
+      font-size: 1.2rem;
+      margin: 0;
+    }
+
+    /* GENERAL */
+
+    .section {
+      padding: 90px 24px;
+    }
+
+    .container {
+      max-width: 1050px;
+      margin: auto;
+    }
+
+    .narrow {
+      max-width: 820px;
+      margin: auto;
+    }
+
+    h2 {
+      color: var(--deep-purple);
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(2.2rem, 5vw, 3.5rem);
+      line-height: 1.15;
+      margin-top: 0;
+    }
+
+    h3 {
+      color: var(--deep-purple);
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 1.8rem;
+    }
+
+    p {
+      margin: 0 0 22px;
+    }
+
+    .lead {
+      font-size: 1.3rem;
+      color: var(--deep-purple);
+      font-family: Georgia, "Times New Roman", serif;
+      font-weight: 700;
+    }
+
+    .lavender {
+      background: #f3ebf7;
+    }
+
+    .pink {
+      background: #fdf0f5;
+    }
+
+    /* STORY WITH PHOTO */
+
+    .story-grid {
+      display: grid;
+      grid-template-columns: 0.9fr 1.1fr;
+      gap: 60px;
+      align-items: center;
+    }
+
+    .story-grid.reverse {
+      grid-template-columns: 1.1fr 0.9fr;
+    }
+
+    .story-photo {
+      border-radius: 26px;
+      overflow: hidden;
+      box-shadow: 0 18px 45px rgba(73,46,84,0.16);
+    }
+
+    .story-photo img {
+      width: 100%;
+      height: 580px;
+      object-fit: cover;
+    }
+
+    /* QUOTES */
+
+    .quote {
+      max-width: 850px;
+      margin: 70px auto;
+      padding: 45px;
+      background: white;
+      border-left: 7px solid var(--purple);
+      border-radius: 0 22px 22px 0;
+      box-shadow: 0 12px 35px rgba(70,45,80,0.08);
+    }
+
+    .quote p {
+      font-family: Georgia, "Times New Roman", serif;
+      color: var(--deep-purple);
+      font-size: 1.65rem;
+      line-height: 1.5;
+      margin: 0;
+    }
+
+    /* LITTLE THINGS */
+
+    .little-things {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      margin-top: 45px;
+    }
+
+    .thing {
+      background: white;
+      border-radius: 22px;
+      padding: 28px;
+      box-shadow: 0 10px 30px rgba(70,45,80,0.07);
+    }
+
+    .thing strong {
+      display: block;
+      color: var(--deep-purple);
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 1.3rem;
+      margin-bottom: 8px;
+    }
+
+    /* PHOTO STRIP */
+
+    .photo-strip {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+    }
+
+    .photo-strip img {
+      width: 100%;
+      height: 330px;
+      object-fit: cover;
+    }
+
+    /* LEGACY */
+
+    .legacy {
+      text-align: center;
+      padding: 100px 24px;
+      background:
+        linear-gradient(
+          rgba(65,39,75,0.82),
+          rgba(65,39,75,0.82)
+        ),
+        url("lg.jpg") center / cover no-repeat;
+      color: white;
+    }
+
+    .legacy-inner {
+      max-width: 850px;
+      margin: auto;
+    }
+
+    .legacy h2 {
+      color: white;
+    }
+
+    .legacy p {
+      font-size: 1.15rem;
+    }
+
+    .legacy-final {
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 1.7rem !important;
+      font-weight: 700;
+      margin-top: 35px;
+    }
+
+    /* BUTTONS */
+
+    .button {
+      display: inline-block;
+      margin-top: 18px;
+      padding: 13px 24px;
+      border-radius: 999px;
+      background: white;
+      color: var(--deep-purple);
+      text-decoration: none;
+      font-weight: 800;
+    }
+
+    /* FOOTER */
+
+    footer {
+      background: #2f2632;
+      color: #e9e1ea;
+      text-align: center;
+      padding: 38px 20px;
+      font-size: 0.9rem;
+    }
+
+    /* QUICK EXIT */
+
+    .quick-exit {
+      position: fixed;
+      right: 18px;
+      bottom: 18px;
+      z-index: 200;
+      border: none;
+      border-radius: 999px;
+      padding: 13px 20px;
+      background: var(--deep-purple);
+      color: white;
+      font-weight: 800;
+      cursor: pointer;
+      box-shadow: 0 8px 25px rgba(0,0,0,0.22);
+    }
+
+    /* MOBILE */
+
+    @media (max-width: 900px) {
+      .nav-inner {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .story-grid,
+      .story-grid.reverse {
+        grid-template-columns: 1fr;
+      }
+
+      .little-things {
+        grid-template-columns: 1fr;
+      }
+
+      .photo-strip {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .story-photo img {
+        height: 480px;
+      }
+    }
+
+    @media (max-width: 520px) {
+      .hero {
+        min-height: 65vh;
+      }
+
+      .hero-content {
+        padding: 65px 22px;
+      }
+
+      .section {
+        padding: 65px 20px;
+      }
+
+      .photo-strip img {
+        height: 220px;
+      }
+
+      .story-photo img {
+        height: 430px;
+      }
+
+      .quote {
+        padding: 30px;
+      }
+
+      .quote p {
+        font-size: 1.35rem;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="emergency-bar">
+    If you are in immediate danger, call 911.
+  </div>
+
+  <nav>
+    <div class="nav-inner">
+
+      <a class="brand" href="index.html">Smilee Kylee</a>
+
+      <div class="nav-links">
+        <a href="index.html">Home</a>
+        <a class="active" href="kylee.html">Meet Kylee</a>
+        <a href="mission.html">Vision & Mission</a>
+        <a href="shop.html">Shop</a>
+        <a href="donate.html">Donate</a>
+        <a href="case.html">The Case</a>
+        <a href="story.html">What We Know</a>
+        <a href="help.html">Get Help</a>
+      </div>
+
+    </div>
+  </nav>
+
+
+  <header class="hero">
+
+    <div class="hero-content">
+
+      <div class="eyebrow">
+        November 4, 2006 — August 19, 2025
+      </div>
+
+      <h1>Meet Kylee</h1>
+
+      <p>
+        Before Kylee Monteiro became a name people saw in the news,
+        she was our sister, our niece, our granddaughter, our friend—
+        and the girl who could walk into a room and somehow make
+        everyone smile.
+      </p>
+
+    </div>
+
+  </header>
+
+
+  <section class="section">
+
+    <div class="container story-grid">
+
+      <div class="story-photo">
+        <img
+          src="535270693_10230812686321648_7000763581018243905_n.jpg"
+          alt="Kylee as a little girl"
+        >
+      </div>
+
+      <div>
+
+        <div class="eyebrow">Her Story</div>
+
+        <h2>Before “Smilee Kylee”</h2>
+
+        <p>
+          Kylee was born on November 4, 2006. Her father lovingly
+          called her <strong>“Fat Baby”</strong> when she was little,
+          a nickname she thought was hilarious and continued laughing
+          about for years.
+        </p>
+
+        <p>
+          She lost her father when she was still a baby, in June 2008.
+          Kylee was raised primarily by her mother, a woman who loved
+          her fiercely and gave her everything she could, even when
+          they had very little.
+        </p>
+
+        <p>
+          They experienced poverty together, but Kylee never doubted
+          that her mother loved her.
+        </p>
+
+        <p>
+          Then, when Kylee was only 13, she lost her mother three days
+          before Christmas. It broke her heart.
+        </p>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <section class="section lavender">
+
+    <div class="container story-grid reverse">
+
+      <div>
+
+        <div class="eyebrow">Growing Up</div>
+
+        <h2>And Somehow, She Thrived.</h2>
+
+        <p>
+          Her aunt and uncle opened their home to Kylee and her sister,
+          Hailey, welcoming them with open arms.
+        </p>
+
+        <p>
+          Kylee suddenly had to navigate a new home, new schools,
+          new friendships, and a life she never expected to have.
+        </p>
+
+        <p>
+          The quiet, shy little girl began to blossom into someone
+          completely different.
+        </p>
+
+        <p>
+          Kylee became outgoing, social, funny, and incredibly easy
+          to love. She made friends everywhere she went.
+        </p>
+
+        <p>
+          She loved makeup, music, helping people, talking to her
+          friends, and—perhaps most of all—making people laugh.
+        </p>
+
+        <p class="lead">
+          And that laugh.
+        </p>
+
+        <p>
+          Kylee had one of those ridiculous, contagious laughs that
+          could fill a room. Sometimes you didn't even know what she
+          was laughing about, but you would find yourself laughing
+          right alongside her.
+        </p>
+
+      </div>
+
+      <div class="story-photo">
+        <img
+          src="535771147_10230812688281697_5872507385772841575_n.jpg"
+          alt="Kylee smiling near the water"
+        >
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <section class="section">
+
+    <div class="container story-grid">
+
+      <div class="story-photo">
+        <img
+          src="534709195_1470646080945022_8534622753613095277_n.jpg"
+          alt="Kylee celebrating graduation"
+        >
+      </div>
+
+      <div>
+
+        <div class="eyebrow">The Name That Stuck</div>
+
+        <h2>Becoming Smilee Kylee</h2>
+
+        <p>
+          Kylee had a way of bringing light with her.
+          That light became part of her name.
+        </p>
+
+        <p>
+          During the summer before her senior year, Kylee participated
+          in a welding program. The people around her began calling her
+          <strong>“Smilee Kylee”</strong> because of the way she lit
+          up every room.
+        </p>
+
+        <p>
+          The name stuck. So did the smile.
+        </p>
+
+        <p>
+          Kylee discovered a real passion for welding. She graduated
+          from Attleboro High School in 2025 and was incredibly proud
+          of what she had accomplished.
+        </p>
+
+        <p>
+          She even became <strong>Prom Queen.</strong>
+        </p>
+
+        <p class="lead">
+          She had dreams, plans, a future. She was just beginning
+          to build.
+        </p>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <section class="section pink">
+
+    <div class="narrow">
+
+      <div class="eyebrow">A New Future</div>
+
+      <h2>The Baby Who Changed Everything</h2>
+
+      <p>
+        At a time when Kylee was struggling deeply with her mental
+        health, she went to Butler Hospital after experiencing
+        suicidal thoughts.
+      </p>
+
+      <p>
+        While she was there, she found out she was pregnant.
+      </p>
+
+      <p class="lead">
+        And something changed.
+      </p>
+
+      <p>
+        For the first time, Kylee felt like she had something—and
+        someone—to live for. It wasn't just her anymore.
+      </p>
+
+      <p>
+        Kylee fell completely in love with her baby. She sent her
+        family pictures of the hospital paperwork showing the positive
+        result. She sent pictures of baby clothes and talked about the
+        baby constantly.
+      </p>
+
+      <div class="quote">
+        <p>
+          “If it’s a girl, I want to name her Eleanor and call her Ella.”
+        </p>
+      </div>
+
+      <p>
+        She even created a social-media post with her beloved Elmo
+        blanket shaped into a heart, with the words
+        <strong>“Baby Groom”</strong> in the middle.
+      </p>
+
+      <p>
+        That was how much this baby meant to her.
+        She was already a mother in her heart.
+      </p>
+
+      <p>
+        Kylee was willing to put her dream of becoming a welder on
+        hold because she didn't want to do anything that could put
+        her baby at risk.
+      </p>
+
+      <p>
+        She was already imagining her future as a mother.
+      </p>
+
+      <p class="lead">
+        She should have gotten to live it.
+      </p>
+
+      <p>
+        She should have gotten to hold her baby for the first time,
+        surrounded by the people who loved her. We imagine Kylee
+        smiling through happy tears while her family filled the
+        hospital room, everyone waiting for their chance to hold
+        the precious baby she had created.
+      </p>
+
+      <p>
+        She should have gotten to become a mother. She should have
+        gotten to build her welding career. She should have gotten
+        married, grown older, made mistakes, made memories, laughed
+        until she cried, and continued making everyone around her
+        smile.
+      </p>
+
+      <p>
+        She should have had a lifetime.
+      </p>
+
+      <p>
+        Instead, Kylee was taken from us at only 18 years old.
+        And her baby was taken with her.
+      </p>
+
+    </div>
+
+  </section>
+
+
+  <section class="section lavender">
+
+    <div class="container">
+
+      <div class="narrow">
+
+        <div class="eyebrow">The Things We Remember</div>
+
+        <h2>The Little Things That Were Kylee</h2>
+
+        <p>
+          Kylee had two things she couldn't sleep without:
+          Bob, her beloved Minion stuffed animal, and her Elmo blanket.
+        </p>
+
+        <p>
+          That blanket had been used by her own parents to wrap her
+          in when she was a baby. Kylee couldn't wait to wrap her own
+          baby in it someday.
+        </p>
+
+        <p>
+          When she was 16, she once made her sister Faith drive all
+          the way home to get Bob and her Elmo blanket because she
+          couldn't sleep without them.
+        </p>
+
+      </div>
+
+      <div class="little-things">
+
+        <div class="thing">
+          <strong>Bob</strong>
+          Her beloved Minion stuffed animal and one of the comforts
+          she carried with her from childhood.
+        </div>
+
+        <div class="thing">
+          <strong>Her Elmo Blanket</strong>
+          The blanket her parents wrapped her in as a baby—and the
+          blanket she dreamed of someday wrapping around her own child.
+        </div>
+
+        <div class="thing">
+          <strong>Pieces of Home</strong>
+          They weren't just objects. They were pieces of her childhood,
+          her mom and dad, and the feeling of home.
+        </div>
+
+      </div>
+
+      <div class="quote">
+        <p>
+          Neither Bob nor the Elmo blanket was ever recovered after
+          Kylee's death. Sometimes, it's the smallest things that hurt
+          the most.
+        </p>
+      </div>
+
+      <div class="narrow">
+
+        <p class="lead">
+          Because we don't just miss Kylee.
+          We miss everything she was supposed to become.
+        </p>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <div class="photo-strip">
+
+    <img
+      src="535825087_10230812683721583_8547162204426606609_n.jpg"
+      alt="A childhood family memory"
+    >
+
+    <img
+      src="656853571_26192752777048172_6271036138216469204_n.jpg"
+      alt="A candid photo of Kylee"
+    >
+
+    <img
+      src="656153597_26193231943666922_5799060983736162287_n.jpg"
+      alt="Kylee dressed for a special occasion"
+    >
+
+    <img
+      src="576934323_1534292487913714_2079411978847318151_n.jpg"
+      alt="Kylee at graduation"
+    >
+
+  </div>
+
+
+  <section class="section">
+
+    <div class="narrow">
+
+      <div class="eyebrow">Remember Her This Way</div>
+
+      <h2>Kylee Was More Than How Her Life Ended</h2>
+
+      <p>
+        Kylee was more than a missing-person poster.
+        More than a news story.
+        More than a tragedy.
+      </p>
+
+      <p>
+        She was the little girl who laughed at being called
+        “Fat Baby.”
+      </p>
+
+      <p>
+        She was the daughter who wanted desperately to make her
+        mother proud.
+      </p>
+
+      <p>
+        She was the sister who could make an ordinary night
+        unforgettable.
+      </p>
+
+      <p>
+        She was the girl who loved makeup, music, welding, her friends,
+        her cat Bleb, Bob, and her Elmo blanket.
+      </p>
+
+      <p>
+        She was the Prom Queen.
+      </p>
+
+      <p class="lead">
+        She was Smilee Kylee.
+      </p>
+
+      <p>
+        And she was a young woman who had finally begun to believe
+        in her future.
+      </p>
+
+      <p>
+        Kylee had an incredible ability to find light in dark places.
+        Even after losing so much, she kept finding reasons to smile.
+      </p>
+
+    </div>
+
+  </section>
+
+
+  <section class="legacy">
+
+    <div class="legacy-inner">
+
+      <div class="eyebrow">Her Legacy</div>
+
+      <h2>Her Memory Becomes Someone Else's Hope.</h2>
+
+      <p>
+        Now, we want to take that light and use it to help other
+        people find their way out of the dark.
+      </p>
+
+      <p>
+        Because Kylee's story isn't only about what was taken from
+        her. It's about what she still has the power to give.
+      </p>
+
+      <p>
+        <strong>Hope. Love. Purpose. A reason to keep going.</strong>
+      </p>
+
+      <p>
+        We can't give Kylee back the lifetime she deserved.
+        But we can make sure her life changes someone else's.
+      </p>
+
+      <p>
+        We can help women who are struggling with their mental health.
+        We can support women who are pregnant and scared. We can help
+        women who need safety, stability, and someone who won't give
+        up on them.
+      </p>
+
+      <p>
+        We can become the people Kylee needed.
+      </p>
+
+      <p class="legacy-final">
+        That is her legacy.<br>
+        That is Smilee Kylee.
+      </p>
+
+      <a class="button" href="mission.html">
+        Discover Our Mission
+      </a>
+
+    </div>
+
+  </section>
+
+
+  <footer>
+    © <span id="year"></span> Smilee Kylee · In Loving Memory of
+    Kylee M. Monteiro
+  </footer>
+
+
+  <button
+    class="quick-exit"
+    type="button"
+    onclick="quickExit()"
+  >
+    Quick Exit
+  </button>
+
+
+  <script>
+    document.getElementById("year").textContent =
+      new Date().getFullYear();
+
+    function quickExit() {
+      window.location.replace("https://www.google.com");
+    }
+  </script>
+
+</body>
+</html>
