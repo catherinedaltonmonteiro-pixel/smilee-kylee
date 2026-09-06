@@ -336,9 +336,74 @@
     footer {
       background: #2f2632;
       color: #e9e1ea;
-      text-align: center;
-      padding: 38px 20px;
+      padding: 55px 24px 85px;
       font-size: 0.9rem;
+    }
+
+    .footer-inner {
+      max-width: 1100px;
+      margin: auto;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 1.4fr 1fr 1fr;
+      gap: 42px;
+      align-items: start;
+    }
+
+    .footer-brand h2 {
+      color: white;
+      font-size: 2rem;
+      margin: 0 0 11px;
+    }
+
+    .footer-brand p {
+      color: #cfc7d4;
+      max-width: 420px;
+      margin: 7px 0;
+    }
+
+    .footer-column h3 {
+      color: white;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 1.15rem;
+      margin: 0 0 14px;
+    }
+
+    .footer-links {
+      display: grid;
+      gap: 9px;
+    }
+
+    .footer-links a {
+      color: #cfc7d4;
+      text-decoration: none;
+    }
+
+    .footer-links a:hover {
+      color: white;
+      text-decoration: underline;
+    }
+
+    .footer-divider {
+      height: 1px;
+      background: rgba(255,255,255,0.12);
+      margin: 34px 0 24px;
+    }
+
+    .footer-bottom {
+      text-align: center;
+      color: #cfc7d4;
+    }
+
+    .footer-bottom p {
+      margin: 6px auto;
+    }
+
+    .copyright {
+      margin-top: 14px;
+      font-size: 0.8rem;
     }
 
     /* QUICK EXIT */
@@ -381,6 +446,11 @@
 
       .story-photo img {
         height: 480px;
+      }
+
+      .footer-grid {
+        grid-template-columns: 1fr;
+        gap: 30px;
       }
     }
 
@@ -935,8 +1005,52 @@
 
 
   <footer>
-    © <span id="year"></span> Smilee Kylee · In Loving Memory of
-    Kylee M. Monteiro
+    <div class="footer-inner">
+
+      <div class="footer-grid">
+
+        <div class="footer-brand">
+          <h2>Smilee Kylee</h2>
+          <p>Created in loving memory of Kylee M. Monteiro.</p>
+          <p>Her memory becomes someone else's hope.</p>
+        </div>
+
+        <div class="footer-column">
+          <h3>Explore</h3>
+          <div class="footer-links">
+            <a href="index.html">Home</a>
+            <a href="kylee.html">Meet Kylee</a>
+            <a href="mission.html">Vision &amp; Mission</a>
+            <a href="case.html">The Case</a>
+            <a href="story.html">What We Know</a>
+            <a href="help.html">Get Help</a>
+          </div>
+        </div>
+
+        <div class="footer-column">
+          <h3>Support Smilee Kylee</h3>
+          <div class="footer-links">
+            <a href="shop.html">Shop Smilee Kylee</a>
+            <a href="donate.html">Donate</a>
+            <a href="https://www.paypal.com/ncp/payment/BKQGJZW65HJS4" target="_blank" rel="noopener noreferrer">PayPal</a>
+            <a href="https://cash.app/$justice4Kylee" target="_blank" rel="noopener noreferrer">Cash App</a>
+            <a href="https://venmo.com/u/smileekylee" target="_blank" rel="noopener noreferrer">Venmo</a>
+            <a href="https://smilee-kylee-shop.fourthwall.com/" target="_blank" rel="noopener noreferrer">Fourthwall Shop</a>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="footer-divider"></div>
+
+      <div class="footer-bottom">
+        <p>May her memory become safety, healing, opportunity and hope.</p>
+        <p class="copyright">
+          © <span id="year"></span> Smilee Kylee. All rights reserved.
+        </p>
+      </div>
+
+    </div>
   </footer>
 
 
