@@ -357,6 +357,19 @@ button:disabled{
   flex-wrap:wrap;
 }
 
+
+  .memory-admin-image{
+    display:block;
+    width:100%;
+    max-width:560px;
+    max-height:440px;
+    object-fit:contain;
+    margin:18px 0 6px;
+    border-radius:16px;
+    background:#f7f2f7;
+    border:1px solid #e5d9e7;
+  }
+
 @media(max-width:760px){
   .code-form{
     grid-template-columns:1fr;
@@ -803,6 +816,15 @@ function createMemoryCard(memory){
   card.appendChild(meta);
   card.appendChild(title);
   card.appendChild(memoryText);
+
+  if(memory.image_data){
+    const memoryImage = document.createElement("img");
+    memoryImage.className = "memory-admin-image";
+    memoryImage.src = memory.image_data;
+    memoryImage.alt =
+      "Picture submitted with Memory #" + memory.id;
+    card.appendChild(memoryImage);
+  }
 
   if(currentRole === "owner"){
     const actions = document.createElement("div");
