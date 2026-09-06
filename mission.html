@@ -1,0 +1,747 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Vision & Mission | Smilee Kylee</title>
+
+  <style>
+    :root {
+      --lavender: #d8c5e8;
+      --purple: #7d5a91;
+      --deep-purple: #553765;
+      --pink: #efd2df;
+      --cream: #fffaf5;
+      --white: #ffffff;
+      --charcoal: #342f35;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      background: var(--cream);
+      color: var(--charcoal);
+      line-height: 1.8;
+    }
+
+    img {
+      max-width: 100%;
+      display: block;
+    }
+
+    .emergency-bar {
+      background: var(--deep-purple);
+      color: white;
+      text-align: center;
+      padding: 8px 20px;
+      font-size: 0.9rem;
+    }
+
+    nav {
+      background: rgba(255,255,255,0.97);
+      border-bottom: 1px solid #eadfea;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .nav-inner {
+      max-width: 1200px;
+      margin: auto;
+      padding: 15px 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .brand {
+      color: var(--deep-purple);
+      font-size: 1.35rem;
+      font-weight: 800;
+      text-decoration: none;
+      white-space: nowrap;
+    }
+
+    .nav-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 17px;
+      align-items: center;
+    }
+
+    .nav-links a {
+      color: var(--charcoal);
+      text-decoration: none;
+      font-size: 0.92rem;
+      font-weight: 700;
+    }
+
+    .nav-links a:hover,
+    .nav-links a.active {
+      color: var(--purple);
+    }
+
+    .hero {
+      min-height: 72vh;
+      display: flex;
+      align-items: flex-end;
+      background:
+        linear-gradient(
+          90deg,
+          rgba(48,31,55,0.82),
+          rgba(48,31,55,0.28)
+        ),
+        url("535771147_10230812688281697_5872507385772841575_n.jpg")
+        center / cover no-repeat;
+    }
+
+    .hero-content {
+      width: 100%;
+      max-width: 1200px;
+      margin: auto;
+      padding: 90px 30px;
+      color: white;
+    }
+
+    .eyebrow {
+      text-transform: uppercase;
+      letter-spacing: 3px;
+      font-size: 0.8rem;
+      font-weight: 800;
+      margin-bottom: 12px;
+    }
+
+    .hero h1 {
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(3rem, 7vw, 6rem);
+      line-height: 1;
+      margin: 0 0 22px;
+    }
+
+    .hero p {
+      max-width: 760px;
+      font-size: 1.2rem;
+      margin: 0;
+    }
+
+    .section {
+      padding: 90px 24px;
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: auto;
+    }
+
+    .narrow {
+      max-width: 850px;
+      margin: auto;
+    }
+
+    h2 {
+      color: var(--deep-purple);
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(2.2rem, 5vw, 3.4rem);
+      line-height: 1.15;
+      margin-top: 0;
+    }
+
+    h3 {
+      color: var(--deep-purple);
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 1.45rem;
+      margin-top: 0;
+    }
+
+    p {
+      margin: 0 0 22px;
+    }
+
+    .lead {
+      color: var(--deep-purple);
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 1.35rem;
+      font-weight: 700;
+    }
+
+    .lavender {
+      background: #f3ebf7;
+    }
+
+    .pink {
+      background: #fdf0f5;
+    }
+
+    .statement {
+      max-width: 930px;
+      margin: auto;
+      padding: 55px;
+      background: white;
+      border-radius: 28px;
+      box-shadow: 0 16px 45px rgba(70,45,80,0.08);
+    }
+
+    .statement strong {
+      color: var(--deep-purple);
+    }
+
+    .standalone {
+      margin: 45px 0;
+      text-align: center;
+      font-family: Georgia, "Times New Roman", serif;
+      color: var(--deep-purple);
+      font-size: 2rem;
+      font-weight: 700;
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      margin-top: 45px;
+    }
+
+    .card {
+      background: white;
+      border-radius: 22px;
+      padding: 30px;
+      box-shadow: 0 10px 30px rgba(70,45,80,0.07);
+    }
+
+    .card p {
+      margin-bottom: 0;
+    }
+
+    .promise-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 35px;
+      align-items: stretch;
+      margin-top: 45px;
+    }
+
+    .promise {
+      background: white;
+      border-radius: 22px;
+      padding: 34px;
+      box-shadow: 0 10px 30px rgba(70,45,80,0.07);
+    }
+
+    .promise strong {
+      display: block;
+      color: var(--deep-purple);
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 1.4rem;
+      margin-bottom: 10px;
+    }
+
+    .future-note {
+      max-width: 900px;
+      margin: auto;
+      padding: 40px;
+      border: 2px solid var(--lavender);
+      border-radius: 24px;
+      background: white;
+    }
+
+    .future-note h3 {
+      margin-bottom: 10px;
+    }
+
+    .closing {
+      text-align: center;
+      padding: 100px 24px;
+      background:
+        linear-gradient(
+          rgba(65,39,75,0.84),
+          rgba(65,39,75,0.84)
+        ),
+        url("lg.jpg") center / cover no-repeat;
+      color: white;
+    }
+
+    .closing-inner {
+      max-width: 850px;
+      margin: auto;
+    }
+
+    .closing h2 {
+      color: white;
+    }
+
+    .closing p {
+      font-size: 1.15rem;
+    }
+
+    .closing-final {
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 1.8rem !important;
+      font-weight: 700;
+      margin-top: 35px;
+    }
+
+    footer {
+      background: #2f2632;
+      color: #e9e1ea;
+      text-align: center;
+      padding: 38px 20px;
+      font-size: 0.9rem;
+    }
+
+    .quick-exit {
+      position: fixed;
+      right: 18px;
+      bottom: 18px;
+      z-index: 200;
+      border: none;
+      border-radius: 999px;
+      padding: 13px 20px;
+      background: var(--deep-purple);
+      color: white;
+      font-weight: 800;
+      cursor: pointer;
+      box-shadow: 0 8px 25px rgba(0,0,0,0.22);
+    }
+
+    @media (max-width: 900px) {
+      .nav-inner {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .cards,
+      .promise-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 520px) {
+      .hero {
+        min-height: 62vh;
+      }
+
+      .hero-content {
+        padding: 65px 22px;
+      }
+
+      .section {
+        padding: 65px 20px;
+      }
+
+      .statement {
+        padding: 30px 24px;
+      }
+
+      .standalone {
+        font-size: 1.55rem;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="emergency-bar">
+    If you are in immediate danger, call 911.
+  </div>
+
+  <nav>
+    <div class="nav-inner">
+
+      <a class="brand" href="index.html">Smilee Kylee</a>
+
+      <div class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="kylee.html">Meet Kylee</a>
+        <a class="active" href="mission.html">Vision & Mission</a>
+        <a href="shop.html">Shop</a>
+        <a href="donate.html">Donate</a>
+        <a href="case.html">The Case</a>
+        <a href="story.html">What We Know</a>
+        <a href="help.html">Get Help</a>
+      </div>
+
+    </div>
+  </nav>
+
+  <header class="hero">
+
+    <div class="hero-content">
+
+      <div class="eyebrow">Why Smilee Kylee Exists</div>
+
+      <h1>Vision & Mission</h1>
+
+      <p>
+        Our goal is to create the kind of place we wish had existed
+        for Kylee: somewhere women can find safety, stability,
+        practical help, compassion, and a real path forward.
+      </p>
+
+    </div>
+
+  </header>
+
+  <section class="section">
+
+    <div class="statement">
+
+      <div class="eyebrow">Our Mission</div>
+
+      <h2>A Better Kind of Support</h2>
+
+      <p class="lead">
+        Our goal is to build the kind of place we wish had existed
+        for Kylee.
+      </p>
+
+      <p>
+        A place where a woman is not defined by her worst day,
+        where asking for help does not come with impossible expectations,
+        and where one missed meeting, one mistake, or one setback does
+        not mean losing the support she desperately needs.
+      </p>
+
+      <p>
+        Kylee was surrounded by people and systems that should have
+        protected her, supported her, and recognized how much she was
+        struggling. Too many opportunities to help her were missed.
+      </p>
+
+      <div class="standalone">
+        We were part of that, too.
+      </div>
+
+      <p>
+        Smilee Kylee exists because we acknowledge that we didn't do
+        enough for her.
+      </p>
+
+      <p>
+        There are things we wish we had understood sooner, questions
+        we wish we had asked, and moments we wish we could go back and
+        handle differently.
+      </p>
+
+      <p>
+        We cannot change those moments now.
+        But we can learn from them.
+      </p>
+
+      <p class="lead">
+        We do not want another woman to fall through the same cracks.
+      </p>
+
+    </div>
+
+  </section>
+
+  <section class="section lavender">
+
+    <div class="narrow">
+
+      <div class="eyebrow">What Justice Means To Us</div>
+
+      <h2>Justice Is More Than a Courtroom</h2>
+
+      <p>
+        To us, finding justice for Kylee is about more than handcuffs
+        and prison bars.
+      </p>
+
+      <p>
+        Justice also means confronting the failures and mistakes that
+        helped lead to a young woman reaching a point where she was so
+        vulnerable.
+      </p>
+
+      <p>
+        It means asking what could have been done differently—and then
+        doing something differently for the next woman.
+      </p>
+
+      <p class="lead">
+        That is what we want Smilee Kylee to become.
+      </p>
+
+    </div>
+
+  </section>
+
+  <section class="section">
+
+    <div class="container">
+
+      <div class="narrow">
+
+        <div class="eyebrow">The Future Shelter</div>
+
+        <h2>Help That Works in Real Life</h2>
+
+        <p>
+          We envision a shelter for women that offers more than a bed.
+          We want to create a home where women can stabilize their
+          lives while gaining the tools, resources, support, and
+          confidence they need to move forward.
+        </p>
+
+        <p>
+          The goal is not simply to hand someone a list of resources
+          and send her on her way.
+        </p>
+
+        <p>
+          The goal is to help her actually access those resources and
+          use them in a realistic way.
+        </p>
+
+      </div>
+
+      <div class="cards">
+
+        <div class="card">
+          <h3>Safe Housing</h3>
+          <p>
+            A stable place to stay while a woman works toward safety,
+            independence, and her next chapter.
+          </p>
+        </div>
+
+        <div class="card">
+          <h3>Counseling & Mental Health</h3>
+          <p>
+            Connections to counseling and mental-health support so
+            women do not have to navigate difficult moments alone.
+          </p>
+        </div>
+
+        <div class="card">
+          <h3>Pregnancy & Family Support</h3>
+          <p>
+            Education, guidance, and resources for women who are
+            pregnant, parenting, or trying to create stability for
+            their families.
+          </p>
+        </div>
+
+        <div class="card">
+          <h3>Financial Education</h3>
+          <p>
+            Practical help with budgeting, money management,
+            financial literacy, and preparing for independent living.
+          </p>
+        </div>
+
+        <div class="card">
+          <h3>Employment Support</h3>
+          <p>
+            Résumé building, job-search assistance, interview
+            preparation, and help getting back into the workforce.
+          </p>
+        </div>
+
+        <div class="card">
+          <h3>Substance-Use Resources</h3>
+          <p>
+            Support and connections for women dealing with substance
+            use, recovery, relapse, or the challenges that come with
+            rebuilding their lives.
+          </p>
+        </div>
+
+        <div class="card">
+          <h3>Life Skills</h3>
+          <p>
+            Real-world education designed to help women manage
+            responsibilities, solve problems, and prepare for life
+            beyond the shelter.
+          </p>
+        </div>
+
+        <div class="card">
+          <h3>Resource Navigation</h3>
+          <p>
+            Help finding and connecting with services instead of
+            expecting someone in crisis to figure everything out
+            alone.
+          </p>
+        </div>
+
+        <div class="card">
+          <h3>A Path to Independence</h3>
+          <p>
+            A structured plan that helps each woman move from
+            surviving toward stability, confidence, employment,
+            housing, and independence.
+          </p>
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+  <section class="section pink">
+
+    <div class="container">
+
+      <div class="narrow">
+
+        <div class="eyebrow">How We Want To Be Different</div>
+
+        <h2>Structure With Grace</h2>
+
+        <p>
+          There will be structure.
+          There will be expectations.
+          There will be accountability.
+        </p>
+
+        <p class="lead">
+          But there will also be grace.
+        </p>
+
+        <p>
+          The women who need this kind of help may miss appointments.
+          They may relapse. They may make decisions other people do not
+          understand.
+        </p>
+
+        <p>
+          They may be scared, angry, overwhelmed, depressed,
+          traumatized, or unsure whether they are ready to change
+          their lives.
+        </p>
+
+        <p class="lead">
+          Those may be the moments when they need someone not to give
+          up on them the most.
+        </p>
+
+      </div>
+
+      <div class="promise-grid">
+
+        <div class="promise">
+          <strong>Accountability Without Abandonment</strong>
+          People should be encouraged to keep commitments and make
+          progress, but a setback should not automatically mean losing
+          the support they need.
+        </div>
+
+        <div class="promise">
+          <strong>Realistic Expectations</strong>
+          Programs should recognize that women in crisis may be dealing
+          with trauma, mental-health struggles, pregnancy, substance use,
+          unemployment, poverty, or unstable relationships all at once.
+        </div>
+
+        <div class="promise">
+          <strong>Support That Connects</strong>
+          Housing, counseling, employment help, education, and practical
+          resources should work together instead of feeling like
+          disconnected systems.
+        </div>
+
+        <div class="promise">
+          <strong>Someone Who Keeps Showing Up</strong>
+          Our hope is that women who come to Smilee Kylee will know they
+          have people willing to help them keep trying, even when progress
+          is not perfect.
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+  <section class="section">
+
+    <div class="future-note">
+
+      <h3>Smilee Kylee Is Still Being Built</h3>
+
+      <p>
+        Smilee Kylee is currently a developing vision and is not yet
+        operating an emergency shelter or residential program.
+      </p>
+
+      <p>
+        As the organization grows, this page will be updated with more
+        information about the shelter model, services, partnerships,
+        eligibility, program structure, location planning, and the steps
+        required to make this vision a reality.
+      </p>
+
+      <p>
+        If you are currently in danger or need immediate shelter,
+        please use established emergency and community resources.
+      </p>
+
+    </div>
+
+  </section>
+
+  <section class="closing">
+
+    <div class="closing-inner">
+
+      <div class="eyebrow">For Kylee. For The Next Woman.</div>
+
+      <h2>We Couldn't Build This Place in Time for Kylee.</h2>
+
+      <p>
+        We cannot change what happened to her.
+        We cannot give her back the future she deserved.
+      </p>
+
+      <p>
+        But we can take what we have learned, including the mistakes
+        we wish we could undo, and use it to build something that may
+        change another woman's future.
+      </p>
+
+      <p class="closing-final">
+        So we will build it in her name.
+      </p>
+
+    </div>
+
+  </section>
+
+  <footer>
+    © <span id="year"></span> Smilee Kylee · In Loving Memory of
+    Kylee M. Monteiro
+  </footer>
+
+  <button
+    class="quick-exit"
+    type="button"
+    onclick="quickExit()"
+  >
+    Quick Exit
+  </button>
+
+  <script>
+    document.getElementById("year").textContent =
+      new Date().getFullYear();
+
+    function quickExit() {
+      window.location.replace("https://www.google.com");
+    }
+  </script>
+
+</body>
+</html>
