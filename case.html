@@ -602,16 +602,16 @@ her life ended.
 </div>
 </footer>
 
-<button class="quick-exit" type="button" onclick="quickExit()">
-Quick Exit
+<button class="quick-exit" type="button" onclick="returnToTop()">
+Return to Top
 </button>
 
 <script>
 document.getElementById("year").textContent =
 new Date().getFullYear();
 
-function quickExit(){
-  window.location.replace("https://www.google.com");
+function returnToTop(){
+  window.scrollTo({top:0, behavior:"smooth"});
 }
 
 document.addEventListener("keydown",function(event){
