@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex,nofollow,noarchive">
 <title>Question Inbox | Smilee Kylee</title>
 
 <style>
@@ -91,6 +92,11 @@ button:hover{
   opacity:.9;
 }
 
+button:disabled{
+  opacity:.55;
+  cursor:not-allowed;
+}
+
 .login-button{
   margin-top:16px;
   width:100%;
@@ -102,8 +108,43 @@ button:hover{
   font-weight:700;
 }
 
+.success{
+  margin-top:14px;
+  color:#2f6d44;
+  font-weight:700;
+}
+
 .admin-area{
   display:none;
+}
+
+.access-banner{
+  background:white;
+  border:1px solid var(--lavender);
+  border-radius:16px;
+  padding:16px 18px;
+  margin-bottom:20px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:15px;
+  flex-wrap:wrap;
+}
+
+.access-badge{
+  display:inline-block;
+  background:var(--lavender);
+  color:var(--deep-purple);
+  padding:7px 12px;
+  border-radius:999px;
+  font-size:.85rem;
+  font-weight:800;
+}
+
+.read-only-note{
+  margin:0;
+  color:#6f6471;
+  line-height:1.5;
 }
 
 .toolbar{
@@ -113,6 +154,12 @@ button:hover{
   align-items:center;
   flex-wrap:wrap;
   margin-bottom:25px;
+}
+
+.toolbar-right{
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap;
 }
 
 .folder-tabs{
@@ -130,6 +177,10 @@ button:hover{
 .folder-tabs button.active{
   background:var(--deep-purple);
   color:white;
+}
+
+.manage-codes{
+  background:var(--purple);
 }
 
 .submission-list{
@@ -199,6 +250,119 @@ button:hover{
   border:1px solid var(--lavender);
 }
 
+.code-panel{
+  display:none;
+  background:white;
+  border:2px solid var(--lavender);
+  border-radius:22px;
+  padding:26px;
+  margin-bottom:28px;
+  box-shadow:0 10px 28px rgba(70,45,80,.06);
+}
+
+.code-panel h2{
+  margin:0 0 8px;
+  font-family:Georgia,"Times New Roman",serif;
+  color:var(--deep-purple);
+}
+
+.code-panel p{
+  line-height:1.6;
+}
+
+.code-form{
+  display:grid;
+  grid-template-columns:1fr 1fr auto;
+  gap:12px;
+  align-items:end;
+  margin-top:20px;
+}
+
+.field label{
+  margin-bottom:7px;
+}
+
+.code-help{
+  font-size:.88rem;
+  color:#746b75;
+  margin-top:6px;
+}
+
+.generated-code{
+  display:none;
+  background:#f7f0fa;
+  border:2px solid var(--purple);
+  border-radius:16px;
+  padding:18px;
+  margin-top:20px;
+}
+
+.generated-code strong{
+  color:var(--deep-purple);
+}
+
+.generated-number{
+  display:block;
+  margin-top:10px;
+  font-size:1.6rem;
+  font-weight:900;
+  letter-spacing:3px;
+  color:var(--deep-purple);
+}
+
+.code-list{
+  display:grid;
+  gap:12px;
+  margin-top:24px;
+}
+
+.code-item{
+  border:1px solid var(--border);
+  border-radius:14px;
+  padding:16px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:15px;
+  flex-wrap:wrap;
+}
+
+.code-item-info strong{
+  display:block;
+  color:var(--deep-purple);
+  margin-bottom:5px;
+}
+
+.code-item-info span{
+  color:#746b75;
+  font-size:.9rem;
+}
+
+.small-delete{
+  background:#8c2f42;
+  padding:9px 14px;
+}
+
+.close-panel{
+  background:white;
+  color:var(--deep-purple);
+  border:1px solid var(--lavender);
+}
+
+.panel-heading{
+  display:flex;
+  justify-content:space-between;
+  gap:15px;
+  align-items:flex-start;
+  flex-wrap:wrap;
+}
+
+@media(max-width:760px){
+  .code-form{
+    grid-template-columns:1fr;
+  }
+}
+
 @media(max-width:650px){
   .actions{
     display:grid;
@@ -208,6 +372,14 @@ button:hover{
   .actions button{
     width:100%;
     max-width:none;
+  }
+
+  .toolbar-right{
+    width:100%;
+  }
+
+  .toolbar-right button{
+    width:100%;
   }
 }
 </style>
@@ -241,7 +413,81 @@ button:hover{
 
   <div id="adminArea" class="admin-area">
 
+    <div class="access-banner">
+      <div>
+        <span id="accessBadge" class="access-badge"></span>
+      </div>
+
+      <p id="accessMessage" class="read-only-note"></p>
+    </div>
+
+    <div id="codePanel" class="code-panel">
+
+      <div class="panel-heading">
+        <div>
+          <h2>View-Only Passcodes</h2>
+          <p>
+            Create passcodes for people you want to allow to read submitted
+            questions. Viewer passcodes cannot move or delete submissions.
+          </p>
+        </div>
+
+        <button class="close-panel" onclick="closeCodePanel()">
+          Close
+        </button>
+      </div>
+
+      <div class="code-form">
+
+        <div class="field">
+          <label for="viewerLabel">Name or Label</label>
+          <input
+            id="viewerLabel"
+            type="text"
+            maxlength="100"
+            placeholder="Example: Aunt Mary"
+          >
+        </div>
+
+        <div class="field">
+          <label for="viewerPasscode">Passcode</label>
+          <input
+            id="viewerPasscode"
+            type="text"
+            inputmode="numeric"
+            maxlength="12"
+            placeholder="Leave blank to create one"
+          >
+          <div class="code-help">
+            Use 6–12 numbers, or leave this blank and the site will create an
+            8-digit code.
+          </div>
+        </div>
+
+        <button onclick="createViewerCode()">
+          Create Passcode
+        </button>
+
+      </div>
+
+      <div id="codeError" class="error"></div>
+      <div id="codeSuccess" class="success"></div>
+
+      <div id="generatedCode" class="generated-code">
+        <strong>New view-only passcode:</strong>
+        <span id="generatedNumber" class="generated-number"></span>
+        <p>
+          Copy this number now and give it only to the person you want to have
+          view-only access.
+        </p>
+      </div>
+
+      <div id="codeList" class="code-list"></div>
+
+    </div>
+
     <div class="toolbar">
+
       <div class="folder-tabs">
         <button data-folder="inbox" class="active">Inbox</button>
         <button data-folder="next">Next in Line</button>
@@ -250,7 +496,23 @@ button:hover{
         <button data-folder="backburner">Back Burner</button>
       </div>
 
-      <button class="logout" onclick="logout()">Log Out</button>
+      <div class="toolbar-right">
+
+        <button
+          id="manageCodesButton"
+          class="manage-codes"
+          onclick="openCodePanel()"
+          style="display:none;"
+        >
+          Manage Viewer Passcodes
+        </button>
+
+        <button class="logout" onclick="logout()">
+          Log Out
+        </button>
+
+      </div>
+
     </div>
 
     <div id="submissionList" class="submission-list"></div>
@@ -262,6 +524,8 @@ button:hover{
 <script>
 let adminPasscode = "";
 let currentFolder = "inbox";
+let currentRole = "";
+let currentLabel = "";
 
 const folderNames = {
   inbox: "Inbox",
@@ -270,6 +534,7 @@ const folderNames = {
   future: "Address in the Future",
   backburner: "Back Burner"
 };
+
 
 async function login(){
   const input = document.getElementById("passcode");
@@ -304,11 +569,15 @@ async function login(){
     }
 
     adminPasscode = passcode;
+    currentRole = data.role || "viewer";
+    currentLabel = data.label || "";
 
     document.getElementById("loginBox").style.display = "none";
     document.getElementById("adminArea").style.display = "block";
 
     input.value = "";
+
+    setupAccessDisplay();
 
     await loadSubmissions();
 
@@ -318,10 +587,37 @@ async function login(){
   }
 }
 
+
+function setupAccessDisplay(){
+  const badge = document.getElementById("accessBadge");
+  const message = document.getElementById("accessMessage");
+  const manageButton = document.getElementById("manageCodesButton");
+
+  if(currentRole === "owner"){
+    badge.textContent = "Owner Access";
+
+    message.textContent =
+      "You can view, move, delete, and organize submissions.";
+
+    manageButton.style.display = "inline-block";
+  }else{
+    badge.textContent = currentLabel
+      ? "View Only — " + currentLabel
+      : "View-Only Access";
+
+    message.textContent =
+      "You can read submitted questions, but you cannot move, edit, or delete them.";
+
+    manageButton.style.display = "none";
+  }
+}
+
+
 async function loadSubmissions(){
   const list = document.getElementById("submissionList");
 
-  list.innerHTML = "<div class='empty'>Loading...</div>";
+  list.innerHTML =
+    "<div class='empty'>Loading...</div>";
 
   try{
     const response = await fetch(
@@ -366,6 +662,7 @@ async function loadSubmissions(){
       "<div class='empty'>Unable to connect to the inbox.</div>";
   }
 }
+
 
 function createCard(submission){
   const card = document.createElement("div");
@@ -424,59 +721,67 @@ function createCard(submission){
     card.appendChild(commentary);
   }
 
-  const actions = document.createElement("div");
-  actions.className = "actions";
+  if(currentRole === "owner"){
+    const actions = document.createElement("div");
+    actions.className = "actions";
 
-  const select = document.createElement("select");
+    const select = document.createElement("select");
 
-  Object.entries(folderNames).forEach(([value,label])=>{
-    const option = document.createElement("option");
-    option.value = value;
-    option.textContent = label;
+    Object.entries(folderNames).forEach(([value,label])=>{
+      const option = document.createElement("option");
 
-    if(value === currentFolder){
-      option.selected = true;
-    }
+      option.value = value;
+      option.textContent = label;
 
-    select.appendChild(option);
-  });
+      if(value === currentFolder){
+        option.selected = true;
+      }
 
-  const moveButton = document.createElement("button");
-  moveButton.textContent = "Move";
+      select.appendChild(option);
+    });
 
-  moveButton.onclick = async ()=>{
-    await moveSubmission(
-      submission.id,
-      select.value
-    );
-  };
+    const moveButton = document.createElement("button");
+    moveButton.textContent = "Move";
 
-  const deleteButton = document.createElement("button");
-  deleteButton.textContent = "Delete";
-  deleteButton.className = "delete-button";
+    moveButton.onclick = async ()=>{
+      await moveSubmission(
+        submission.id,
+        select.value
+      );
+    };
 
-  deleteButton.onclick = async ()=>{
-    const confirmed = confirm(
-      "Delete this submission permanently?"
-    );
+    const deleteButton = document.createElement("button");
+    deleteButton.textContent = "Delete";
+    deleteButton.className = "delete-button";
 
-    if(!confirmed){
-      return;
-    }
+    deleteButton.onclick = async ()=>{
+      const confirmed = confirm(
+        "Delete this submission permanently?"
+      );
 
-    await deleteSubmission(submission.id);
-  };
+      if(!confirmed){
+        return;
+      }
 
-  actions.appendChild(select);
-  actions.appendChild(moveButton);
-  actions.appendChild(deleteButton);
+      await deleteSubmission(submission.id);
+    };
 
-  card.appendChild(actions);
+    actions.appendChild(select);
+    actions.appendChild(moveButton);
+    actions.appendChild(deleteButton);
+
+    card.appendChild(actions);
+  }
 
   return card;
 }
 
+
 async function moveSubmission(id,folder){
+  if(currentRole !== "owner"){
+    return;
+  }
+
   try{
     const response = await fetch(
       "/api/admin/submissions/" + id + "/move",
@@ -492,10 +797,15 @@ async function moveSubmission(id,folder){
       }
     );
 
+    const data = await response.json();
+
     if(response.ok){
       await loadSubmissions();
     }else{
-      alert("Unable to move this submission.");
+      alert(
+        data.error ||
+        "Unable to move this submission."
+      );
     }
 
   }catch(error){
@@ -503,7 +813,12 @@ async function moveSubmission(id,folder){
   }
 }
 
+
 async function deleteSubmission(id){
+  if(currentRole !== "owner"){
+    return;
+  }
+
   try{
     const response = await fetch(
       "/api/admin/submissions/" + id,
@@ -515,10 +830,15 @@ async function deleteSubmission(id){
       }
     );
 
+    const data = await response.json();
+
     if(response.ok){
       await loadSubmissions();
     }else{
-      alert("Unable to delete this submission.");
+      alert(
+        data.error ||
+        "Unable to delete this submission."
+      );
     }
 
   }catch(error){
@@ -526,13 +846,297 @@ async function deleteSubmission(id){
   }
 }
 
+
+async function openCodePanel(){
+  if(currentRole !== "owner"){
+    return;
+  }
+
+  document.getElementById("codePanel").style.display = "block";
+
+  document.getElementById("generatedCode").style.display = "none";
+  document.getElementById("codeError").textContent = "";
+  document.getElementById("codeSuccess").textContent = "";
+
+  await loadAccessCodes();
+
+  document.getElementById("codePanel").scrollIntoView({
+    behavior:"smooth",
+    block:"start"
+  });
+}
+
+
+function closeCodePanel(){
+  document.getElementById("codePanel").style.display = "none";
+}
+
+
+async function createViewerCode(){
+  if(currentRole !== "owner"){
+    return;
+  }
+
+  const labelInput =
+    document.getElementById("viewerLabel");
+
+  const passcodeInput =
+    document.getElementById("viewerPasscode");
+
+  const errorBox =
+    document.getElementById("codeError");
+
+  const successBox =
+    document.getElementById("codeSuccess");
+
+  const generatedBox =
+    document.getElementById("generatedCode");
+
+  const generatedNumber =
+    document.getElementById("generatedNumber");
+
+  errorBox.textContent = "";
+  successBox.textContent = "";
+  generatedBox.style.display = "none";
+
+  const label = labelInput.value.trim();
+  const passcode = passcodeInput.value.trim();
+
+  if(passcode && !/^\d{6,12}$/.test(passcode)){
+    errorBox.textContent =
+      "Passcodes must contain 6 to 12 numbers.";
+    return;
+  }
+
+  try{
+    const response = await fetch(
+      "/api/admin/access-codes",
+      {
+        method:"POST",
+        headers:{
+          "Content-Type":"application/json",
+          "X-Admin-Passcode":adminPasscode
+        },
+        body:JSON.stringify({
+          label:label,
+          passcode:passcode
+        })
+      }
+    );
+
+    const data = await response.json();
+
+    if(!response.ok){
+      errorBox.textContent =
+        data.error ||
+        "Unable to create the passcode.";
+      return;
+    }
+
+    generatedNumber.textContent = data.passcode;
+    generatedBox.style.display = "block";
+
+    successBox.textContent =
+      "View-only access created successfully.";
+
+    labelInput.value = "";
+    passcodeInput.value = "";
+
+    await loadAccessCodes();
+
+  }catch(error){
+    errorBox.textContent =
+      "Unable to create the passcode.";
+  }
+}
+
+
+async function loadAccessCodes(){
+  if(currentRole !== "owner"){
+    return;
+  }
+
+  const list =
+    document.getElementById("codeList");
+
+  list.innerHTML =
+    "<div class='empty'>Loading passcodes...</div>";
+
+  try{
+    const response = await fetch(
+      "/api/admin/access-codes",
+      {
+        headers:{
+          "X-Admin-Passcode":adminPasscode
+        }
+      }
+    );
+
+    const data = await response.json();
+
+    if(!response.ok){
+      list.innerHTML =
+        "<div class='empty'>Unable to load passcodes.</div>";
+      return;
+    }
+
+    const codes =
+      (data.accessCodes || []).filter(
+        code => code.role === "viewer"
+      );
+
+    if(codes.length === 0){
+      list.innerHTML =
+        "<div class='empty'>No viewer passcodes have been created yet.</div>";
+      return;
+    }
+
+    list.innerHTML = "";
+
+    codes.forEach(code=>{
+      list.appendChild(
+        createAccessCodeItem(code)
+      );
+    });
+
+  }catch(error){
+    list.innerHTML =
+      "<div class='empty'>Unable to load passcodes.</div>";
+  }
+}
+
+
+function createAccessCodeItem(code){
+  const item =
+    document.createElement("div");
+
+  item.className = "code-item";
+
+  const info =
+    document.createElement("div");
+
+  info.className = "code-item-info";
+
+  const label =
+    document.createElement("strong");
+
+  label.textContent =
+    code.label || "Viewer";
+
+  const created =
+    document.createElement("span");
+
+  let dateText = "";
+
+  if(code.created_at){
+    dateText = new Date(
+      code.created_at.replace(" ","T") + "Z"
+    ).toLocaleString();
+  }
+
+  created.textContent =
+    dateText
+      ? "View-only access • Created " + dateText
+      : "View-only access";
+
+  info.appendChild(label);
+  info.appendChild(created);
+
+  const deleteButton =
+    document.createElement("button");
+
+  deleteButton.className =
+    "small-delete";
+
+  deleteButton.textContent =
+    "Remove Access";
+
+  deleteButton.onclick = async ()=>{
+    const confirmed = confirm(
+      "Remove view-only access for " +
+      (code.label || "this viewer") +
+      "?"
+    );
+
+    if(!confirmed){
+      return;
+    }
+
+    await deleteViewerCode(code.id);
+  };
+
+  item.appendChild(info);
+  item.appendChild(deleteButton);
+
+  return item;
+}
+
+
+async function deleteViewerCode(id){
+  if(currentRole !== "owner"){
+    return;
+  }
+
+  try{
+    const response = await fetch(
+      "/api/admin/access-codes/" + id,
+      {
+        method:"DELETE",
+        headers:{
+          "X-Admin-Passcode":adminPasscode
+        }
+      }
+    );
+
+    const data = await response.json();
+
+    if(response.ok){
+      document.getElementById("codeSuccess").textContent =
+        "View-only access removed.";
+
+      document.getElementById("generatedCode").style.display =
+        "none";
+
+      await loadAccessCodes();
+    }else{
+      document.getElementById("codeError").textContent =
+        data.error ||
+        "Unable to remove access.";
+    }
+
+  }catch(error){
+    document.getElementById("codeError").textContent =
+      "Unable to remove access.";
+  }
+}
+
+
 function logout(){
   adminPasscode = "";
+  currentRole = "";
+  currentLabel = "";
+  currentFolder = "inbox";
 
   document.getElementById("adminArea").style.display = "none";
   document.getElementById("loginBox").style.display = "block";
   document.getElementById("submissionList").innerHTML = "";
+  document.getElementById("codePanel").style.display = "none";
+  document.getElementById("manageCodesButton").style.display = "none";
+
+  document.getElementById("passcode").value = "";
+  document.getElementById("loginError").textContent = "";
+
+  document
+    .querySelectorAll(".folder-tabs button")
+    .forEach(button=>{
+      button.classList.remove("active");
+
+      if(button.getAttribute("data-folder") === "inbox"){
+        button.classList.add("active");
+      }
+    });
 }
+
 
 document.querySelectorAll(".folder-tabs button")
   .forEach(button=>{
@@ -552,11 +1156,19 @@ document.querySelectorAll(".folder-tabs button")
     });
   });
 
+
 document.getElementById("passcode")
   .addEventListener("keydown",event=>{
     if(event.key === "Enter"){
       login();
     }
+  });
+
+
+document.getElementById("viewerPasscode")
+  .addEventListener("input",event=>{
+    event.target.value =
+      event.target.value.replace(/\D/g,"");
   });
 </script>
 
