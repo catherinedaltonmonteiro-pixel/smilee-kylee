@@ -534,6 +534,9 @@ button:disabled{
       <button id="memoriesTab" type="button">
         Pending Memories
       </button>
+      <button id="approvedMemoriesTab" type="button">
+        Posted Memories
+      </button>
     </div>
 
     <div id="memoryNote" class="memory-note" style="display:none;">
@@ -665,21 +668,36 @@ function setupAccessDisplay(){
 
 
 function setInboxView(view){
-  currentView = view === "memories" ? "memories" : "questions";
+  if(view === "memories" || view === "approvedMemories"){
+    currentView = view;
+  }else{
+    currentView = "questions";
+  }
 
   const questionsTab = document.getElementById("questionsTab");
   const memoriesTab = document.getElementById("memoriesTab");
+  const approvedMemoriesTab = document.getElementById("approvedMemoriesTab");
   const folderTabs = document.getElementById("folderTabs");
   const memoryNote = document.getElementById("memoryNote");
 
   questionsTab.classList.toggle("active", currentView === "questions");
   memoriesTab.classList.toggle("active", currentView === "memories");
+  approvedMemoriesTab.classList.toggle("active", currentView === "approvedMemories");
 
   folderTabs.style.display =
     currentView === "questions" ? "flex" : "none";
 
-  memoryNote.style.display =
-    currentView === "memories" ? "block" : "none";
+  if(currentView === "memories"){
+    memoryNote.style.display = "block";
+    memoryNote.textContent =
+      "Approved memories are published to the public Memories page. Denied memories are permanently deleted.";
+  }else if(currentView === "approvedMemories"){
+    memoryNote.style.display = "block";
+    memoryNote.textContent =
+      "These memories are currently posted on the public Memories page. Owner access can permanently delete a posted memory.";
+  }else{
+    memoryNote.style.display = "none";
+  }
 
   loadCurrentView();
 }
@@ -687,14 +705,16 @@ function setInboxView(view){
 
 async function loadCurrentView(){
   if(currentView === "memories"){
-    await loadMemories();
+    await loadMemories("pending");
+  }else if(currentView === "approvedMemories"){
+    await loadMemories("approved");
   }else{
     await loadSubmissions();
   }
 }
 
 
-async function loadMemories(){
+async function loadMemories(status = "pending"){
   const list = document.getElementById("submissionList");
 
   list.innerHTML =
@@ -702,7 +722,7 @@ async function loadMemories(){
 
   try{
     const response = await fetch(
-      "/api/admin/memories",
+      "/api/admin/memories?status=" + encodeURIComponent(status),
       {
         headers:{
           "X-Admin-Passcode":adminPasscode
@@ -727,7 +747,9 @@ async function loadMemories(){
 
     if(memories.length === 0){
       list.innerHTML =
-        "<div class='empty'>No memories are waiting for approval.</div>";
+        status === "approved"
+          ? "<div class='empty'>No approved memories are currently posted.</div>"
+          : "<div class='empty'>No memories are waiting for approval.</div>";
       return;
     }
 
@@ -786,40 +808,60 @@ function createMemoryCard(memory){
     const actions = document.createElement("div");
     actions.className = "actions";
 
-    const approveButton = document.createElement("button");
-    approveButton.className = "approve-button";
-    approveButton.textContent = "Approve";
+    if(currentView === "approvedMemories"){
+      const deleteButton = document.createElement("button");
+      deleteButton.className = "deny-button";
+      deleteButton.textContent = "Delete Posted Memory";
 
-    approveButton.onclick = async ()=>{
-      const confirmed = confirm(
-        "Approve this memory and publish it on the public Memories page?"
-      );
+      deleteButton.onclick = async ()=>{
+        const confirmed = confirm(
+          "Permanently delete this memory and remove it from the public Memories page? This cannot be undone."
+        );
 
-      if(!confirmed){
-        return;
-      }
+        if(!confirmed){
+          return;
+        }
 
-      await approveMemory(memory.id);
-    };
+        await deleteApprovedMemory(memory.id);
+      };
 
-    const denyButton = document.createElement("button");
-    denyButton.className = "deny-button";
-    denyButton.textContent = "Deny";
+      actions.appendChild(deleteButton);
+    }else{
+      const approveButton = document.createElement("button");
+      approveButton.className = "approve-button";
+      approveButton.textContent = "Approve";
 
-    denyButton.onclick = async ()=>{
-      const confirmed = confirm(
-        "Deny and permanently delete this memory?"
-      );
+      approveButton.onclick = async ()=>{
+        const confirmed = confirm(
+          "Approve this memory and publish it on the public Memories page?"
+        );
 
-      if(!confirmed){
-        return;
-      }
+        if(!confirmed){
+          return;
+        }
 
-      await denyMemory(memory.id);
-    };
+        await approveMemory(memory.id);
+      };
 
-    actions.appendChild(approveButton);
-    actions.appendChild(denyButton);
+      const denyButton = document.createElement("button");
+      denyButton.className = "deny-button";
+      denyButton.textContent = "Deny";
+
+      denyButton.onclick = async ()=>{
+        const confirmed = confirm(
+          "Deny and permanently delete this memory?"
+        );
+
+        if(!confirmed){
+          return;
+        }
+
+        await denyMemory(memory.id);
+      };
+
+      actions.appendChild(approveButton);
+      actions.appendChild(denyButton);
+    }
 
     card.appendChild(actions);
   }
@@ -890,6 +932,39 @@ async function denyMemory(id){
 
   }catch(error){
     alert("Unable to deny this memory.");
+  }
+}
+
+
+async function deleteApprovedMemory(id){
+  if(currentRole !== "owner"){
+    return;
+  }
+
+  try{
+    const response = await fetch(
+      "/api/admin/memories/" + id + "/delete",
+      {
+        method:"DELETE",
+        headers:{
+          "X-Admin-Passcode":adminPasscode
+        }
+      }
+    );
+
+    const data = await response.json();
+
+    if(response.ok){
+      await loadMemories("approved");
+    }else{
+      alert(
+        data.error ||
+        "Unable to delete this posted memory."
+      );
+    }
+
+  }catch(error){
+    alert("Unable to delete this posted memory.");
   }
 }
 
@@ -1405,6 +1480,7 @@ function logout(){
   document.getElementById("manageCodesButton").style.display = "none";
   document.getElementById("questionsTab").classList.add("active");
   document.getElementById("memoriesTab").classList.remove("active");
+  document.getElementById("approvedMemoriesTab").classList.remove("active");
   document.getElementById("folderTabs").style.display = "flex";
   document.getElementById("memoryNote").style.display = "none";
 
@@ -1432,6 +1508,11 @@ document.getElementById("questionsTab")
 document.getElementById("memoriesTab")
   .addEventListener("click",()=>{
     setInboxView("memories");
+  });
+
+document.getElementById("approvedMemoriesTab")
+  .addEventListener("click",()=>{
+    setInboxView("approvedMemories");
   });
 
 
