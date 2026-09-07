@@ -436,6 +436,10 @@ button:disabled{
   color:#5e5361;
 }
 
+
+.shelter-panel{display:none;}
+.shelter-panel.active{display:block;}
+
 </style>
 </head>
 
@@ -1570,6 +1574,211 @@ document.getElementById("viewerPasscode")
     event.target.value =
       event.target.value.replace(/\D/g,"");
   });
+</script>
+
+
+<section id="shelterExperiencesAdmin" class="shelter-panel">
+  <h2>Shelter Experiences</h2>
+  <p>Review firsthand shelter experience submissions here.</p>
+
+  <div style="display:flex;gap:12px;flex-wrap:wrap;margin:20px 0;">
+    <button type="button" id="loadPendingShelter">Pending</button>
+    <button type="button" id="loadApprovedShelter">Approved</button>
+  </div>
+
+  <div id="shelterExperiencesList">
+    <p>Select Pending or Approved.</p>
+  </div>
+</section>
+
+
+<script>
+(function () {
+  const panel = document.getElementById("shelterExperiencesAdmin");
+  const tabButton = document.getElementById("shelterTabButton");
+  const pendingButton = document.getElementById("loadPendingShelter");
+  const approvedButton = document.getElementById("loadApprovedShelter");
+  const list = document.getElementById("shelterExperiencesList");
+
+  function getPasscode() {
+    const possibleKeys = ["adminPasscode", "passcode", "ownerPasscode", "smileeKyleePasscode"];
+    for (const key of possibleKeys) {
+      const value = sessionStorage.getItem(key) || localStorage.getItem(key);
+      if (value) return value;
+    }
+
+    const input =
+      document.querySelector('input[type="password"]') ||
+      document.querySelector('input[name="passcode"]') ||
+      document.getElementById("passcode");
+
+    return input && input.value ? input.value.trim() : "";
+  }
+
+  function showShelterPanel() {
+    if (!panel) return;
+
+    document.querySelectorAll("main section, .admin-section, .panel, .tab-content").forEach((el) => {
+      if (el !== panel && el.id !== "loginSection") {
+        el.classList.remove("active");
+      }
+    });
+
+    panel.style.display = "block";
+    panel.classList.add("active");
+    panel.scrollIntoView({ behavior: "smooth", block: "start" });
+  }
+
+  if (tabButton) {
+    tabButton.addEventListener("click", function (event) {
+      event.preventDefault();
+      showShelterPanel();
+      loadShelter("pending");
+    });
+  }
+
+  async function loadShelter(status) {
+    if (!list) return;
+
+    const passcode = getPasscode();
+
+    if (!passcode) {
+      list.innerHTML = "<p>Please log in first.</p>";
+      return;
+    }
+
+    list.innerHTML = "<p>Loading...</p>";
+
+    try {
+      const response = await fetch("/api/admin/shelter-experiences?status=" + encodeURIComponent(status), {
+        headers: {
+          "X-Admin-Passcode": passcode
+        }
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.error || "Unable to load submissions.");
+      }
+
+      const items = data.memories || [];
+
+      if (!items.length) {
+        list.innerHTML = "<p>No " + status + " shelter experiences.</p>";
+        return;
+      }
+
+      list.innerHTML = "";
+
+      items.forEach((item) => {
+        const card = document.createElement("div");
+        card.style.border = "1px solid #ddd";
+        card.style.borderRadius = "16px";
+        card.style.padding = "20px";
+        card.style.margin = "0 0 18px";
+        card.style.background = "#fff";
+
+        const safeName = item.name || "Anonymous";
+        const safeText = item.memory || "";
+
+        const title = document.createElement("h3");
+        title.textContent = safeName;
+        card.appendChild(title);
+
+        const text = document.createElement("p");
+        text.style.whiteSpace = "pre-wrap";
+        text.textContent = safeText;
+        card.appendChild(text);
+
+        if (item.image_data) {
+          const img = document.createElement("img");
+          img.src = item.image_data;
+          img.alt = "Submitted with shelter experience";
+          img.style.maxWidth = "320px";
+          img.style.width = "100%";
+          img.style.height = "auto";
+          img.style.display = "block";
+          img.style.borderRadius = "14px";
+          img.style.margin = "15px 0";
+          card.appendChild(img);
+        }
+
+        const buttons = document.createElement("div");
+        buttons.style.display = "flex";
+        buttons.style.gap = "10px";
+        buttons.style.flexWrap = "wrap";
+        buttons.style.marginTop = "15px";
+
+        if (status === "pending") {
+          const approve = document.createElement("button");
+          approve.type = "button";
+          approve.textContent = "Approve";
+          approve.addEventListener("click", async () => {
+            await shelterAction(item.id, "approve", "POST");
+            loadShelter("pending");
+          });
+          buttons.appendChild(approve);
+
+          const deny = document.createElement("button");
+          deny.type = "button";
+          deny.textContent = "Deny";
+          deny.addEventListener("click", async () => {
+            await shelterAction(item.id, "deny", "DELETE");
+            loadShelter("pending");
+          });
+          buttons.appendChild(deny);
+        } else {
+          const del = document.createElement("button");
+          del.type = "button";
+          del.textContent = "Delete";
+          del.addEventListener("click", async () => {
+            await shelterAction(item.id, "delete", "DELETE");
+            loadShelter("approved");
+          });
+          buttons.appendChild(del);
+        }
+
+        card.appendChild(buttons);
+        list.appendChild(card);
+      });
+    } catch (error) {
+      list.innerHTML = "<p>" + error.message + "</p>";
+    }
+  }
+
+  async function shelterAction(id, action, method) {
+    const passcode = getPasscode();
+
+    const response = await fetch(
+      "/api/admin/shelter-experiences/" + id + "/" + action,
+      {
+        method,
+        headers: {
+          "X-Admin-Passcode": passcode
+        }
+      }
+    );
+
+    const data = await response.json();
+
+    if (!response.ok) {
+      alert(data.error || "Unable to complete that action.");
+    }
+  }
+
+  if (pendingButton) {
+    pendingButton.addEventListener("click", function () {
+      loadShelter("pending");
+    });
+  }
+
+  if (approvedButton) {
+    approvedButton.addEventListener("click", function () {
+      loadShelter("approved");
+    });
+  }
+})();
 </script>
 
 </body>
