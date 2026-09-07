@@ -767,7 +767,11 @@
     const memoryBoard = document.getElementById("memoryBoard");
 
     shareButton.addEventListener("click", function(){
-      shareBox.classList.toggle("open");
+      const isOpen = shareBox.classList.toggle("open");
+      shareButton.textContent = isOpen ? "Close Share Form" : "Share Your Experience";
+      if(isOpen){
+        shareBox.scrollIntoView({ behavior: "smooth", block: "center" });
+      }
     });
 
     const textMemoryShapes = [
@@ -1002,7 +1006,11 @@
 
     memoryForm.addEventListener("submit", async function(event){
       event.preventDefault();
+
+      const submitButton = memoryForm.querySelector('button[type="submit"]');
       formMessage.textContent = "Sending...";
+      submitButton.disabled = true;
+      submitButton.textContent = "Sending...";
 
       const name = document.getElementById("memoryName").value.trim();
       const memory = document.getElementById("memoryText").value.trim();
@@ -1017,18 +1025,35 @@
           body: JSON.stringify({ name, experience: memory, imageData })
         });
 
-        const data = await response.json();
+        let data = {};
+        try{
+          data = await response.json();
+        }catch(parseError){
+          throw new Error("The website could not complete the submission. Please try again.");
+        }
 
         if(!response.ok){
           throw new Error(data.error || "Unable to submit your experience.");
         }
 
         memoryForm.reset();
-        formMessage.textContent =
-          "Thank you. Your experience has been sent for approval.";
+        formMessage.textContent = "Thank you. Your experience has been sent for approval.";
+
+        await loadMemories();
+
+        setTimeout(function(){
+          shareBox.classList.remove("open");
+          shareButton.textContent = "Share Your Experience";
+          formMessage.textContent = "";
+          shareButton.scrollIntoView({ behavior: "smooth", block: "center" });
+        }, 1200);
+
       }catch(error){
         formMessage.textContent =
           error.message || "Unable to submit your experience. Please try again.";
+      }finally{
+        submitButton.disabled = false;
+        submitButton.textContent = "Send Experience for Approval";
       }
     });
 
