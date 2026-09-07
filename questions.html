@@ -562,13 +562,76 @@ footer{
   box-shadow:0 8px 25px rgba(0,0,0,.22);
 }
 
+
+.expandable-question-groups{
+  max-width:1000px;
+  margin:0 auto;
+  padding:70px 24px;
+}
+.question-group{
+  margin:0 0 28px;
+}
+.question-group summary{
+  list-style:none;
+  cursor:pointer;
+  background:var(--deep-purple);
+  color:white;
+  text-align:center;
+  font-family:Georgia,"Times New Roman",serif;
+  font-size:clamp(1.7rem,4vw,2.6rem);
+  font-weight:700;
+  padding:38px 28px;
+  border-radius:24px;
+  box-shadow:0 12px 30px rgba(70,45,80,.16);
+  transition:transform .2s ease, box-shadow .2s ease;
+}
+.question-group summary::-webkit-details-marker{display:none}
+.question-group summary:hover{
+  transform:translateY(-2px);
+  box-shadow:0 16px 34px rgba(70,45,80,.22);
+}
+.question-group summary::after{
+  content:" +";
+  font-family:Arial,Helvetica,sans-serif;
+  font-weight:400;
+}
+.question-group[open] summary::after{content:" −"}
+.question-group-content{
+  padding:45px 0 15px;
+}
+
 </style>
 </head>
 <body>
+<div class="emergency-bar">
+If you are in immediate danger, call 911.
+</div>
 
-  <div id="site-shared-top"></div>
+<div class="funding-notice">
+<strong>Funding Notice:</strong>
+Donations, merchandise proceeds after costs and fees, and other financial support go toward building Smilee Kylee and its future programs, resources, and supportive housing for women in need.
+</div>
 
+<nav>
+<div class="nav-inner">
 
+<a class="brand" href="index.html">Smilee Kylee</a>
+
+<div class="nav-links">
+<a href="index.html">Home</a>
+<a href="kylee.html">Meet Kylee</a>
+<a href="mission.html">Vision & Mission</a>
+<a href="shop.html">Shop</a>
+<a href="donate.html">Donate</a>
+<a href="case.html">The Case</a>
+<a href="story.html">What We Know</a>
+<a class="active" href="questions.html">Public Questions</a>
+<a href="memories.html">Memories</a>
+<a href="help.html">Get Help</a>
+</div>
+
+</div>
+</nav>
 
 <header class="hero">
   <div class="hero-inner">
@@ -578,8 +641,14 @@ footer{
   </div>
 </header>
 
+
 <section class="section lavender">
-  <div class="container">
+  <div class="expandable-question-groups">
+
+    <details class="question-group">
+      <summary>Questions We Can't Answer</summary>
+      <div class="question-group-content">
+
     <div class="section-intro">
       <div class="eyebrow">Questions We Have Too</div>
       <h2>Questions We Cannot Answer</h2>
@@ -603,11 +672,14 @@ footer{
 <div class="question-card"><div class="question-number">15</div><div class="question-text">What evidence will prosecutors present to a jury to prove their allegations against Gregory—and will Kylee's family have the opportunity to see the entire case heard in court?</div></div>
     </div>
     <div class="answer-note"><strong>These questions are not accusations or findings of guilt.</strong> Where a question refers to allegations made by prosecutors, those allegations remain subject to the criminal court process.</div>
-  </div>
-</section>
+  
+      </div>
+    </details>
 
-<section class="section">
-  <div class="container">
+    <details class="question-group">
+      <summary>Questions We Can Answer</summary>
+      <div class="question-group-content">
+
     <div class="section-intro">
       <div class="eyebrow">Our Family's Perspective</div>
       <h2>Questions We Can Answer</h2>
@@ -635,6 +707,10 @@ footer{
 <div class="question-card"><div class="question-number">19</div><div class="question-text">What efforts did Kylee's family personally make to find her before they learned she had died?</div></div>
 <div class="question-card"><div class="question-number">20</div><div class="question-text">Looking back now, were there things Kylee said or did in the days or weeks before her disappearance that the family understands differently today?</div></div>
     </div>
+  
+      </div>
+    </details>
+
   </div>
 </section>
 
@@ -671,8 +747,56 @@ footer{
   </div>
 </section>
 
-<div id="site-shared-footer"></div>
+<footer>
+<div class="footer-inner">
 
+<div class="footer-grid">
+
+<div class="footer-brand">
+<h2>Smilee Kylee</h2>
+<p>Created in loving memory of Kylee M. Monteiro.</p>
+<p>Her memory becomes someone else's hope.</p>
+</div>
+
+<div class="footer-column">
+<h3>Explore</h3>
+<div class="footer-links">
+<a href="index.html">Home</a>
+<a href="kylee.html">Meet Kylee</a>
+<a href="mission.html">Vision &amp; Mission</a>
+<a href="case.html">The Case</a>
+<a href="story.html">What We Know</a>
+<a href="questions.html">Public Questions</a>
+<a href="memories.html">Memories</a>
+<a href="help.html">Get Help</a>
+</div>
+</div>
+
+<div class="footer-column">
+<h3>Support Smilee Kylee</h3>
+<div class="footer-links">
+<a href="shop.html">Shop Smilee Kylee</a>
+<a href="donate.html">Donate</a>
+<a href="https://www.paypal.com/ncp/payment/BKQGJZW65HJS4" target="_blank" rel="noopener noreferrer">PayPal</a>
+<a href="https://cash.app/$justice4Kylee" target="_blank" rel="noopener noreferrer">Cash App</a>
+<a href="https://venmo.com/u/smileekylee" target="_blank" rel="noopener noreferrer">Venmo</a>
+<a href="https://smilee-kylee-shop.fourthwall.com/" target="_blank" rel="noopener noreferrer">Fourthwall Shop</a>
+</div>
+</div>
+
+</div>
+
+<div class="footer-divider"></div>
+
+<div class="footer-bottom">
+<p>May her memory become safety, healing, opportunity and hope.</p>
+<p class="copyright">
+© <span id="year"></span> Smilee Kylee. All rights reserved.
+</p>
+</div>
+
+</div>
+</footer>
 
 <button id="openQuestionForm" class="floating-question-button" type="button">
 Submit a Question
@@ -793,9 +917,6 @@ if(publicQuestionForm){
 
 
 </script>
-
-
-<script src="site-shared.js"></script>
 
 </body>
 </html>
