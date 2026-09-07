@@ -27,6 +27,7 @@ This one file controls:
     ["story.html", "What We Know"],
     ["questions.html", "Public Questions"],
     ["memories.html", "Memories"],
+    ["shelter-experiences.html", "Shelter Experiences"],
     ["help.html", "Get Help"]
   ];
 
@@ -121,6 +122,7 @@ This one file controls:
             <a href="story.html">What We Know</a>
             <a href="questions.html">Public Questions</a>
             <a href="memories.html">Memories</a>
+            <a href="shelter-experiences.html">Shelter Experiences</a>
             <a href="help.html">Get Help</a>
           </div>
 
