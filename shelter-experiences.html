@@ -1,1042 +1,1785 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Shelter Experiences | Smilee Kylee</title>
-
-  <style>
-    :root{
-      --lavender:#d8c5e8;
-      --purple:#7d5a91;
-      --deep-purple:#553765;
-      --pink:#efd2df;
-      --cream:#fffaf5;
-      --white:#ffffff;
-      --charcoal:#342f35;
-    }
-
-    *{box-sizing:border-box}
-    html{scroll-behavior:smooth}
-
-    body{
-      margin:0;
-      font-family:Arial,Helvetica,sans-serif;
-      background:var(--cream);
-      color:var(--charcoal);
-      line-height:1.7;
-    }
-
-    .emergency-bar{
-      background:var(--deep-purple);
-      color:white;
-      text-align:center;
-      padding:8px 20px;
-      font-size:.9rem;
-    }
-
-    .funding-notice{
-      background:#f3ebf7;
-      color:var(--deep-purple);
-      text-align:center;
-      padding:10px 22px;
-      font-size:.85rem;
-      border-bottom:1px solid var(--lavender);
-    }
-
-    nav{
-      background:rgba(255,255,255,.97);
-      border-bottom:1px solid #eadfea;
-      position:sticky;
-      top:0;
-      z-index:100;
-    }
-
-    .nav-inner{
-      max-width:1200px;
-      margin:auto;
-      padding:15px 24px;
-      display:flex;
-      justify-content:space-between;
-      align-items:center;
-      gap:20px;
-    }
-
-    .brand{
-      color:var(--deep-purple);
-      font-size:1.35rem;
-      font-weight:800;
-      text-decoration:none;
-      white-space:nowrap;
-    }
-
-    .nav-links{
-      display:flex;
-      flex-wrap:wrap;
-      gap:17px;
-      align-items:center;
-    }
-
-    .nav-links a{
-      color:var(--charcoal);
-      text-decoration:none;
-      font-size:.92rem;
-      font-weight:700;
-    }
-
-    .nav-links a:hover,.nav-links a.active{color:var(--purple)}
-
-    .hero{
-      text-align:center;
-      padding:85px 24px 55px;
-      background:linear-gradient(135deg,#f3ebf7,#fffaf5,#fdf0f5);
-    }
-
-    .eyebrow{
-      text-transform:uppercase;
-      letter-spacing:3px;
-      font-size:.8rem;
-      font-weight:800;
-      color:var(--purple);
-      margin-bottom:10px;
-    }
-
-    h1,h2,h3{
-      font-family:Georgia,"Times New Roman",serif;
-      color:var(--deep-purple);
-    }
-
-    h1{
-      font-size:clamp(3rem,7vw,5.6rem);
-      line-height:1;
-      margin:0 0 20px;
-    }
-
-    .hero p{
-      max-width:760px;
-      margin:auto;
-      font-size:1.15rem;
-    }
-
-    .notice{
-      max-width:950px;
-      margin:35px auto 0;
-      padding:20px 24px;
-      border:1px solid var(--lavender);
-      border-radius:18px;
-      background:white;
-      text-align:left;
-      font-size:.92rem;
-    }
-
-    .board-wrap{
-      max-width:1250px;
-      margin:auto;
-      padding:60px 24px 110px;
-    }
-
-    .board-header{
-      max-width:750px;
-      margin-bottom:35px;
-    }
-
-    .board-header h2{
-      font-size:clamp(2.2rem,5vw,3.5rem);
-      margin:0 0 10px;
-    }
-
-    .read-instruction{
-      display:inline-block;
-      margin-top:12px;
-      padding:12px 18px;
-      border-radius:999px;
-      background:#f3ebf7;
-      color:var(--deep-purple);
-      font-weight:800;
-    }
-
-    .memory-board{
-      display:grid;
-      grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
-      gap:34px 28px;
-      align-items:start;
-      padding:22px 10px 10px;
-    }
-
-    .memory-card{
-      --tilt:0deg;
-      position:relative;
-      display:flex;
-      flex-direction:column;
-      justify-content:center;
-      align-items:center;
-      text-align:center;
-      min-height:240px;
-      padding:34px;
-      background:white;
-      box-shadow:0 14px 34px rgba(70,45,80,.12);
-      transform:rotate(var(--tilt));
-      transform-origin:center;
-      transition:transform .2s ease, box-shadow .2s ease;
-      overflow:hidden;
-      margin:0 auto;
-    }
-
-    .memory-card:hover{
-      transform:rotate(0deg) translateY(-4px) scale(1.02);
-      box-shadow:0 18px 38px rgba(70,45,80,.17);
-      z-index:3;
-    }
-
-    .memory-card:nth-child(3n+1){background:#fffdf9}
-    .memory-card:nth-child(3n+2){background:#fdf0f5}
-    .memory-card:nth-child(3n+3){background:#f3ebf7}
-
-    .shape-circle{
-      width:250px;
-      height:250px;
-      border-radius:50%;
-      padding:42px;
-    }
-
-    .shape-square{
-      width:250px;
-      min-height:250px;
-      border-radius:18px;
-    }
-
-    .shape-oval{
-      width:290px;
-      min-height:210px;
-      border-radius:50%;
-      padding:36px 44px;
-    }
-
-    .shape-star{
-      width:285px;
-      min-height:285px;
-      padding:58px 54px;
-      clip-path:polygon(
-        50% 0%,
-        61% 34%,
-        98% 35%,
-        68% 57%,
-        79% 93%,
-        50% 72%,
-        21% 93%,
-        32% 57%,
-        2% 35%,
-        39% 34%
-      );
-    }
-
-    .shape-triangle{
-      width:300px;
-      min-height:270px;
-      padding:78px 56px 40px;
-      clip-path:polygon(50% 0%,100% 100%,0% 100%);
-    }
-
-    .shape-diamond{
-      width:245px;
-      min-height:245px;
-      padding:48px;
-      clip-path:polygon(50% 0%,100% 50%,50% 100%,0% 50%);
-    }
-
-    .shape-hexagon{
-      width:275px;
-      min-height:240px;
-      padding:42px;
-      clip-path:polygon(25% 6%,75% 6%,100% 50%,75% 94%,25% 94%,0% 50%);
-    }
-
-    .shape-heart{
-      width:285px;
-      min-height:255px;
-      padding:62px 50px 42px;
-      clip-path:polygon(
-        50% 92%,
-        10% 52%,
-        3% 34%,
-        6% 17%,
-        18% 6%,
-        33% 4%,
-        46% 14%,
-        50% 20%,
-        54% 14%,
-        67% 4%,
-        82% 6%,
-        94% 17%,
-        97% 34%,
-        90% 52%
-      );
-    }
-
-    .memory-text{
-      position:relative;
-      z-index:1;
-      white-space:pre-wrap;
-      font-family:Georgia,"Times New Roman",serif;
-      font-size:1.03rem;
-      line-height:1.6;
-      max-width:100%;
-      display:-webkit-box;
-      -webkit-line-clamp:6;
-      -webkit-box-orient:vertical;
-      overflow:hidden;
-    }
-
-    .memory-card{
-      cursor:pointer;
-    }
-
-    .memory-card::after{
-      content:"Click to read full experience";
-      position:absolute;
-      left:50%;
-      bottom:12px;
-      transform:translateX(-50%);
-      width:80%;
-      font-size:.75rem;
-      font-weight:800;
-      color:var(--deep-purple);
-      opacity:.72;
-      z-index:2;
-      pointer-events:none;
-    }
-
-    .memory-modal-backdrop{
-      position:fixed;
-      inset:0;
-      background:rgba(47,38,50,.72);
-      display:none;
-      align-items:center;
-      justify-content:center;
-      padding:22px;
-      z-index:1000;
-    }
-
-    .memory-modal-backdrop.open{
-      display:flex;
-    }
-
-    .memory-modal{
-      position:relative;
-      width:min(680px,94vw);
-      max-height:84vh;
-      overflow:auto;
-      background:white;
-      border-radius:28px;
-      padding:40px 34px 34px;
-      box-shadow:0 24px 70px rgba(0,0,0,.28);
-      text-align:left;
-    }
-
-    .memory-modal h3{
-      margin:0 45px 18px 0;
-      color:var(--deep-purple);
-      font-family:Georgia,"Times New Roman",serif;
-      font-size:1.5rem;
-    }
-
-    .memory-modal-text{
-      white-space:pre-wrap;
-      font-family:Georgia,"Times New Roman",serif;
-      font-size:1.12rem;
-      line-height:1.8;
-    }
-
-    .memory-modal-name{
-      margin-top:24px;
-      font-weight:800;
-      color:var(--deep-purple);
-    }
-
-    .memory-modal-close{
-      position:absolute;
-      right:16px;
-      top:14px;
-      width:40px;
-      height:40px;
-      border:none;
-      border-radius:50%;
-      background:#f3ebf7;
-      color:var(--deep-purple);
-      font-size:1.35rem;
-      font-weight:800;
-      cursor:pointer;
-    }
-
-    .memory-name{
-      position:relative;
-      z-index:1;
-      margin-top:16px;
-      font-weight:800;
-      color:var(--deep-purple);
-    }
-
-
-    .memory-photo-input{
-      width:100%;
-      padding:12px;
-      border:1px solid #d9ccd9;
-      border-radius:12px;
-      background:white;
-      font:inherit;
-    }
-
-    .photo-help{
-      margin:7px 0 16px;
-      font-size:.84rem;
-      color:#665f68;
-      line-height:1.5;
-    }
-
-    .memory-thumb{
-      width:74px;
-      height:74px;
-      border-radius:50%;
-      object-fit:cover;
-      margin:0 auto 12px;
-      border:4px solid rgba(255,255,255,.85);
-      box-shadow:0 4px 14px rgba(70,45,80,.16);
-      flex:0 0 auto;
-    }
-
-    .memory-modal-image{
-      display:none;
-      width:100%;
-      max-height:460px;
-      object-fit:contain;
-      border-radius:18px;
-      margin:0 0 24px;
-      background:#f7f2f7;
-    }
-
-    .memory-modal-image.show{
-      display:block;
-    }
-
-    @media (max-width:700px){
-      .memory-board{
-        grid-template-columns:1fr;
-        gap:28px;
-      }
-
-      .memory-card{
-        transform:rotate(calc(var(--tilt) * .45));
-      }
-
-      .shape-circle,
-      .shape-square,
-      .shape-oval,
-      .shape-star,
-      .shape-triangle,
-      .shape-diamond,
-      .shape-hexagon,
-      .shape-heart{
-        width:min(88vw,300px);
-      }
-    }
-
-    .empty{
-      background:white;
-      padding:35px;
-      border-radius:20px;
-      text-align:center;
-      box-shadow:0 10px 30px rgba(70,45,80,.07);
-    }
-
-    .share-panel{
-      position:fixed;
-      right:22px;
-      top:50%;
-      transform:translateY(-50%);
-      z-index:150;
-      display:flex;
-      align-items:flex-start;
-      gap:12px;
-    }
-
-    .share-button{
-      border:0;
-      border-radius:999px;
-      padding:17px 24px;
-      background:var(--deep-purple);
-      color:white;
-      font-weight:800;
-      font-size:1rem;
-      cursor:pointer;
-      box-shadow:0 10px 28px rgba(0,0,0,.2);
-    }
-
-    .share-box{
-      width:min(390px,calc(100vw - 40px));
-      background:white;
-      border-radius:22px;
-      padding:25px;
-      box-shadow:0 15px 45px rgba(0,0,0,.22);
-      display:none;
-    }
-
-    .share-box.open{display:block}
-
-    .share-box h3{
-      margin:0 0 7px;
-      font-size:1.6rem;
-    }
-
-    .share-box p{
-      margin:0 0 16px;
-      font-size:.9rem;
-    }
-
-    label{
-      display:block;
-      font-weight:800;
-      color:var(--deep-purple);
-      margin:13px 0 6px;
-    }
-
-    input,textarea{
-      width:100%;
-      padding:12px;
-      border:1px solid #d9cedd;
-      border-radius:12px;
-      font:inherit;
-      background:#fffdfb;
-    }
-
-    textarea{
-      min-height:150px;
-      resize:vertical;
-    }
-
-    .submit-button{
-      width:100%;
-      margin-top:17px;
-      border:0;
-      border-radius:999px;
-      padding:13px 20px;
-      background:var(--purple);
-      color:white;
-      font-weight:800;
-      cursor:pointer;
-    }
-
-    .form-message{
-      margin-top:12px!important;
-      font-weight:700;
-      color:var(--deep-purple);
-    }
-
-    footer{
-      background:#2f2632;
-      color:#e9e1ea;
-      padding:55px 24px 85px;
-      font-size:.9rem;
-    }
-
-    .footer-inner{max-width:1100px;margin:auto}
-    .footer-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:42px}
-    .footer-brand h2{color:white;margin:0 0 11px}
-    .footer-brand p{color:#cfc7d4;margin:7px 0}
-    .footer-column h3{color:white;margin:0 0 14px;font-size:1.15rem}
-    .footer-links{display:grid;gap:9px}
-    .footer-links a{color:#cfc7d4;text-decoration:none}
-    .footer-links a:hover{color:white;text-decoration:underline}
-    .footer-divider{height:1px;background:rgba(255,255,255,.12);margin:34px 0 24px}
-    .footer-bottom{text-align:center;color:#cfc7d4}
-    .footer-bottom p{margin:6px auto}
-
-    .return-top{
-      position:fixed;
-      right:18px;
-      bottom:18px;
-      z-index:140;
-      border:0;
-      border-radius:999px;
-      padding:13px 20px;
-      background:var(--deep-purple);
-      color:white;
-      font-weight:800;
-      cursor:pointer;
-      box-shadow:0 8px 25px rgba(0,0,0,.22);
-    }
-
-    @media(max-width:900px){
-      .nav-inner{flex-direction:column;align-items:flex-start}
-      .footer-grid{grid-template-columns:1fr}
-      .share-panel{
-        position:fixed;
-        top:auto;
-        right:18px;
-        bottom:72px;
-        transform:none;
-        flex-direction:column-reverse;
-        align-items:flex-end;
-      }
-      .share-box{max-height:70vh;overflow:auto}
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex,nofollow,noarchive">
+<title>Admin Inbox | Smilee Kylee</title>
+
+<style>
+:root{
+  --lavender:#d8c5e8;
+  --purple:#7d5a91;
+  --deep-purple:#553765;
+  --pink:#efd2df;
+  --cream:#fffaf5;
+  --white:#ffffff;
+  --charcoal:#342f35;
+  --border:#eadfea;
+}
+
+*{
+  box-sizing:border-box;
+}
+
+body{
+  margin:0;
+  font-family:Arial,Helvetica,sans-serif;
+  background:var(--cream);
+  color:var(--charcoal);
+}
+
+header{
+  background:var(--deep-purple);
+  color:white;
+  padding:28px 20px;
+  text-align:center;
+}
+
+header h1{
+  margin:0;
+  font-family:Georgia,"Times New Roman",serif;
+}
+
+.wrap{
+  max-width:1100px;
+  margin:40px auto;
+  padding:0 20px 60px;
+}
+
+.login-box{
+  max-width:440px;
+  margin:70px auto;
+  background:white;
+  border:2px solid var(--lavender);
+  border-radius:22px;
+  padding:30px;
+  box-shadow:0 12px 30px rgba(70,45,80,.08);
+}
+
+.login-box h2{
+  margin-top:0;
+  color:var(--deep-purple);
+  font-family:Georgia,"Times New Roman",serif;
+}
+
+label{
+  display:block;
+  font-weight:700;
+  margin-bottom:8px;
+}
+
+input,
+select{
+  width:100%;
+  padding:13px 14px;
+  border:1px solid #d8cbdc;
+  border-radius:10px;
+  font:inherit;
+}
+
+button{
+  border:none;
+  border-radius:999px;
+  padding:12px 18px;
+  background:var(--deep-purple);
+  color:white;
+  font-weight:800;
+  cursor:pointer;
+}
+
+button:hover{
+  opacity:.9;
+}
+
+button:disabled{
+  opacity:.55;
+  cursor:not-allowed;
+}
+
+.login-button{
+  margin-top:16px;
+  width:100%;
+}
+
+.error{
+  margin-top:14px;
+  color:#9b1c31;
+  font-weight:700;
+}
+
+.success{
+  margin-top:14px;
+  color:#2f6d44;
+  font-weight:700;
+}
+
+.admin-area{
+  display:none;
+}
+
+.access-banner{
+  background:white;
+  border:1px solid var(--lavender);
+  border-radius:16px;
+  padding:16px 18px;
+  margin-bottom:20px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:15px;
+  flex-wrap:wrap;
+}
+
+.access-badge{
+  display:inline-block;
+  background:var(--lavender);
+  color:var(--deep-purple);
+  padding:7px 12px;
+  border-radius:999px;
+  font-size:.85rem;
+  font-weight:800;
+}
+
+.read-only-note{
+  margin:0;
+  color:#6f6471;
+  line-height:1.5;
+}
+
+.toolbar{
+  display:flex;
+  justify-content:space-between;
+  gap:15px;
+  align-items:center;
+  flex-wrap:wrap;
+  margin-bottom:25px;
+}
+
+.toolbar-right{
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap;
+}
+
+.folder-tabs{
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap;
+}
+
+.folder-tabs button{
+  background:white;
+  color:var(--deep-purple);
+  border:1px solid var(--lavender);
+}
+
+.folder-tabs button.active{
+  background:var(--deep-purple);
+  color:white;
+}
+
+.manage-codes{
+  background:var(--purple);
+}
+
+.submission-list{
+  display:grid;
+  gap:18px;
+}
+
+.submission-card{
+  background:white;
+  border:1px solid var(--border);
+  border-radius:18px;
+  padding:24px;
+  box-shadow:0 8px 24px rgba(70,45,80,.05);
+}
+
+.submission-meta{
+  display:flex;
+  justify-content:space-between;
+  gap:15px;
+  flex-wrap:wrap;
+  margin-bottom:15px;
+  color:#746b75;
+  font-size:.9rem;
+}
+
+.submission-card h3{
+  color:var(--deep-purple);
+  font-family:Georgia,"Times New Roman",serif;
+  margin:0 0 10px;
+}
+
+.commentary{
+  margin-top:15px;
+  padding:15px;
+  background:#f8f2fa;
+  border-radius:12px;
+}
+
+.actions{
+  margin-top:20px;
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap;
+  align-items:center;
+}
+
+.actions select{
+  max-width:260px;
+}
+
+.delete-button{
+  background:#8c2f42;
+}
+
+.empty{
+  background:white;
+  border:1px solid var(--border);
+  border-radius:18px;
+  padding:35px;
+  text-align:center;
+  color:#746b75;
+}
+
+.logout{
+  background:white;
+  color:var(--deep-purple);
+  border:1px solid var(--lavender);
+}
+
+.code-panel{
+  display:none;
+  background:white;
+  border:2px solid var(--lavender);
+  border-radius:22px;
+  padding:26px;
+  margin-bottom:28px;
+  box-shadow:0 10px 28px rgba(70,45,80,.06);
+}
+
+.code-panel h2{
+  margin:0 0 8px;
+  font-family:Georgia,"Times New Roman",serif;
+  color:var(--deep-purple);
+}
+
+.code-panel p{
+  line-height:1.6;
+}
+
+.code-form{
+  display:grid;
+  grid-template-columns:1fr 1fr auto;
+  gap:12px;
+  align-items:end;
+  margin-top:20px;
+}
+
+.field label{
+  margin-bottom:7px;
+}
+
+.code-help{
+  font-size:.88rem;
+  color:#746b75;
+  margin-top:6px;
+}
+
+.generated-code{
+  display:none;
+  background:#f7f0fa;
+  border:2px solid var(--purple);
+  border-radius:16px;
+  padding:18px;
+  margin-top:20px;
+}
+
+.generated-code strong{
+  color:var(--deep-purple);
+}
+
+.generated-number{
+  display:block;
+  margin-top:10px;
+  font-size:1.6rem;
+  font-weight:900;
+  letter-spacing:3px;
+  color:var(--deep-purple);
+}
+
+.code-list{
+  display:grid;
+  gap:12px;
+  margin-top:24px;
+}
+
+.code-item{
+  border:1px solid var(--border);
+  border-radius:14px;
+  padding:16px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:15px;
+  flex-wrap:wrap;
+}
+
+.code-item-info strong{
+  display:block;
+  color:var(--deep-purple);
+  margin-bottom:5px;
+}
+
+.code-item-info span{
+  color:#746b75;
+  font-size:.9rem;
+}
+
+.small-delete{
+  background:#8c2f42;
+  padding:9px 14px;
+}
+
+.close-panel{
+  background:white;
+  color:var(--deep-purple);
+  border:1px solid var(--lavender);
+}
+
+.panel-heading{
+  display:flex;
+  justify-content:space-between;
+  gap:15px;
+  align-items:flex-start;
+  flex-wrap:wrap;
+}
+
+
+  .memory-admin-image{
+    display:block;
+    width:100%;
+    max-width:560px;
+    max-height:440px;
+    object-fit:contain;
+    margin:18px 0 6px;
+    border-radius:16px;
+    background:#f7f2f7;
+    border:1px solid #e5d9e7;
+  }
+
+@media(max-width:760px){
+  .code-form{
+    grid-template-columns:1fr;
+  }
+}
+
+@media(max-width:650px){
+  .actions{
+    display:grid;
+  }
+
+  .actions select,
+  .actions button{
+    width:100%;
+    max-width:none;
+  }
+
+  .toolbar-right{
+    width:100%;
+  }
+
+  .toolbar-right button{
+    width:100%;
+  }
+}
+
+.inbox-type-tabs{
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap;
+  margin-bottom:18px;
+}
+
+.inbox-type-tabs button{
+  background:white;
+  color:var(--deep-purple);
+  border:1px solid var(--lavender);
+}
+
+.inbox-type-tabs button.active{
+  background:var(--deep-purple);
+  color:white;
+}
+
+.approve-button{
+  background:#2f6d44;
+}
+
+.deny-button{
+  background:#8c2f42;
+}
+
+.memory-text{
+  white-space:pre-wrap;
+  line-height:1.7;
+}
+
+.memory-note{
+  margin:0 0 22px;
+  padding:15px 18px;
+  background:#f8f2fa;
+  border-left:5px solid var(--purple);
+  border-radius:0 12px 12px 0;
+  color:#5e5361;
+}
+
+
+.shelter-panel{display:none;}
+.shelter-panel.active{display:block;}
+
+</style>
 </head>
 
 <body>
-  <div class="emergency-bar">If you are in immediate danger, call 911.</div>
 
-  <div class="funding-notice">
-    <strong>Funding Notice:</strong>
-    Donations, merchandise proceeds after costs and fees, and other financial support go toward building Smilee Kylee and its future programs, resources, and supportive housing for women in need.
-  </div>
+<header>
+  <h1>Smilee Kylee Admin Inbox</h1>
+</header>
 
-  <nav>
-    <div class="nav-inner">
-      <a class="brand" href="index.html">Smilee Kylee</a>
-      <div class="nav-links">
-        <a href="index.html">Home</a>
-        <a href="kylee.html">Meet Kylee</a>
-        <a href="mission.html">Vision &amp; Mission</a>
-        <a href="timeline.html">Timeline</a>
-        <a href="shop.html">Shop</a>
-        <a href="donate.html">Donate</a>
-        <a href="case.html">The Case</a>
-        <a href="story.html">What We Know</a>
-        <a href="questions.html">Public Questions</a>
-        <a href="memories.html">Memories</a>
-        <a class="active" href="shelter-experiences.html">Shelter Experiences</a>
-        <a href="help.html">Get Help</a>
-      </div>
-    </div>
-  </nav>
+<div class="wrap">
 
-  <header class="hero">
-    <div class="eyebrow">In Loving Memory of Kylee M. Monteiro</div>
-    <h1>Shelter Experiences</h1>
-    <p>
-      A place for people who have personally experienced living at Bethesda House
-      or other shelters in the area to share what their experience was like.
-    </p>
+  <div id="loginBox" class="login-box">
+    <h2>Private Access</h2>
+    <p>Enter your numeric passcode to open the private admin inbox.</p>
 
-    <div class="notice">
-      <strong>Community Notice:</strong>
-      This page is for firsthand personal experiences. Submissions are reviewed before publication.
-      Please do not include threats, harassment, impersonation, private contact information,
-      or identifying information about other shelter residents. Published submissions reflect
-      the individual contributor's own account and are not presented as independently verified facts.
-      Submission does not guarantee publication.
-    </div>
-  </header>
-
-  <main class="board-wrap">
-    <div class="board-header">
-      <div class="eyebrow">Firsthand Community Experiences</div>
-      <h2>Shelter Experience Board</h2>
-      <p>
-        These experiences are shared by people who say they personally lived at Bethesda House
-        or another shelter in the area. Every submission is reviewed before appearing here.
-      </p>
-      <p class="read-instruction">Click on each experience to read the full submission.</p>
-    </div>
-
-    <div id="memoryBoard" class="memory-board">
-      <div class="empty">Loading experiences...</div>
-    </div>
-  </main>
-
-  <div class="share-panel">
-    <div id="shareBox" class="share-box">
-      <h3>Share Your Experience</h3>
-      <p>Your experience will be sent privately for approval before it appears on this page.</p>
-
-      <form id="memoryForm">
-        <label for="memoryName">Your Name or “Anonymous”</label>
-        <input id="memoryName" name="name" maxlength="100" required>
-
-        <label for="memoryText">Your Shelter Experience</label>
-        <textarea id="memoryText" name="memory" maxlength="4000" required></textarea>
-
-        <label for="memoryPhoto">Add a Picture (Optional)</label>
-        <input
-          class="memory-photo-input"
-          id="memoryPhoto"
-          name="photo"
-          type="file"
-          accept="image/jpeg,image/png,image/webp"
-        >
-        <p class="photo-help">
-          You may include one picture with your experience. Pictures are reviewed with the written submission before anything is published. Please do not upload images that identify other shelter residents without their permission.
-        </p>
-
-        <button class="submit-button" type="submit">Send Experience for Approval</button>
-        <p id="formMessage" class="form-message" aria-live="polite"></p>
-      </form>
-    </div>
-
-    <button id="shareButton" class="share-button" type="button">
-      Share Your Experience
-    </button>
-  </div>
-
-
-  <div
-    class="memory-modal-backdrop"
-    id="memoryModalBackdrop"
-    aria-hidden="true"
-  >
-    <div
-      class="memory-modal"
-      role="dialog"
-      aria-modal="true"
-      aria-labelledby="memoryModalTitle"
+    <label for="passcode">Passcode</label>
+    <input
+      id="passcode"
+      type="password"
+      inputmode="numeric"
+      autocomplete="off"
+      placeholder="Enter passcode"
     >
-      <button
-        class="memory-modal-close"
-        id="memoryModalClose"
-        type="button"
-        aria-label="Close full experience"
-      >
-        ×
-      </button>
 
-      <h3 id="memoryModalTitle">A Shelter Experience</h3>
-      <img
-        class="memory-modal-image"
-        id="memoryModalImage"
-        alt=""
-      >
-      <div class="memory-modal-text" id="memoryModalText"></div>
-      <div class="memory-modal-name" id="memoryModalName"></div>
-    </div>
+    <button class="login-button" onclick="login()">Open Inbox</button>
+
+    <div id="loginError" class="error"></div>
   </div>
 
-  <footer>
-    <div class="footer-inner">
-      <div class="footer-grid">
-        <div class="footer-brand">
-          <h2>Smilee Kylee</h2>
-          <p>Created in loving memory of Kylee M. Monteiro.</p>
-          <p>Her memory becomes someone else's hope.</p>
-        </div>
+  <div id="adminArea" class="admin-area">
 
-        <div class="footer-column">
-          <h3>Explore</h3>
-          <div class="footer-links">
-            <a href="index.html">Home</a>
-            <a href="kylee.html">Meet Kylee</a>
-            <a href="mission.html">Vision &amp; Mission</a>
-            <a href="timeline.html">Timeline</a>
-            <a href="case.html">The Case</a>
-            <a href="story.html">What We Know</a>
-            <a href="questions.html">Public Questions</a>
-            <a href="memories.html">Memories</a>
-            <a href="help.html">Get Help</a>
-          </div>
-        </div>
-
-        <div class="footer-column">
-          <h3>Support Smilee Kylee</h3>
-          <div class="footer-links">
-            <a href="shop.html">Shop Smilee Kylee</a>
-            <a href="donate.html">Donate</a>
-            <a href="https://www.paypal.com/ncp/payment/BKQGJZW65HJS4" target="_blank" rel="noopener noreferrer">PayPal</a>
-            <a href="https://cash.app/$justice4Kylee" target="_blank" rel="noopener noreferrer">Cash App</a>
-            <a href="https://venmo.com/u/smileekylee" target="_blank" rel="noopener noreferrer">Venmo</a>
-            <a href="https://smilee-kylee-shop.fourthwall.com/" target="_blank" rel="noopener noreferrer">Fourthwall Shop</a>
-          </div>
-        </div>
+    <div class="access-banner">
+      <div>
+        <span id="accessBadge" class="access-badge"></span>
       </div>
 
-      <div class="footer-divider"></div>
-      <div class="footer-bottom">
-        <p>May her memory become safety, healing, opportunity and hope.</p>
-        <p>© <span id="year"></span> Smilee Kylee. All rights reserved.</p>
-      </div>
+      <p id="accessMessage" class="read-only-note"></p>
     </div>
-  </footer>
 
-  <button class="return-top" type="button" onclick="returnToTop()">Return to Top</button>
+    <div id="codePanel" class="code-panel">
 
-  <script>
-    document.getElementById("year").textContent = new Date().getFullYear();
+      <div class="panel-heading">
+        <div>
+          <h2>View-Only Passcodes</h2>
+          <p>
+            Create passcodes for people you want to allow to read submitted
+            questions. Viewer passcodes cannot move or delete submissions.
+          </p>
+        </div>
 
-    const shareButton = document.getElementById("shareButton");
-    const shareBox = document.getElementById("shareBox");
-    const memoryForm = document.getElementById("memoryForm");
-    const formMessage = document.getElementById("formMessage");
-    const memoryBoard = document.getElementById("memoryBoard");
+        <button class="close-panel" onclick="closeCodePanel()">
+          Close
+        </button>
+      </div>
 
-    shareButton.addEventListener("click", function(){
-      shareBox.classList.toggle("open");
+      <div class="code-form">
+
+        <div class="field">
+          <label for="viewerLabel">Name or Label</label>
+          <input
+            id="viewerLabel"
+            type="text"
+            maxlength="100"
+            placeholder="Example: Aunt Mary"
+          >
+        </div>
+
+        <div class="field">
+          <label for="viewerPasscode">Passcode</label>
+          <input
+            id="viewerPasscode"
+            type="text"
+            inputmode="numeric"
+            maxlength="12"
+            placeholder="Leave blank to create one"
+          >
+          <div class="code-help">
+            Use 6–12 numbers, or leave this blank and the site will create an
+            8-digit code.
+          </div>
+        </div>
+
+        <button onclick="createViewerCode()">
+          Create Passcode
+        </button>
+
+      </div>
+
+      <div id="codeError" class="error"></div>
+      <div id="codeSuccess" class="success"></div>
+
+      <div id="generatedCode" class="generated-code">
+        <strong>New view-only passcode:</strong>
+        <span id="generatedNumber" class="generated-number"></span>
+        <p>
+          Copy this number now and give it only to the person you want to have
+          view-only access.
+        </p>
+      </div>
+
+      <div id="codeList" class="code-list"></div>
+
+    </div>
+
+    <div class="inbox-type-tabs">
+      <button id="questionsTab" class="active" type="button">
+        Questions
+      </button>
+      <button id="memoriesTab" type="button">
+        Pending Memories
+      </button>
+      <button id="approvedMemoriesTab" type="button">
+        Posted Memories
+      </button>
+    </div>
+
+    <div id="memoryNote" class="memory-note" style="display:none;">
+      Approved memories are published to the public Memories page. Denied memories are permanently deleted.
+    </div>
+
+    <div class="toolbar">
+
+      <div id="folderTabs" class="folder-tabs">
+        <button data-folder="inbox" class="active">Inbox</button>
+        <button data-folder="next">Next in Line</button>
+        <button data-folder="work">Work in Progress</button>
+        <button data-folder="future">Address in the Future</button>
+        <button data-folder="backburner">Back Burner</button>
+      </div>
+
+      <div class="toolbar-right">
+
+        <button
+          id="manageCodesButton"
+          class="manage-codes"
+          onclick="openCodePanel()"
+          style="display:none;"
+        >
+          Manage Viewer Passcodes
+        </button>
+
+        <button class="logout" onclick="logout()">
+          Log Out
+        </button>
+
+      </div>
+
+    </div>
+
+    <div id="submissionList" class="submission-list"></div>
+
+  </div>
+
+</div>
+
+<script>
+let adminPasscode = "";
+let currentFolder = "inbox";
+let currentRole = "";
+let currentLabel = "";
+let currentView = "questions";
+
+const folderNames = {
+  inbox: "Inbox",
+  next: "Next in Line",
+  work: "Work in Progress",
+  future: "Address in the Future",
+  backburner: "Back Burner"
+};
+
+
+async function login(){
+  const input = document.getElementById("passcode");
+  const errorBox = document.getElementById("loginError");
+
+  errorBox.textContent = "";
+
+  const passcode = input.value.trim();
+
+  if(!passcode){
+    errorBox.textContent = "Enter your passcode.";
+    return;
+  }
+
+  try{
+    const response = await fetch("/api/admin/login",{
+      method:"POST",
+      headers:{
+        "Content-Type":"application/json"
+      },
+      body:JSON.stringify({
+        passcode:passcode
+      })
     });
 
-    const textMemoryShapes = [
-      "shape-square",
-      "shape-circle"
-    ];
+    const data = await response.json();
 
-    const photoMemoryShapes = [
-      "shape-star",
-      "shape-triangle",
-      "shape-oval",
-      "shape-diamond",
-      "shape-hexagon",
-      "shape-heart"
-    ];
+    if(!response.ok){
+      errorBox.textContent =
+        data.error || "Unable to log in.";
+      return;
+    }
 
-    const memoryTilts = ["-2deg","1.5deg","-1deg","2deg","-.75deg","1deg","-1.4deg","1.8deg"];
+    adminPasscode = passcode;
+    currentRole = data.role || "viewer";
+    currentLabel = data.label || "";
 
-    function makeMemoryCard(memory, index){
-      const card = document.createElement("article");
+    document.getElementById("loginBox").style.display = "none";
+    document.getElementById("adminArea").style.display = "block";
 
-      const shapes = memory.has_image ? photoMemoryShapes : textMemoryShapes;
-      const shape = shapes[index % shapes.length];
-      card.className = "memory-card " + shape;
-      card.style.setProperty("--tilt", memoryTilts[index % memoryTilts.length]);
+    input.value = "";
 
-      if(memory.has_image){
-        const thumb = document.createElement("img");
-        thumb.className = "memory-thumb";
-        thumb.src = "/api/shelter-experiences/" + memory.id + "/image";
-        thumb.alt = "Picture submitted with this experience";
-        card.appendChild(thumb);
-      }
+    setupAccessDisplay();
 
-      const text = document.createElement("div");
-      text.className = "memory-text";
-      text.textContent = memory.memory;
+    await loadCurrentView();
 
-      const name = document.createElement("div");
-      name.className = "memory-name";
-      name.textContent = "— " + memory.name;
+  }catch(error){
+    errorBox.textContent =
+      "Unable to connect. Please try again.";
+  }
+}
 
-      card.appendChild(text);
-      card.appendChild(name);
 
-      card.setAttribute("role", "button");
-      card.setAttribute("tabindex", "0");
-      card.setAttribute("aria-label", "Read full experience from " + memory.name);
+function setupAccessDisplay(){
+  const badge = document.getElementById("accessBadge");
+  const message = document.getElementById("accessMessage");
+  const manageButton = document.getElementById("manageCodesButton");
 
-      function openThisMemory(){
-        openMemoryModal(memory);
-      }
+  if(currentRole === "owner"){
+    badge.textContent = "Owner Access";
 
-      card.addEventListener("click", openThisMemory);
-      card.addEventListener("keydown", function(event){
-        if(event.key === "Enter" || event.key === " "){
-          event.preventDefault();
-          openThisMemory();
+    message.textContent =
+      "You can view, move, delete, and organize submissions.";
+
+    manageButton.style.display = "inline-block";
+  }else{
+    badge.textContent = "Admin";
+    message.textContent = "";
+    manageButton.style.display = "none";
+  }
+}
+
+
+
+function setInboxView(view){
+  if(view === "memories" || view === "approvedMemories"){
+    currentView = view;
+  }else{
+    currentView = "questions";
+  }
+
+  const questionsTab = document.getElementById("questionsTab");
+  const memoriesTab = document.getElementById("memoriesTab");
+  const approvedMemoriesTab = document.getElementById("approvedMemoriesTab");
+  const folderTabs = document.getElementById("folderTabs");
+  const memoryNote = document.getElementById("memoryNote");
+
+  questionsTab.classList.toggle("active", currentView === "questions");
+  memoriesTab.classList.toggle("active", currentView === "memories");
+  approvedMemoriesTab.classList.toggle("active", currentView === "approvedMemories");
+
+  folderTabs.style.display =
+    currentView === "questions" ? "flex" : "none";
+
+  if(currentView === "memories"){
+    memoryNote.style.display = "block";
+    memoryNote.textContent =
+      "Approved memories are published to the public Memories page. Denied memories are permanently deleted.";
+  }else if(currentView === "approvedMemories"){
+    memoryNote.style.display = "block";
+    memoryNote.textContent =
+      "These memories are currently posted on the public Memories page. Owner access can permanently delete a posted memory.";
+  }else{
+    memoryNote.style.display = "none";
+  }
+
+  loadCurrentView();
+}
+
+
+async function loadCurrentView(){
+  if(currentView === "memories"){
+    await loadMemories("pending");
+  }else if(currentView === "approvedMemories"){
+    await loadMemories("approved");
+  }else{
+    await loadSubmissions();
+  }
+}
+
+
+async function loadMemories(status = "pending"){
+  const list = document.getElementById("submissionList");
+
+  list.innerHTML =
+    "<div class='empty'>Loading memories...</div>";
+
+  try{
+    const response = await fetch(
+      "/api/admin/memories?status=" + encodeURIComponent(status),
+      {
+        headers:{
+          "X-Admin-Passcode":adminPasscode
         }
-      });
+      }
+    );
 
-      return card;
+    const data = await response.json();
+
+    if(response.status === 401){
+      logout();
+      return;
     }
 
-    function openMemoryModal(memory){
-      const backdrop = document.getElementById("memoryModalBackdrop");
-      const text = document.getElementById("memoryModalText");
-      const name = document.getElementById("memoryModalName");
-      const image = document.getElementById("memoryModalImage");
-
-      text.textContent = memory.memory;
-      name.textContent = "— " + memory.name;
-
-      if(memory.has_image){
-        image.src = "/api/shelter-experiences/" + memory.id + "/image";
-        image.alt = "Picture submitted by " + memory.name;
-        image.classList.add("show");
-      }else{
-        image.removeAttribute("src");
-        image.alt = "";
-        image.classList.remove("show");
-      }
-
-      backdrop.classList.add("open");
-      backdrop.setAttribute("aria-hidden", "false");
-      document.body.style.overflow = "hidden";
-      document.getElementById("memoryModalClose").focus();
+    if(!response.ok){
+      list.innerHTML =
+        "<div class='empty'>Unable to load memories.</div>";
+      return;
     }
 
-    function closeMemoryModal(){
-      const backdrop = document.getElementById("memoryModalBackdrop");
-      backdrop.classList.remove("open");
-      backdrop.setAttribute("aria-hidden", "true");
-      document.body.style.overflow = "";
+    const memories = data.memories || [];
+
+    if(memories.length === 0){
+      list.innerHTML =
+        status === "approved"
+          ? "<div class='empty'>No approved memories are currently posted.</div>"
+          : "<div class='empty'>No memories are waiting for approval.</div>";
+      return;
     }
 
-    const memoryModalBackdrop = document.getElementById("memoryModalBackdrop");
-    const memoryModalClose = document.getElementById("memoryModalClose");
+    list.innerHTML = "";
 
-    memoryModalClose.addEventListener("click", function(event){
-      event.preventDefault();
-      event.stopPropagation();
-      closeMemoryModal();
+    memories.forEach(memory=>{
+      list.appendChild(createMemoryCard(memory));
     });
 
-    memoryModalBackdrop.addEventListener("click", function(event){
-      if(event.target === memoryModalBackdrop){
-        closeMemoryModal();
-      }
-    });
+  }catch(error){
+    list.innerHTML =
+      "<div class='empty'>Unable to connect to the memory inbox.</div>";
+  }
+}
 
-    document.addEventListener("keydown", function(event){
-      if(event.key === "Escape" && memoryModalBackdrop.classList.contains("open")){
-        closeMemoryModal();
-      }
-    });
 
-    async function loadMemories(){
-      try{
-        const response = await fetch("/api/shelter-experiences", {
-          method: "GET",
-          headers: { "Accept": "application/json" }
-        });
+function createMemoryCard(memory){
+  const card = document.createElement("div");
+  card.className = "submission-card";
 
-        const data = await response.json();
+  const safeName =
+    memory.name && memory.name.trim()
+      ? memory.name
+      : "Unknown";
 
-        if(!response.ok){
-          throw new Error(data.error || "Unable to load experiences.");
-        }
+  const date = memory.submitted_at
+    ? new Date(
+        memory.submitted_at.replace(" ","T") + "Z"
+      ).toLocaleString()
+    : "";
 
-        memoryBoard.textContent = "";
+  const meta = document.createElement("div");
+  meta.className = "submission-meta";
 
-        if(!data.memories || data.memories.length === 0){
-          const empty = document.createElement("div");
-          empty.className = "empty";
-          empty.textContent = "Approved experiences will appear here.";
-          memoryBoard.appendChild(empty);
+  const name = document.createElement("span");
+  name.textContent = safeName;
+
+  const submitted = document.createElement("span");
+  submitted.textContent = date;
+
+  meta.appendChild(name);
+  meta.appendChild(submitted);
+
+  const title = document.createElement("h3");
+  title.textContent = "Memory #" + memory.id;
+
+  const memoryText = document.createElement("div");
+  memoryText.className = "memory-text";
+  memoryText.textContent = memory.memory;
+
+  card.appendChild(meta);
+  card.appendChild(title);
+  card.appendChild(memoryText);
+
+  if(memory.image_data){
+    const memoryImage = document.createElement("img");
+    memoryImage.className = "memory-admin-image";
+    memoryImage.src = memory.image_data;
+    memoryImage.alt =
+      "Picture submitted with Memory #" + memory.id;
+    card.appendChild(memoryImage);
+  }
+
+  if(currentRole === "owner"){
+    const actions = document.createElement("div");
+    actions.className = "actions";
+
+    if(currentView === "approvedMemories"){
+      const deleteButton = document.createElement("button");
+      deleteButton.className = "deny-button";
+      deleteButton.textContent = "Delete Posted Memory";
+
+      deleteButton.onclick = async ()=>{
+        const confirmed = confirm(
+          "Permanently delete this memory and remove it from the public Memories page? This cannot be undone."
+        );
+
+        if(!confirmed){
           return;
         }
 
-        data.memories.forEach(function(memory, index){
-          memoryBoard.appendChild(makeMemoryCard(memory, index));
-        });
-      }catch(error){
-        memoryBoard.textContent = "";
-        const empty = document.createElement("div");
-        empty.className = "empty";
-        empty.textContent = "Experiences are temporarily unavailable. Please try again later.";
-        memoryBoard.appendChild(empty);
-      }
-    }
+        await deleteApprovedMemory(memory.id);
+      };
 
-    async function prepareMemoryPhoto(file){
-      if(!file){
-        return null;
-      }
+      actions.appendChild(deleteButton);
+    }else{
+      const approveButton = document.createElement("button");
+      approveButton.className = "approve-button";
+      approveButton.textContent = "Approve";
 
-      const allowedTypes = [
-        "image/jpeg",
-        "image/png",
-        "image/webp"
-      ];
-
-      if(!allowedTypes.includes(file.type)){
-        throw new Error("Please choose a JPG, PNG, or WebP picture.");
-      }
-
-      if(file.size > 8 * 1024 * 1024){
-        throw new Error("Please choose a picture smaller than 8 MB.");
-      }
-
-      const dataUrl = await new Promise((resolve, reject)=>{
-        const reader = new FileReader();
-
-        reader.onload = ()=>resolve(reader.result);
-        reader.onerror = ()=>reject(
-          new Error("Unable to read that picture.")
+      approveButton.onclick = async ()=>{
+        const confirmed = confirm(
+          "Approve this memory and publish it on the public Memories page?"
         );
 
-        reader.readAsDataURL(file);
-      });
-
-      const image = await new Promise((resolve, reject)=>{
-        const img = new Image();
-
-        img.onload = ()=>resolve(img);
-        img.onerror = ()=>reject(
-          new Error("Unable to open that picture.")
-        );
-
-        img.src = dataUrl;
-      });
-
-      const maxDimension = 1200;
-      let width = image.naturalWidth;
-      let height = image.naturalHeight;
-
-      if(width > maxDimension || height > maxDimension){
-        const scale =
-          Math.min(
-            maxDimension / width,
-            maxDimension / height
-          );
-
-        width = Math.round(width * scale);
-        height = Math.round(height * scale);
-      }
-
-      const canvas = document.createElement("canvas");
-      canvas.width = width;
-      canvas.height = height;
-
-      const context = canvas.getContext("2d");
-      context.drawImage(image, 0, 0, width, height);
-
-      let quality = .82;
-      let compressed = canvas.toDataURL("image/jpeg", quality);
-
-      while(compressed.length > 1400000 && quality > .42){
-        quality -= .08;
-        compressed = canvas.toDataURL("image/jpeg", quality);
-      }
-
-      if(compressed.length > 1600000){
-        throw new Error(
-          "That picture is still too large after resizing. Please choose a smaller picture."
-        );
-      }
-
-      return compressed;
-    }
-
-    memoryForm.addEventListener("submit", async function(event){
-      event.preventDefault();
-      formMessage.textContent = "Sending...";
-
-      const name = document.getElementById("memoryName").value.trim();
-      const memory = document.getElementById("memoryText").value.trim();
-      const photo = document.getElementById("memoryPhoto").files[0];
-
-      try{
-        const imageData = await prepareMemoryPhoto(photo);
-
-        const response = await fetch("/api/shelter-experiences", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ name, experience: memory, imageData })
-        });
-
-        const data = await response.json();
-
-        if(!response.ok){
-          throw new Error(data.error || "Unable to submit your experience.");
+        if(!confirmed){
+          return;
         }
 
-        memoryForm.reset();
-        formMessage.textContent =
-          "Thank you. Your experience has been sent for approval.";
-      }catch(error){
-        formMessage.textContent =
-          error.message || "Unable to submit your experience. Please try again.";
+        await approveMemory(memory.id);
+      };
+
+      const denyButton = document.createElement("button");
+      denyButton.className = "deny-button";
+      denyButton.textContent = "Deny";
+
+      denyButton.onclick = async ()=>{
+        const confirmed = confirm(
+          "Deny and permanently delete this memory?"
+        );
+
+        if(!confirmed){
+          return;
+        }
+
+        await denyMemory(memory.id);
+      };
+
+      actions.appendChild(approveButton);
+      actions.appendChild(denyButton);
+    }
+
+    card.appendChild(actions);
+  }
+
+  return card;
+}
+
+
+async function approveMemory(id){
+  if(currentRole !== "owner"){
+    return;
+  }
+
+  try{
+    const response = await fetch(
+      "/api/admin/memories/" + id + "/approve",
+      {
+        method:"POST",
+        headers:{
+          "X-Admin-Passcode":adminPasscode
+        }
+      }
+    );
+
+    const data = await response.json();
+
+    if(response.ok){
+      await loadMemories();
+    }else{
+      alert(
+        data.error ||
+        "Unable to approve this memory."
+      );
+    }
+
+  }catch(error){
+    alert("Unable to approve this memory.");
+  }
+}
+
+
+async function denyMemory(id){
+  if(currentRole !== "owner"){
+    return;
+  }
+
+  try{
+    const response = await fetch(
+      "/api/admin/memories/" + id + "/deny",
+      {
+        method:"DELETE",
+        headers:{
+          "X-Admin-Passcode":adminPasscode
+        }
+      }
+    );
+
+    const data = await response.json();
+
+    if(response.ok){
+      await loadMemories();
+    }else{
+      alert(
+        data.error ||
+        "Unable to deny this memory."
+      );
+    }
+
+  }catch(error){
+    alert("Unable to deny this memory.");
+  }
+}
+
+
+async function deleteApprovedMemory(id){
+  if(currentRole !== "owner"){
+    return;
+  }
+
+  try{
+    const response = await fetch(
+      "/api/admin/memories/" + id + "/delete",
+      {
+        method:"DELETE",
+        headers:{
+          "X-Admin-Passcode":adminPasscode
+        }
+      }
+    );
+
+    const data = await response.json();
+
+    if(response.ok){
+      await loadMemories("approved");
+    }else{
+      alert(
+        data.error ||
+        "Unable to delete this posted memory."
+      );
+    }
+
+  }catch(error){
+    alert("Unable to delete this posted memory.");
+  }
+}
+
+async function loadSubmissions(){
+  const list = document.getElementById("submissionList");
+
+  list.innerHTML =
+    "<div class='empty'>Loading...</div>";
+
+  try{
+    const response = await fetch(
+      "/api/admin/submissions?folder=" +
+      encodeURIComponent(currentFolder),
+      {
+        headers:{
+          "X-Admin-Passcode":adminPasscode
+        }
+      }
+    );
+
+    const data = await response.json();
+
+    if(response.status === 401){
+      logout();
+      return;
+    }
+
+    if(!response.ok){
+      list.innerHTML =
+        "<div class='empty'>Unable to load submissions.</div>";
+      return;
+    }
+
+    const submissions = data.submissions || [];
+
+    if(submissions.length === 0){
+      list.innerHTML =
+        "<div class='empty'>No submissions in this folder.</div>";
+      return;
+    }
+
+    list.innerHTML = "";
+
+    submissions.forEach(submission=>{
+      list.appendChild(createCard(submission));
+    });
+
+  }catch(error){
+    list.innerHTML =
+      "<div class='empty'>Unable to connect to the inbox.</div>";
+  }
+}
+
+
+function createCard(submission){
+  const card = document.createElement("div");
+  card.className = "submission-card";
+
+  const safeName =
+    submission.name && submission.name.trim()
+      ? submission.name
+      : "Anonymous";
+
+  const date = submission.submitted_at
+    ? new Date(
+        submission.submitted_at.replace(" ","T") + "Z"
+      ).toLocaleString()
+    : "";
+
+  const meta = document.createElement("div");
+  meta.className = "submission-meta";
+
+  const name = document.createElement("span");
+  name.textContent = safeName;
+
+  const submitted = document.createElement("span");
+  submitted.textContent = date;
+
+  meta.appendChild(name);
+  meta.appendChild(submitted);
+
+  const title = document.createElement("h3");
+  title.textContent =
+    "Question #" + submission.id;
+
+  const question = document.createElement("div");
+  question.textContent = submission.question;
+
+  card.appendChild(meta);
+  card.appendChild(title);
+  card.appendChild(question);
+
+  if(
+    submission.commentary &&
+    submission.commentary.trim()
+  ){
+    const commentary = document.createElement("div");
+    commentary.className = "commentary";
+
+    const strong = document.createElement("strong");
+    strong.textContent = "Additional commentary:";
+
+    const text = document.createElement("div");
+    text.textContent = submission.commentary;
+
+    commentary.appendChild(strong);
+    commentary.appendChild(text);
+
+    card.appendChild(commentary);
+  }
+
+  if(currentRole === "owner"){
+    const actions = document.createElement("div");
+    actions.className = "actions";
+
+    const select = document.createElement("select");
+
+    Object.entries(folderNames).forEach(([value,label])=>{
+      const option = document.createElement("option");
+
+      option.value = value;
+      option.textContent = label;
+
+      if(value === currentFolder){
+        option.selected = true;
+      }
+
+      select.appendChild(option);
+    });
+
+    const moveButton = document.createElement("button");
+    moveButton.textContent = "Move";
+
+    moveButton.onclick = async ()=>{
+      await moveSubmission(
+        submission.id,
+        select.value
+      );
+    };
+
+    const deleteButton = document.createElement("button");
+    deleteButton.textContent = "Delete";
+    deleteButton.className = "delete-button";
+
+    deleteButton.onclick = async ()=>{
+      const confirmed = confirm(
+        "Delete this submission permanently?"
+      );
+
+      if(!confirmed){
+        return;
+      }
+
+      await deleteSubmission(submission.id);
+    };
+
+    actions.appendChild(select);
+    actions.appendChild(moveButton);
+    actions.appendChild(deleteButton);
+
+    card.appendChild(actions);
+  }
+
+  return card;
+}
+
+
+async function moveSubmission(id,folder){
+  if(currentRole !== "owner"){
+    return;
+  }
+
+  try{
+    const response = await fetch(
+      "/api/admin/submissions/" + id + "/move",
+      {
+        method:"POST",
+        headers:{
+          "Content-Type":"application/json",
+          "X-Admin-Passcode":adminPasscode
+        },
+        body:JSON.stringify({
+          folder:folder
+        })
+      }
+    );
+
+    const data = await response.json();
+
+    if(response.ok){
+      await loadSubmissions();
+    }else{
+      alert(
+        data.error ||
+        "Unable to move this submission."
+      );
+    }
+
+  }catch(error){
+    alert("Unable to move this submission.");
+  }
+}
+
+
+async function deleteSubmission(id){
+  if(currentRole !== "owner"){
+    return;
+  }
+
+  try{
+    const response = await fetch(
+      "/api/admin/submissions/" + id,
+      {
+        method:"DELETE",
+        headers:{
+          "X-Admin-Passcode":adminPasscode
+        }
+      }
+    );
+
+    const data = await response.json();
+
+    if(response.ok){
+      await loadSubmissions();
+    }else{
+      alert(
+        data.error ||
+        "Unable to delete this submission."
+      );
+    }
+
+  }catch(error){
+    alert("Unable to delete this submission.");
+  }
+}
+
+
+async function openCodePanel(){
+  if(currentRole !== "owner"){
+    return;
+  }
+
+  document.getElementById("codePanel").style.display = "block";
+
+  document.getElementById("generatedCode").style.display = "none";
+  document.getElementById("codeError").textContent = "";
+  document.getElementById("codeSuccess").textContent = "";
+
+  await loadAccessCodes();
+
+  document.getElementById("codePanel").scrollIntoView({
+    behavior:"smooth",
+    block:"start"
+  });
+}
+
+
+function closeCodePanel(){
+  document.getElementById("codePanel").style.display = "none";
+}
+
+
+async function createViewerCode(){
+  if(currentRole !== "owner"){
+    return;
+  }
+
+  const labelInput =
+    document.getElementById("viewerLabel");
+
+  const passcodeInput =
+    document.getElementById("viewerPasscode");
+
+  const errorBox =
+    document.getElementById("codeError");
+
+  const successBox =
+    document.getElementById("codeSuccess");
+
+  const generatedBox =
+    document.getElementById("generatedCode");
+
+  const generatedNumber =
+    document.getElementById("generatedNumber");
+
+  errorBox.textContent = "";
+  successBox.textContent = "";
+  generatedBox.style.display = "none";
+
+  const label = labelInput.value.trim();
+  const passcode = passcodeInput.value.trim();
+
+  if(passcode && !/^\d{6,12}$/.test(passcode)){
+    errorBox.textContent =
+      "Passcodes must contain 6 to 12 numbers.";
+    return;
+  }
+
+  try{
+    const response = await fetch(
+      "/api/admin/access-codes",
+      {
+        method:"POST",
+        headers:{
+          "Content-Type":"application/json",
+          "X-Admin-Passcode":adminPasscode
+        },
+        body:JSON.stringify({
+          label:label,
+          passcode:passcode
+        })
+      }
+    );
+
+    const data = await response.json();
+
+    if(!response.ok){
+      errorBox.textContent =
+        data.error ||
+        "Unable to create the passcode.";
+      return;
+    }
+
+    generatedNumber.textContent = data.passcode;
+    generatedBox.style.display = "block";
+
+    successBox.textContent =
+      "View-only access created successfully.";
+
+    labelInput.value = "";
+    passcodeInput.value = "";
+
+    await loadAccessCodes();
+
+  }catch(error){
+    errorBox.textContent =
+      "Unable to create the passcode.";
+  }
+}
+
+
+async function loadAccessCodes(){
+  if(currentRole !== "owner"){
+    return;
+  }
+
+  const list =
+    document.getElementById("codeList");
+
+  list.innerHTML =
+    "<div class='empty'>Loading passcodes...</div>";
+
+  try{
+    const response = await fetch(
+      "/api/admin/access-codes",
+      {
+        headers:{
+          "X-Admin-Passcode":adminPasscode
+        }
+      }
+    );
+
+    const data = await response.json();
+
+    if(!response.ok){
+      list.innerHTML =
+        "<div class='empty'>Unable to load passcodes.</div>";
+      return;
+    }
+
+    const codes =
+      (data.accessCodes || []).filter(
+        code => code.role === "viewer"
+      );
+
+    if(codes.length === 0){
+      list.innerHTML =
+        "<div class='empty'>No viewer passcodes have been created yet.</div>";
+      return;
+    }
+
+    list.innerHTML = "";
+
+    codes.forEach(code=>{
+      list.appendChild(
+        createAccessCodeItem(code)
+      );
+    });
+
+  }catch(error){
+    list.innerHTML =
+      "<div class='empty'>Unable to load passcodes.</div>";
+  }
+}
+
+
+function createAccessCodeItem(code){
+  const item =
+    document.createElement("div");
+
+  item.className = "code-item";
+
+  const info =
+    document.createElement("div");
+
+  info.className = "code-item-info";
+
+  const label =
+    document.createElement("strong");
+
+  label.textContent =
+    code.label || "Viewer";
+
+  const created =
+    document.createElement("span");
+
+  let dateText = "";
+
+  if(code.created_at){
+    dateText = new Date(
+      code.created_at.replace(" ","T") + "Z"
+    ).toLocaleString();
+  }
+
+  created.textContent =
+    dateText
+      ? "View-only access • Created " + dateText
+      : "View-only access";
+
+  info.appendChild(label);
+  info.appendChild(created);
+
+  const deleteButton =
+    document.createElement("button");
+
+  deleteButton.className =
+    "small-delete";
+
+  deleteButton.textContent =
+    "Remove Access";
+
+  deleteButton.onclick = async ()=>{
+    const confirmed = confirm(
+      "Remove view-only access for " +
+      (code.label || "this viewer") +
+      "?"
+    );
+
+    if(!confirmed){
+      return;
+    }
+
+    await deleteViewerCode(code.id);
+  };
+
+  item.appendChild(info);
+  item.appendChild(deleteButton);
+
+  return item;
+}
+
+
+async function deleteViewerCode(id){
+  if(currentRole !== "owner"){
+    return;
+  }
+
+  try{
+    const response = await fetch(
+      "/api/admin/access-codes/" + id,
+      {
+        method:"DELETE",
+        headers:{
+          "X-Admin-Passcode":adminPasscode
+        }
+      }
+    );
+
+    const data = await response.json();
+
+    if(response.ok){
+      document.getElementById("codeSuccess").textContent =
+        "View-only access removed.";
+
+      document.getElementById("generatedCode").style.display =
+        "none";
+
+      await loadAccessCodes();
+    }else{
+      document.getElementById("codeError").textContent =
+        data.error ||
+        "Unable to remove access.";
+    }
+
+  }catch(error){
+    document.getElementById("codeError").textContent =
+      "Unable to remove access.";
+  }
+}
+
+
+function logout(){
+  adminPasscode = "";
+  currentRole = "";
+  currentLabel = "";
+  currentFolder = "inbox";
+  currentView = "questions";
+
+  document.getElementById("adminArea").style.display = "none";
+  document.getElementById("loginBox").style.display = "block";
+  document.getElementById("submissionList").innerHTML = "";
+  document.getElementById("codePanel").style.display = "none";
+  document.getElementById("manageCodesButton").style.display = "none";
+  document.getElementById("questionsTab").classList.add("active");
+  document.getElementById("memoriesTab").classList.remove("active");
+  document.getElementById("approvedMemoriesTab").classList.remove("active");
+  document.getElementById("folderTabs").style.display = "flex";
+  document.getElementById("memoryNote").style.display = "none";
+
+  document.getElementById("passcode").value = "";
+  document.getElementById("loginError").textContent = "";
+
+  document
+    .querySelectorAll(".folder-tabs button")
+    .forEach(button=>{
+      button.classList.remove("active");
+
+      if(button.getAttribute("data-folder") === "inbox"){
+        button.classList.add("active");
+      }
+    });
+}
+
+
+
+document.getElementById("questionsTab")
+  .addEventListener("click",()=>{
+    setInboxView("questions");
+  });
+
+document.getElementById("memoriesTab")
+  .addEventListener("click",()=>{
+    setInboxView("memories");
+  });
+
+document.getElementById("approvedMemoriesTab")
+  .addEventListener("click",()=>{
+    setInboxView("approvedMemories");
+  });
+
+
+document.querySelectorAll(".folder-tabs button")
+  .forEach(button=>{
+    button.addEventListener("click",async ()=>{
+      document
+        .querySelectorAll(".folder-tabs button")
+        .forEach(item=>{
+          item.classList.remove("active");
+        });
+
+      button.classList.add("active");
+
+      currentFolder =
+        button.getAttribute("data-folder");
+
+      await loadSubmissions();
+    });
+  });
+
+
+document.getElementById("passcode")
+  .addEventListener("keydown",event=>{
+    if(event.key === "Enter"){
+      login();
+    }
+  });
+
+
+document.getElementById("viewerPasscode")
+  .addEventListener("input",event=>{
+    event.target.value =
+      event.target.value.replace(/\D/g,"");
+  });
+</script>
+
+
+<section id="shelterExperiencesAdmin" class="shelter-panel">
+  <h2>Shelter Experiences</h2>
+  <p>Review firsthand shelter experience submissions here.</p>
+
+  <div style="display:flex;gap:12px;flex-wrap:wrap;margin:20px 0;">
+    <button type="button" id="loadPendingShelter">Pending</button>
+    <button type="button" id="loadApprovedShelter">Approved</button>
+  </div>
+
+  <div id="shelterExperiencesList">
+    <p>Select Pending or Approved.</p>
+  </div>
+</section>
+
+
+<script>
+(function () {
+  const panel = document.getElementById("shelterExperiencesAdmin");
+  const tabButton = document.getElementById("shelterTabButton");
+  const pendingButton = document.getElementById("loadPendingShelter");
+  const approvedButton = document.getElementById("loadApprovedShelter");
+  const list = document.getElementById("shelterExperiencesList");
+
+  function getPasscode() {
+    const possibleKeys = ["adminPasscode", "passcode", "ownerPasscode", "smileeKyleePasscode"];
+    for (const key of possibleKeys) {
+      const value = sessionStorage.getItem(key) || localStorage.getItem(key);
+      if (value) return value;
+    }
+
+    const input =
+      document.querySelector('input[type="password"]') ||
+      document.querySelector('input[name="passcode"]') ||
+      document.getElementById("passcode");
+
+    return input && input.value ? input.value.trim() : "";
+  }
+
+  function showShelterPanel() {
+    if (!panel) return;
+
+    document.querySelectorAll("main section, .admin-section, .panel, .tab-content").forEach((el) => {
+      if (el !== panel && el.id !== "loginSection") {
+        el.classList.remove("active");
       }
     });
 
-    function returnToTop(){
-      window.scrollTo({ top: 0, behavior: "smooth" });
+    panel.style.display = "block";
+    panel.classList.add("active");
+    panel.scrollIntoView({ behavior: "smooth", block: "start" });
+  }
+
+  if (tabButton) {
+    tabButton.addEventListener("click", function (event) {
+      event.preventDefault();
+      showShelterPanel();
+      loadShelter("pending");
+    });
+  }
+
+  async function loadShelter(status) {
+    if (!list) return;
+
+    const passcode = getPasscode();
+
+    if (!passcode) {
+      list.innerHTML = "<p>Please log in first.</p>";
+      return;
     }
 
-    loadMemories();
-  </script>
+    list.innerHTML = "<p>Loading...</p>";
+
+    try {
+      const response = await fetch("/api/admin/shelter-experiences?status=" + encodeURIComponent(status), {
+        headers: {
+          "X-Admin-Passcode": passcode
+        }
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.error || "Unable to load submissions.");
+      }
+
+      const items = data.memories || [];
+
+      if (!items.length) {
+        list.innerHTML = "<p>No " + status + " shelter experiences.</p>";
+        return;
+      }
+
+      list.innerHTML = "";
+
+      items.forEach((item) => {
+        const card = document.createElement("div");
+        card.style.border = "1px solid #ddd";
+        card.style.borderRadius = "16px";
+        card.style.padding = "20px";
+        card.style.margin = "0 0 18px";
+        card.style.background = "#fff";
+
+        const safeName = item.name || "Anonymous";
+        const safeText = item.memory || "";
+
+        const title = document.createElement("h3");
+        title.textContent = safeName;
+        card.appendChild(title);
+
+        const text = document.createElement("p");
+        text.style.whiteSpace = "pre-wrap";
+        text.textContent = safeText;
+        card.appendChild(text);
+
+        if (item.image_data) {
+          const img = document.createElement("img");
+          img.src = item.image_data;
+          img.alt = "Submitted with shelter experience";
+          img.style.maxWidth = "320px";
+          img.style.width = "100%";
+          img.style.height = "auto";
+          img.style.display = "block";
+          img.style.borderRadius = "14px";
+          img.style.margin = "15px 0";
+          card.appendChild(img);
+        }
+
+        const buttons = document.createElement("div");
+        buttons.style.display = "flex";
+        buttons.style.gap = "10px";
+        buttons.style.flexWrap = "wrap";
+        buttons.style.marginTop = "15px";
+
+        if (status === "pending") {
+          const approve = document.createElement("button");
+          approve.type = "button";
+          approve.textContent = "Approve";
+          approve.addEventListener("click", async () => {
+            await shelterAction(item.id, "approve", "POST");
+            loadShelter("pending");
+          });
+          buttons.appendChild(approve);
+
+          const deny = document.createElement("button");
+          deny.type = "button";
+          deny.textContent = "Deny";
+          deny.addEventListener("click", async () => {
+            await shelterAction(item.id, "deny", "DELETE");
+            loadShelter("pending");
+          });
+          buttons.appendChild(deny);
+        } else {
+          const del = document.createElement("button");
+          del.type = "button";
+          del.textContent = "Delete";
+          del.addEventListener("click", async () => {
+            await shelterAction(item.id, "delete", "DELETE");
+            loadShelter("approved");
+          });
+          buttons.appendChild(del);
+        }
+
+        card.appendChild(buttons);
+        list.appendChild(card);
+      });
+    } catch (error) {
+      list.innerHTML = "<p>" + error.message + "</p>";
+    }
+  }
+
+  async function shelterAction(id, action, method) {
+    const passcode = getPasscode();
+
+    const response = await fetch(
+      "/api/admin/shelter-experiences/" + id + "/" + action,
+      {
+        method,
+        headers: {
+          "X-Admin-Passcode": passcode
+        }
+      }
+    );
+
+    const data = await response.json();
+
+    if (!response.ok) {
+      alert(data.error || "Unable to complete that action.");
+    }
+  }
+
+  if (pendingButton) {
+    pendingButton.addEventListener("click", function () {
+      loadShelter("pending");
+    });
+  }
+
+  if (approvedButton) {
+    approvedButton.addEventListener("click", function () {
+      loadShelter("approved");
+    });
+  }
+})();
+</script>
+
 </body>
 </html>
