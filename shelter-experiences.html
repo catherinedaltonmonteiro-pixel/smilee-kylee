@@ -965,7 +965,7 @@ const shareButton = document.getElementById("shareButton");
         }
 
         memoryForm.reset();
-        formMessage.textContent = "Thank you. Your experience has been sent for approval.";
+        formMessage.textContent = "Your experience was submitted successfully.";
 
         await loadMemories();
 
@@ -974,7 +974,7 @@ const shareButton = document.getElementById("shareButton");
           shareButton.textContent = "Share Your Experience";
           formMessage.textContent = "";
           shareButton.scrollIntoView({ behavior: "smooth", block: "center" });
-        }, 1200);
+        }, 1800);
 
       }catch(error){
         formMessage.textContent =
