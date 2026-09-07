@@ -818,7 +818,16 @@ if(publicQuestionForm){
 
       publicQuestionForm.reset();
       status.textContent =
-        "Thank you. Your question has been submitted.";
+        "Your question was submitted successfully.";
+
+      setTimeout(function(){
+        closeQuestionPopup();
+        status.textContent = "";
+        openQuestionForm.scrollIntoView({
+          behavior: "smooth",
+          block: "center"
+        });
+      }, 1800);
     }catch(error){
       status.textContent =
         "Unable to submit your question. Please try again.";
