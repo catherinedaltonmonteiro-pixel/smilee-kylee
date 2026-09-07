@@ -414,6 +414,33 @@ button:disabled{
   color:white;
 }
 
+.submission-count-badge{
+  display:none;
+  align-items:center;
+  justify-content:center;
+  min-width:20px;
+  height:20px;
+  padding:0 6px;
+  margin-left:7px;
+  border-radius:999px;
+  background:#c62828;
+  color:white;
+  font-size:.75rem;
+  font-weight:900;
+  line-height:1;
+  vertical-align:middle;
+  box-sizing:border-box;
+}
+
+.submission-count-badge.show{
+  display:inline-flex;
+}
+
+.folder-tabs .submission-count-badge{
+  margin-left:6px;
+}
+
+
 .approve-button{
   background:#2f6d44;
 }
@@ -546,16 +573,16 @@ button:disabled{
 
     <div class="inbox-type-tabs">
       <button id="questionsTab" class="active" type="button">
-        Questions
+        Questions <span id="questionsCountBadge" class="submission-count-badge" aria-label="pending questions"></span>
       </button>
       <button id="memoriesTab" type="button">
-        Pending Memories
+        Pending Memories <span id="memoriesCountBadge" class="submission-count-badge" aria-label="pending memories"></span>
       </button>
       <button id="approvedMemoriesTab" type="button">
         Posted Memories
       </button>
       <button id="shelterPendingTab" type="button">
-        Pending Shelter Experiences
+        Pending Shelter Experiences <span id="shelterCountBadge" class="submission-count-badge" aria-label="pending shelter experiences"></span>
       </button>
       <button id="shelterApprovedTab" type="button">
         Posted Shelter Experiences
@@ -569,11 +596,11 @@ button:disabled{
     <div class="toolbar">
 
       <div id="folderTabs" class="folder-tabs">
-        <button data-folder="inbox" class="active">Inbox</button>
-        <button data-folder="next">Next in Line</button>
-        <button data-folder="work">Work in Progress</button>
-        <button data-folder="future">Address in the Future</button>
-        <button data-folder="backburner">Back Burner</button>
+        <button data-folder="inbox" class="active">Inbox <span id="folderCount-inbox" class="submission-count-badge"></span></button>
+        <button data-folder="next">Next in Line <span id="folderCount-next" class="submission-count-badge"></span></button>
+        <button data-folder="work">Work in Progress <span id="folderCount-work" class="submission-count-badge"></span></button>
+        <button data-folder="future">Address in the Future <span id="folderCount-future" class="submission-count-badge"></span></button>
+        <button data-folder="backburner">Back Burner <span id="folderCount-backburner" class="submission-count-badge"></span></button>
       </div>
 
       <div class="toolbar-right">
@@ -615,6 +642,121 @@ const folderNames = {
   future: "Address in the Future",
   backburner: "Back Burner"
 };
+
+
+function setSubmissionCountBadge(id,count){
+  const badge = document.getElementById(id);
+
+  if(!badge){
+    return;
+  }
+
+  const number = Number(count) || 0;
+
+  if(number > 0){
+    badge.textContent = number;
+    badge.classList.add("show");
+  }else{
+    badge.textContent = "";
+    badge.classList.remove("show");
+  }
+}
+
+
+async function getAdminCount(url,arrayKey){
+  try{
+    const response = await fetch(url,{
+      headers:{
+        "X-Admin-Passcode":adminPasscode
+      }
+    });
+
+    if(response.status === 401){
+      return null;
+    }
+
+    if(!response.ok){
+      return null;
+    }
+
+    const data = await response.json();
+    const items = data[arrayKey] || [];
+
+    return items.length;
+
+  }catch(error){
+    return null;
+  }
+}
+
+
+async function refreshSubmissionCounts(){
+  if(!adminPasscode){
+    return;
+  }
+
+  const questionFolders = [
+    "inbox",
+    "next",
+    "work",
+    "future",
+    "backburner"
+  ];
+
+  const questionResults = await Promise.all(
+    questionFolders.map(folder =>
+      getAdminCount(
+        "/api/admin/submissions?folder=" +
+        encodeURIComponent(folder),
+        "submissions"
+      )
+    )
+  );
+
+  let questionsTotal = 0;
+
+  questionFolders.forEach((folder,index)=>{
+    const count = questionResults[index];
+
+    if(count !== null){
+      setSubmissionCountBadge(
+        "folderCount-" + folder,
+        count
+      );
+
+      questionsTotal += count;
+    }
+  });
+
+  setSubmissionCountBadge(
+    "questionsCountBadge",
+    questionsTotal
+  );
+
+  const memoryCount = await getAdminCount(
+    "/api/admin/memories?status=pending",
+    "memories"
+  );
+
+  if(memoryCount !== null){
+    setSubmissionCountBadge(
+      "memoriesCountBadge",
+      memoryCount
+    );
+  }
+
+  const shelterCount = await getAdminCount(
+    "/api/admin/shelter-experiences?status=pending",
+    "memories"
+  );
+
+  if(shelterCount !== null){
+    setSubmissionCountBadge(
+      "shelterCountBadge",
+      shelterCount
+    );
+  }
+}
 
 
 async function login(){
@@ -755,6 +897,8 @@ async function loadCurrentView(){
   }else{
     await loadSubmissions();
   }
+
+  await refreshSubmissionCounts();
 }
 
 
@@ -943,6 +1087,7 @@ async function approveMemory(id){
 
     if(response.ok){
       await loadMemories();
+      await refreshSubmissionCounts();
     }else{
       alert(
         data.error ||
@@ -976,6 +1121,7 @@ async function denyMemory(id){
 
     if(response.ok){
       await loadMemories();
+      await refreshSubmissionCounts();
     }else{
       alert(
         data.error ||
@@ -1207,6 +1353,7 @@ async function approveShelterExperience(id){
 
     if(response.ok){
       await loadShelterExperiences("pending");
+      await refreshSubmissionCounts();
     }else{
       alert(data.error || "Unable to approve this shelter experience.");
     }
@@ -1235,6 +1382,7 @@ async function denyShelterExperience(id){
 
     if(response.ok){
       await loadShelterExperiences("pending");
+      await refreshSubmissionCounts();
     }else{
       alert(data.error || "Unable to deny this shelter experience.");
     }
@@ -1459,6 +1607,7 @@ async function moveSubmission(id,folder){
 
     if(response.ok){
       await loadSubmissions();
+      await refreshSubmissionCounts();
     }else{
       alert(
         data.error ||
@@ -1492,6 +1641,7 @@ async function deleteSubmission(id){
 
     if(response.ok){
       await loadSubmissions();
+      await refreshSubmissionCounts();
     }else{
       alert(
         data.error ||
@@ -1792,6 +1942,19 @@ function logout(){
   document.getElementById("passcode").value = "";
   document.getElementById("loginError").textContent = "";
 
+  [
+    "questionsCountBadge",
+    "memoriesCountBadge",
+    "shelterCountBadge",
+    "folderCount-inbox",
+    "folderCount-next",
+    "folderCount-work",
+    "folderCount-future",
+    "folderCount-backburner"
+  ].forEach(id=>{
+    setSubmissionCountBadge(id,0);
+  });
+
   document
     .querySelectorAll(".folder-tabs button")
     .forEach(button=>{
@@ -1846,6 +2009,7 @@ document.querySelectorAll(".folder-tabs button")
         button.getAttribute("data-folder");
 
       await loadSubmissions();
+      await refreshSubmissionCounts();
     });
   });
 
