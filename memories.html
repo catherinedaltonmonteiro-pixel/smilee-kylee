@@ -953,7 +953,14 @@ const shareButton = document.getElementById("shareButton");
 
         memoryForm.reset();
         formMessage.textContent =
-          "Thank you. Your memory has been sent for approval.";
+          "Your memory was submitted successfully.";
+
+        setTimeout(function(){
+          shareBox.classList.remove("open");
+          shareButton.textContent = "Share Your Memory";
+          formMessage.textContent = "";
+          shareButton.scrollIntoView({ behavior: "smooth", block: "center" });
+        }, 1800);
       }catch(error){
         formMessage.textContent =
           error.message || "Unable to submit your memory. Please try again.";
