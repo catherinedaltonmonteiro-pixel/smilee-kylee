@@ -603,35 +603,8 @@ footer{
 </style>
 </head>
 <body>
-<div class="emergency-bar">
-If you are in immediate danger, call 911.
-</div>
 
-<div class="funding-notice">
-<strong>Funding Notice:</strong>
-Donations, merchandise proceeds after costs and fees, and other financial support go toward building Smilee Kylee and its future programs, resources, and supportive housing for women in need.
-</div>
-
-<nav>
-<div class="nav-inner">
-
-<a class="brand" href="index.html">Smilee Kylee</a>
-
-<div class="nav-links">
-<a href="index.html">Home</a>
-<a href="kylee.html">Meet Kylee</a>
-<a href="mission.html">Vision & Mission</a>
-<a href="shop.html">Shop</a>
-<a href="donate.html">Donate</a>
-<a href="case.html">The Case</a>
-<a href="story.html">What We Know</a>
-<a class="active" href="questions.html">Public Questions</a>
-<a href="memories.html">Memories</a>
-<a href="help.html">Get Help</a>
-</div>
-
-</div>
-</nav>
+  <div id="site-shared-top"></div>
 
 <header class="hero">
   <div class="hero-inner">
@@ -747,73 +720,13 @@ Donations, merchandise proceeds after costs and fees, and other financial suppor
   </div>
 </section>
 
-<footer>
-<div class="footer-inner">
+  <div id="site-shared-footer"></div>
 
-<div class="footer-grid">
-
-<div class="footer-brand">
-<h2>Smilee Kylee</h2>
-<p>Created in loving memory of Kylee M. Monteiro.</p>
-<p>Her memory becomes someone else's hope.</p>
-</div>
-
-<div class="footer-column">
-<h3>Explore</h3>
-<div class="footer-links">
-<a href="index.html">Home</a>
-<a href="kylee.html">Meet Kylee</a>
-<a href="mission.html">Vision &amp; Mission</a>
-<a href="case.html">The Case</a>
-<a href="story.html">What We Know</a>
-<a href="questions.html">Public Questions</a>
-<a href="memories.html">Memories</a>
-<a href="help.html">Get Help</a>
-</div>
-</div>
-
-<div class="footer-column">
-<h3>Support Smilee Kylee</h3>
-<div class="footer-links">
-<a href="shop.html">Shop Smilee Kylee</a>
-<a href="donate.html">Donate</a>
-<a href="https://www.paypal.com/ncp/payment/BKQGJZW65HJS4" target="_blank" rel="noopener noreferrer">PayPal</a>
-<a href="https://cash.app/$justice4Kylee" target="_blank" rel="noopener noreferrer">Cash App</a>
-<a href="https://venmo.com/u/smileekylee" target="_blank" rel="noopener noreferrer">Venmo</a>
-<a href="https://smilee-kylee-shop.fourthwall.com/" target="_blank" rel="noopener noreferrer">Fourthwall Shop</a>
-</div>
-</div>
-
-</div>
-
-<div class="footer-divider"></div>
-
-<div class="footer-bottom">
-<p>May her memory become safety, healing, opportunity and hope.</p>
-<p class="copyright">
-© <span id="year"></span> Smilee Kylee. All rights reserved.
-</p>
-</div>
-
-</div>
-</footer>
 
 <button id="openQuestionForm" class="floating-question-button" type="button">
 Submit a Question
 </button>
-
-<button class="quick-exit" type="button" onclick="returnToTop()">
-Return to Top
-</button>
-
 <script>
-document.getElementById("year").textContent =
-new Date().getFullYear();
-
-function returnToTop(){
-  window.scrollTo({top:0, behavior:"smooth"});
-}
-
 const questionModal =
 document.getElementById("questionModal");
 
@@ -918,5 +831,6 @@ if(publicQuestionForm){
 
 </script>
 
+  <script src="site-shared.js"></script>
 </body>
 </html>
