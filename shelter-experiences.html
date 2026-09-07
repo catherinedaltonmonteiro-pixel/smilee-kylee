@@ -1,0 +1,1042 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shelter Experiences | Smilee Kylee</title>
+
+  <style>
+    :root{
+      --lavender:#d8c5e8;
+      --purple:#7d5a91;
+      --deep-purple:#553765;
+      --pink:#efd2df;
+      --cream:#fffaf5;
+      --white:#ffffff;
+      --charcoal:#342f35;
+    }
+
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+
+    body{
+      margin:0;
+      font-family:Arial,Helvetica,sans-serif;
+      background:var(--cream);
+      color:var(--charcoal);
+      line-height:1.7;
+    }
+
+    .emergency-bar{
+      background:var(--deep-purple);
+      color:white;
+      text-align:center;
+      padding:8px 20px;
+      font-size:.9rem;
+    }
+
+    .funding-notice{
+      background:#f3ebf7;
+      color:var(--deep-purple);
+      text-align:center;
+      padding:10px 22px;
+      font-size:.85rem;
+      border-bottom:1px solid var(--lavender);
+    }
+
+    nav{
+      background:rgba(255,255,255,.97);
+      border-bottom:1px solid #eadfea;
+      position:sticky;
+      top:0;
+      z-index:100;
+    }
+
+    .nav-inner{
+      max-width:1200px;
+      margin:auto;
+      padding:15px 24px;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:20px;
+    }
+
+    .brand{
+      color:var(--deep-purple);
+      font-size:1.35rem;
+      font-weight:800;
+      text-decoration:none;
+      white-space:nowrap;
+    }
+
+    .nav-links{
+      display:flex;
+      flex-wrap:wrap;
+      gap:17px;
+      align-items:center;
+    }
+
+    .nav-links a{
+      color:var(--charcoal);
+      text-decoration:none;
+      font-size:.92rem;
+      font-weight:700;
+    }
+
+    .nav-links a:hover,.nav-links a.active{color:var(--purple)}
+
+    .hero{
+      text-align:center;
+      padding:85px 24px 55px;
+      background:linear-gradient(135deg,#f3ebf7,#fffaf5,#fdf0f5);
+    }
+
+    .eyebrow{
+      text-transform:uppercase;
+      letter-spacing:3px;
+      font-size:.8rem;
+      font-weight:800;
+      color:var(--purple);
+      margin-bottom:10px;
+    }
+
+    h1,h2,h3{
+      font-family:Georgia,"Times New Roman",serif;
+      color:var(--deep-purple);
+    }
+
+    h1{
+      font-size:clamp(3rem,7vw,5.6rem);
+      line-height:1;
+      margin:0 0 20px;
+    }
+
+    .hero p{
+      max-width:760px;
+      margin:auto;
+      font-size:1.15rem;
+    }
+
+    .notice{
+      max-width:950px;
+      margin:35px auto 0;
+      padding:20px 24px;
+      border:1px solid var(--lavender);
+      border-radius:18px;
+      background:white;
+      text-align:left;
+      font-size:.92rem;
+    }
+
+    .board-wrap{
+      max-width:1250px;
+      margin:auto;
+      padding:60px 24px 110px;
+    }
+
+    .board-header{
+      max-width:750px;
+      margin-bottom:35px;
+    }
+
+    .board-header h2{
+      font-size:clamp(2.2rem,5vw,3.5rem);
+      margin:0 0 10px;
+    }
+
+    .read-instruction{
+      display:inline-block;
+      margin-top:12px;
+      padding:12px 18px;
+      border-radius:999px;
+      background:#f3ebf7;
+      color:var(--deep-purple);
+      font-weight:800;
+    }
+
+    .memory-board{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+      gap:34px 28px;
+      align-items:start;
+      padding:22px 10px 10px;
+    }
+
+    .memory-card{
+      --tilt:0deg;
+      position:relative;
+      display:flex;
+      flex-direction:column;
+      justify-content:center;
+      align-items:center;
+      text-align:center;
+      min-height:240px;
+      padding:34px;
+      background:white;
+      box-shadow:0 14px 34px rgba(70,45,80,.12);
+      transform:rotate(var(--tilt));
+      transform-origin:center;
+      transition:transform .2s ease, box-shadow .2s ease;
+      overflow:hidden;
+      margin:0 auto;
+    }
+
+    .memory-card:hover{
+      transform:rotate(0deg) translateY(-4px) scale(1.02);
+      box-shadow:0 18px 38px rgba(70,45,80,.17);
+      z-index:3;
+    }
+
+    .memory-card:nth-child(3n+1){background:#fffdf9}
+    .memory-card:nth-child(3n+2){background:#fdf0f5}
+    .memory-card:nth-child(3n+3){background:#f3ebf7}
+
+    .shape-circle{
+      width:250px;
+      height:250px;
+      border-radius:50%;
+      padding:42px;
+    }
+
+    .shape-square{
+      width:250px;
+      min-height:250px;
+      border-radius:18px;
+    }
+
+    .shape-oval{
+      width:290px;
+      min-height:210px;
+      border-radius:50%;
+      padding:36px 44px;
+    }
+
+    .shape-star{
+      width:285px;
+      min-height:285px;
+      padding:58px 54px;
+      clip-path:polygon(
+        50% 0%,
+        61% 34%,
+        98% 35%,
+        68% 57%,
+        79% 93%,
+        50% 72%,
+        21% 93%,
+        32% 57%,
+        2% 35%,
+        39% 34%
+      );
+    }
+
+    .shape-triangle{
+      width:300px;
+      min-height:270px;
+      padding:78px 56px 40px;
+      clip-path:polygon(50% 0%,100% 100%,0% 100%);
+    }
+
+    .shape-diamond{
+      width:245px;
+      min-height:245px;
+      padding:48px;
+      clip-path:polygon(50% 0%,100% 50%,50% 100%,0% 50%);
+    }
+
+    .shape-hexagon{
+      width:275px;
+      min-height:240px;
+      padding:42px;
+      clip-path:polygon(25% 6%,75% 6%,100% 50%,75% 94%,25% 94%,0% 50%);
+    }
+
+    .shape-heart{
+      width:285px;
+      min-height:255px;
+      padding:62px 50px 42px;
+      clip-path:polygon(
+        50% 92%,
+        10% 52%,
+        3% 34%,
+        6% 17%,
+        18% 6%,
+        33% 4%,
+        46% 14%,
+        50% 20%,
+        54% 14%,
+        67% 4%,
+        82% 6%,
+        94% 17%,
+        97% 34%,
+        90% 52%
+      );
+    }
+
+    .memory-text{
+      position:relative;
+      z-index:1;
+      white-space:pre-wrap;
+      font-family:Georgia,"Times New Roman",serif;
+      font-size:1.03rem;
+      line-height:1.6;
+      max-width:100%;
+      display:-webkit-box;
+      -webkit-line-clamp:6;
+      -webkit-box-orient:vertical;
+      overflow:hidden;
+    }
+
+    .memory-card{
+      cursor:pointer;
+    }
+
+    .memory-card::after{
+      content:"Click to read full experience";
+      position:absolute;
+      left:50%;
+      bottom:12px;
+      transform:translateX(-50%);
+      width:80%;
+      font-size:.75rem;
+      font-weight:800;
+      color:var(--deep-purple);
+      opacity:.72;
+      z-index:2;
+      pointer-events:none;
+    }
+
+    .memory-modal-backdrop{
+      position:fixed;
+      inset:0;
+      background:rgba(47,38,50,.72);
+      display:none;
+      align-items:center;
+      justify-content:center;
+      padding:22px;
+      z-index:1000;
+    }
+
+    .memory-modal-backdrop.open{
+      display:flex;
+    }
+
+    .memory-modal{
+      position:relative;
+      width:min(680px,94vw);
+      max-height:84vh;
+      overflow:auto;
+      background:white;
+      border-radius:28px;
+      padding:40px 34px 34px;
+      box-shadow:0 24px 70px rgba(0,0,0,.28);
+      text-align:left;
+    }
+
+    .memory-modal h3{
+      margin:0 45px 18px 0;
+      color:var(--deep-purple);
+      font-family:Georgia,"Times New Roman",serif;
+      font-size:1.5rem;
+    }
+
+    .memory-modal-text{
+      white-space:pre-wrap;
+      font-family:Georgia,"Times New Roman",serif;
+      font-size:1.12rem;
+      line-height:1.8;
+    }
+
+    .memory-modal-name{
+      margin-top:24px;
+      font-weight:800;
+      color:var(--deep-purple);
+    }
+
+    .memory-modal-close{
+      position:absolute;
+      right:16px;
+      top:14px;
+      width:40px;
+      height:40px;
+      border:none;
+      border-radius:50%;
+      background:#f3ebf7;
+      color:var(--deep-purple);
+      font-size:1.35rem;
+      font-weight:800;
+      cursor:pointer;
+    }
+
+    .memory-name{
+      position:relative;
+      z-index:1;
+      margin-top:16px;
+      font-weight:800;
+      color:var(--deep-purple);
+    }
+
+
+    .memory-photo-input{
+      width:100%;
+      padding:12px;
+      border:1px solid #d9ccd9;
+      border-radius:12px;
+      background:white;
+      font:inherit;
+    }
+
+    .photo-help{
+      margin:7px 0 16px;
+      font-size:.84rem;
+      color:#665f68;
+      line-height:1.5;
+    }
+
+    .memory-thumb{
+      width:74px;
+      height:74px;
+      border-radius:50%;
+      object-fit:cover;
+      margin:0 auto 12px;
+      border:4px solid rgba(255,255,255,.85);
+      box-shadow:0 4px 14px rgba(70,45,80,.16);
+      flex:0 0 auto;
+    }
+
+    .memory-modal-image{
+      display:none;
+      width:100%;
+      max-height:460px;
+      object-fit:contain;
+      border-radius:18px;
+      margin:0 0 24px;
+      background:#f7f2f7;
+    }
+
+    .memory-modal-image.show{
+      display:block;
+    }
+
+    @media (max-width:700px){
+      .memory-board{
+        grid-template-columns:1fr;
+        gap:28px;
+      }
+
+      .memory-card{
+        transform:rotate(calc(var(--tilt) * .45));
+      }
+
+      .shape-circle,
+      .shape-square,
+      .shape-oval,
+      .shape-star,
+      .shape-triangle,
+      .shape-diamond,
+      .shape-hexagon,
+      .shape-heart{
+        width:min(88vw,300px);
+      }
+    }
+
+    .empty{
+      background:white;
+      padding:35px;
+      border-radius:20px;
+      text-align:center;
+      box-shadow:0 10px 30px rgba(70,45,80,.07);
+    }
+
+    .share-panel{
+      position:fixed;
+      right:22px;
+      top:50%;
+      transform:translateY(-50%);
+      z-index:150;
+      display:flex;
+      align-items:flex-start;
+      gap:12px;
+    }
+
+    .share-button{
+      border:0;
+      border-radius:999px;
+      padding:17px 24px;
+      background:var(--deep-purple);
+      color:white;
+      font-weight:800;
+      font-size:1rem;
+      cursor:pointer;
+      box-shadow:0 10px 28px rgba(0,0,0,.2);
+    }
+
+    .share-box{
+      width:min(390px,calc(100vw - 40px));
+      background:white;
+      border-radius:22px;
+      padding:25px;
+      box-shadow:0 15px 45px rgba(0,0,0,.22);
+      display:none;
+    }
+
+    .share-box.open{display:block}
+
+    .share-box h3{
+      margin:0 0 7px;
+      font-size:1.6rem;
+    }
+
+    .share-box p{
+      margin:0 0 16px;
+      font-size:.9rem;
+    }
+
+    label{
+      display:block;
+      font-weight:800;
+      color:var(--deep-purple);
+      margin:13px 0 6px;
+    }
+
+    input,textarea{
+      width:100%;
+      padding:12px;
+      border:1px solid #d9cedd;
+      border-radius:12px;
+      font:inherit;
+      background:#fffdfb;
+    }
+
+    textarea{
+      min-height:150px;
+      resize:vertical;
+    }
+
+    .submit-button{
+      width:100%;
+      margin-top:17px;
+      border:0;
+      border-radius:999px;
+      padding:13px 20px;
+      background:var(--purple);
+      color:white;
+      font-weight:800;
+      cursor:pointer;
+    }
+
+    .form-message{
+      margin-top:12px!important;
+      font-weight:700;
+      color:var(--deep-purple);
+    }
+
+    footer{
+      background:#2f2632;
+      color:#e9e1ea;
+      padding:55px 24px 85px;
+      font-size:.9rem;
+    }
+
+    .footer-inner{max-width:1100px;margin:auto}
+    .footer-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:42px}
+    .footer-brand h2{color:white;margin:0 0 11px}
+    .footer-brand p{color:#cfc7d4;margin:7px 0}
+    .footer-column h3{color:white;margin:0 0 14px;font-size:1.15rem}
+    .footer-links{display:grid;gap:9px}
+    .footer-links a{color:#cfc7d4;text-decoration:none}
+    .footer-links a:hover{color:white;text-decoration:underline}
+    .footer-divider{height:1px;background:rgba(255,255,255,.12);margin:34px 0 24px}
+    .footer-bottom{text-align:center;color:#cfc7d4}
+    .footer-bottom p{margin:6px auto}
+
+    .return-top{
+      position:fixed;
+      right:18px;
+      bottom:18px;
+      z-index:140;
+      border:0;
+      border-radius:999px;
+      padding:13px 20px;
+      background:var(--deep-purple);
+      color:white;
+      font-weight:800;
+      cursor:pointer;
+      box-shadow:0 8px 25px rgba(0,0,0,.22);
+    }
+
+    @media(max-width:900px){
+      .nav-inner{flex-direction:column;align-items:flex-start}
+      .footer-grid{grid-template-columns:1fr}
+      .share-panel{
+        position:fixed;
+        top:auto;
+        right:18px;
+        bottom:72px;
+        transform:none;
+        flex-direction:column-reverse;
+        align-items:flex-end;
+      }
+      .share-box{max-height:70vh;overflow:auto}
+    }
+  </style>
+</head>
+
+<body>
+  <div class="emergency-bar">If you are in immediate danger, call 911.</div>
+
+  <div class="funding-notice">
+    <strong>Funding Notice:</strong>
+    Donations, merchandise proceeds after costs and fees, and other financial support go toward building Smilee Kylee and its future programs, resources, and supportive housing for women in need.
+  </div>
+
+  <nav>
+    <div class="nav-inner">
+      <a class="brand" href="index.html">Smilee Kylee</a>
+      <div class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="kylee.html">Meet Kylee</a>
+        <a href="mission.html">Vision &amp; Mission</a>
+        <a href="timeline.html">Timeline</a>
+        <a href="shop.html">Shop</a>
+        <a href="donate.html">Donate</a>
+        <a href="case.html">The Case</a>
+        <a href="story.html">What We Know</a>
+        <a href="questions.html">Public Questions</a>
+        <a href="memories.html">Memories</a>
+        <a class="active" href="shelter-experiences.html">Shelter Experiences</a>
+        <a href="help.html">Get Help</a>
+      </div>
+    </div>
+  </nav>
+
+  <header class="hero">
+    <div class="eyebrow">In Loving Memory of Kylee M. Monteiro</div>
+    <h1>Shelter Experiences</h1>
+    <p>
+      A place for people who have personally experienced living at Bethesda House
+      or other shelters in the area to share what their experience was like.
+    </p>
+
+    <div class="notice">
+      <strong>Community Notice:</strong>
+      This page is for firsthand personal experiences. Submissions are reviewed before publication.
+      Please do not include threats, harassment, impersonation, private contact information,
+      or identifying information about other shelter residents. Published submissions reflect
+      the individual contributor's own account and are not presented as independently verified facts.
+      Submission does not guarantee publication.
+    </div>
+  </header>
+
+  <main class="board-wrap">
+    <div class="board-header">
+      <div class="eyebrow">Firsthand Community Experiences</div>
+      <h2>Shelter Experience Board</h2>
+      <p>
+        These experiences are shared by people who say they personally lived at Bethesda House
+        or another shelter in the area. Every submission is reviewed before appearing here.
+      </p>
+      <p class="read-instruction">Click on each experience to read the full submission.</p>
+    </div>
+
+    <div id="memoryBoard" class="memory-board">
+      <div class="empty">Loading experiences...</div>
+    </div>
+  </main>
+
+  <div class="share-panel">
+    <div id="shareBox" class="share-box">
+      <h3>Share Your Experience</h3>
+      <p>Your experience will be sent privately for approval before it appears on this page.</p>
+
+      <form id="memoryForm">
+        <label for="memoryName">Your Name or “Anonymous”</label>
+        <input id="memoryName" name="name" maxlength="100" required>
+
+        <label for="memoryText">Your Shelter Experience</label>
+        <textarea id="memoryText" name="memory" maxlength="4000" required></textarea>
+
+        <label for="memoryPhoto">Add a Picture (Optional)</label>
+        <input
+          class="memory-photo-input"
+          id="memoryPhoto"
+          name="photo"
+          type="file"
+          accept="image/jpeg,image/png,image/webp"
+        >
+        <p class="photo-help">
+          You may include one picture with your experience. Pictures are reviewed with the written submission before anything is published. Please do not upload images that identify other shelter residents without their permission.
+        </p>
+
+        <button class="submit-button" type="submit">Send Experience for Approval</button>
+        <p id="formMessage" class="form-message" aria-live="polite"></p>
+      </form>
+    </div>
+
+    <button id="shareButton" class="share-button" type="button">
+      Share Your Experience
+    </button>
+  </div>
+
+
+  <div
+    class="memory-modal-backdrop"
+    id="memoryModalBackdrop"
+    aria-hidden="true"
+  >
+    <div
+      class="memory-modal"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="memoryModalTitle"
+    >
+      <button
+        class="memory-modal-close"
+        id="memoryModalClose"
+        type="button"
+        aria-label="Close full experience"
+      >
+        ×
+      </button>
+
+      <h3 id="memoryModalTitle">A Shelter Experience</h3>
+      <img
+        class="memory-modal-image"
+        id="memoryModalImage"
+        alt=""
+      >
+      <div class="memory-modal-text" id="memoryModalText"></div>
+      <div class="memory-modal-name" id="memoryModalName"></div>
+    </div>
+  </div>
+
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <h2>Smilee Kylee</h2>
+          <p>Created in loving memory of Kylee M. Monteiro.</p>
+          <p>Her memory becomes someone else's hope.</p>
+        </div>
+
+        <div class="footer-column">
+          <h3>Explore</h3>
+          <div class="footer-links">
+            <a href="index.html">Home</a>
+            <a href="kylee.html">Meet Kylee</a>
+            <a href="mission.html">Vision &amp; Mission</a>
+            <a href="timeline.html">Timeline</a>
+            <a href="case.html">The Case</a>
+            <a href="story.html">What We Know</a>
+            <a href="questions.html">Public Questions</a>
+            <a href="memories.html">Memories</a>
+            <a href="help.html">Get Help</a>
+          </div>
+        </div>
+
+        <div class="footer-column">
+          <h3>Support Smilee Kylee</h3>
+          <div class="footer-links">
+            <a href="shop.html">Shop Smilee Kylee</a>
+            <a href="donate.html">Donate</a>
+            <a href="https://www.paypal.com/ncp/payment/BKQGJZW65HJS4" target="_blank" rel="noopener noreferrer">PayPal</a>
+            <a href="https://cash.app/$justice4Kylee" target="_blank" rel="noopener noreferrer">Cash App</a>
+            <a href="https://venmo.com/u/smileekylee" target="_blank" rel="noopener noreferrer">Venmo</a>
+            <a href="https://smilee-kylee-shop.fourthwall.com/" target="_blank" rel="noopener noreferrer">Fourthwall Shop</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-divider"></div>
+      <div class="footer-bottom">
+        <p>May her memory become safety, healing, opportunity and hope.</p>
+        <p>© <span id="year"></span> Smilee Kylee. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <button class="return-top" type="button" onclick="returnToTop()">Return to Top</button>
+
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+
+    const shareButton = document.getElementById("shareButton");
+    const shareBox = document.getElementById("shareBox");
+    const memoryForm = document.getElementById("memoryForm");
+    const formMessage = document.getElementById("formMessage");
+    const memoryBoard = document.getElementById("memoryBoard");
+
+    shareButton.addEventListener("click", function(){
+      shareBox.classList.toggle("open");
+    });
+
+    const textMemoryShapes = [
+      "shape-square",
+      "shape-circle"
+    ];
+
+    const photoMemoryShapes = [
+      "shape-star",
+      "shape-triangle",
+      "shape-oval",
+      "shape-diamond",
+      "shape-hexagon",
+      "shape-heart"
+    ];
+
+    const memoryTilts = ["-2deg","1.5deg","-1deg","2deg","-.75deg","1deg","-1.4deg","1.8deg"];
+
+    function makeMemoryCard(memory, index){
+      const card = document.createElement("article");
+
+      const shapes = memory.has_image ? photoMemoryShapes : textMemoryShapes;
+      const shape = shapes[index % shapes.length];
+      card.className = "memory-card " + shape;
+      card.style.setProperty("--tilt", memoryTilts[index % memoryTilts.length]);
+
+      if(memory.has_image){
+        const thumb = document.createElement("img");
+        thumb.className = "memory-thumb";
+        thumb.src = "/api/shelter-experiences/" + memory.id + "/image";
+        thumb.alt = "Picture submitted with this experience";
+        card.appendChild(thumb);
+      }
+
+      const text = document.createElement("div");
+      text.className = "memory-text";
+      text.textContent = memory.memory;
+
+      const name = document.createElement("div");
+      name.className = "memory-name";
+      name.textContent = "— " + memory.name;
+
+      card.appendChild(text);
+      card.appendChild(name);
+
+      card.setAttribute("role", "button");
+      card.setAttribute("tabindex", "0");
+      card.setAttribute("aria-label", "Read full experience from " + memory.name);
+
+      function openThisMemory(){
+        openMemoryModal(memory);
+      }
+
+      card.addEventListener("click", openThisMemory);
+      card.addEventListener("keydown", function(event){
+        if(event.key === "Enter" || event.key === " "){
+          event.preventDefault();
+          openThisMemory();
+        }
+      });
+
+      return card;
+    }
+
+    function openMemoryModal(memory){
+      const backdrop = document.getElementById("memoryModalBackdrop");
+      const text = document.getElementById("memoryModalText");
+      const name = document.getElementById("memoryModalName");
+      const image = document.getElementById("memoryModalImage");
+
+      text.textContent = memory.memory;
+      name.textContent = "— " + memory.name;
+
+      if(memory.has_image){
+        image.src = "/api/shelter-experiences/" + memory.id + "/image";
+        image.alt = "Picture submitted by " + memory.name;
+        image.classList.add("show");
+      }else{
+        image.removeAttribute("src");
+        image.alt = "";
+        image.classList.remove("show");
+      }
+
+      backdrop.classList.add("open");
+      backdrop.setAttribute("aria-hidden", "false");
+      document.body.style.overflow = "hidden";
+      document.getElementById("memoryModalClose").focus();
+    }
+
+    function closeMemoryModal(){
+      const backdrop = document.getElementById("memoryModalBackdrop");
+      backdrop.classList.remove("open");
+      backdrop.setAttribute("aria-hidden", "true");
+      document.body.style.overflow = "";
+    }
+
+    const memoryModalBackdrop = document.getElementById("memoryModalBackdrop");
+    const memoryModalClose = document.getElementById("memoryModalClose");
+
+    memoryModalClose.addEventListener("click", function(event){
+      event.preventDefault();
+      event.stopPropagation();
+      closeMemoryModal();
+    });
+
+    memoryModalBackdrop.addEventListener("click", function(event){
+      if(event.target === memoryModalBackdrop){
+        closeMemoryModal();
+      }
+    });
+
+    document.addEventListener("keydown", function(event){
+      if(event.key === "Escape" && memoryModalBackdrop.classList.contains("open")){
+        closeMemoryModal();
+      }
+    });
+
+    async function loadMemories(){
+      try{
+        const response = await fetch("/api/shelter-experiences", {
+          method: "GET",
+          headers: { "Accept": "application/json" }
+        });
+
+        const data = await response.json();
+
+        if(!response.ok){
+          throw new Error(data.error || "Unable to load experiences.");
+        }
+
+        memoryBoard.textContent = "";
+
+        if(!data.memories || data.memories.length === 0){
+          const empty = document.createElement("div");
+          empty.className = "empty";
+          empty.textContent = "Approved experiences will appear here.";
+          memoryBoard.appendChild(empty);
+          return;
+        }
+
+        data.memories.forEach(function(memory, index){
+          memoryBoard.appendChild(makeMemoryCard(memory, index));
+        });
+      }catch(error){
+        memoryBoard.textContent = "";
+        const empty = document.createElement("div");
+        empty.className = "empty";
+        empty.textContent = "Experiences are temporarily unavailable. Please try again later.";
+        memoryBoard.appendChild(empty);
+      }
+    }
+
+    async function prepareMemoryPhoto(file){
+      if(!file){
+        return null;
+      }
+
+      const allowedTypes = [
+        "image/jpeg",
+        "image/png",
+        "image/webp"
+      ];
+
+      if(!allowedTypes.includes(file.type)){
+        throw new Error("Please choose a JPG, PNG, or WebP picture.");
+      }
+
+      if(file.size > 8 * 1024 * 1024){
+        throw new Error("Please choose a picture smaller than 8 MB.");
+      }
+
+      const dataUrl = await new Promise((resolve, reject)=>{
+        const reader = new FileReader();
+
+        reader.onload = ()=>resolve(reader.result);
+        reader.onerror = ()=>reject(
+          new Error("Unable to read that picture.")
+        );
+
+        reader.readAsDataURL(file);
+      });
+
+      const image = await new Promise((resolve, reject)=>{
+        const img = new Image();
+
+        img.onload = ()=>resolve(img);
+        img.onerror = ()=>reject(
+          new Error("Unable to open that picture.")
+        );
+
+        img.src = dataUrl;
+      });
+
+      const maxDimension = 1200;
+      let width = image.naturalWidth;
+      let height = image.naturalHeight;
+
+      if(width > maxDimension || height > maxDimension){
+        const scale =
+          Math.min(
+            maxDimension / width,
+            maxDimension / height
+          );
+
+        width = Math.round(width * scale);
+        height = Math.round(height * scale);
+      }
+
+      const canvas = document.createElement("canvas");
+      canvas.width = width;
+      canvas.height = height;
+
+      const context = canvas.getContext("2d");
+      context.drawImage(image, 0, 0, width, height);
+
+      let quality = .82;
+      let compressed = canvas.toDataURL("image/jpeg", quality);
+
+      while(compressed.length > 1400000 && quality > .42){
+        quality -= .08;
+        compressed = canvas.toDataURL("image/jpeg", quality);
+      }
+
+      if(compressed.length > 1600000){
+        throw new Error(
+          "That picture is still too large after resizing. Please choose a smaller picture."
+        );
+      }
+
+      return compressed;
+    }
+
+    memoryForm.addEventListener("submit", async function(event){
+      event.preventDefault();
+      formMessage.textContent = "Sending...";
+
+      const name = document.getElementById("memoryName").value.trim();
+      const memory = document.getElementById("memoryText").value.trim();
+      const photo = document.getElementById("memoryPhoto").files[0];
+
+      try{
+        const imageData = await prepareMemoryPhoto(photo);
+
+        const response = await fetch("/api/shelter-experiences", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ name, experience: memory, imageData })
+        });
+
+        const data = await response.json();
+
+        if(!response.ok){
+          throw new Error(data.error || "Unable to submit your experience.");
+        }
+
+        memoryForm.reset();
+        formMessage.textContent =
+          "Thank you. Your experience has been sent for approval.";
+      }catch(error){
+        formMessage.textContent =
+          error.message || "Unable to submit your experience. Please try again.";
+      }
+    });
+
+    function returnToTop(){
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+
+    loadMemories();
+  </script>
+</body>
+</html>
